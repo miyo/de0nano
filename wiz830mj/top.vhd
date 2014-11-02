@@ -29,7 +29,7 @@ architecture RTL of top is
       wiz830mj_nWR    : out   std_logic;
       wiz830mj_nINT   : in    std_logic;
       wiz830mj_nRESET : out   std_logic;
-      wiz830mj_nBRDY  : in    std_logic;
+      wiz830mj_BRDY   : in    std_logic_vector(4-1 downto 0);
       test_req        : in    std_logic;
       test_busy       : out   std_logic
       );
@@ -59,36 +59,36 @@ begin
     clk             => CLOCK_50,
     reset           => not nReset,
     -- wiz830mj_ADDR
-    wiz830mj_ADDR(9) => GPIO_1(17);
-    wiz830mj_ADDR(8) => GPIO_1(16);
-    wiz830mj_ADDR(7) => GPIO_1(19);
-    wiz830mj_ADDR(6) => GPIO_1(18);
-    wiz830mj_ADDR(5) => GPIO_1(21);
-    wiz830mj_ADDR(4) => GPIO_1(20);
-    wiz830mj_ADDR(3) => GPIO_1(23);
-    wiz830mj_ADDR(2) => GPIO_1(22);
-    wiz830mj_ADDR(1) => GPIO_1(25);
-    wiz830mj_ADDR(0) => GPIO_1(24);
+    wiz830mj_ADDR(9) => GPIO_1(17),
+    wiz830mj_ADDR(8) => GPIO_1(16),
+    wiz830mj_ADDR(7) => GPIO_1(19),
+    wiz830mj_ADDR(6) => GPIO_1(18),
+    wiz830mj_ADDR(5) => GPIO_1(21),
+    wiz830mj_ADDR(4) => GPIO_1(20),
+    wiz830mj_ADDR(3) => GPIO_1(23),
+    wiz830mj_ADDR(2) => GPIO_1(22),
+    wiz830mj_ADDR(1) => GPIO_1(25),
+    wiz830mj_ADDR(0) => GPIO_1(24),
     -- wiz830mj_DATA
-    wiz830mj_DATA(7) => GPIO_1(8);
-    wiz830mj_DATA(6) => GPIO_1(9);
-    wiz830mj_DATA(5) => GPIO_1(10);
-    wiz830mj_DATA(4) => GPIO_1(11);
-    wiz830mj_DATA(3) => GPIO_1(12);
-    wiz830mj_DATA(2) => GPIO_1(13);
-    wiz830mj_DATA(1) => GPIO_1(14);
-    wiz830mj_DATA(0) => GPIO_1(15);
-    wiz830mj_nCS    => GPIO_1(0);
-    wiz830mj_nRD    => GPIO_1(1);
-    wiz830mj_nWR    => GPIO_1(3);
-    wiz830mj_nINT   => GPIO_1(5);
-    wiz830mj_nRESET => GPIO_1(7);
-    -- wiz830mj_nBRDY
-    wiz830mj_nBRDY(0) => GPIO_1(4);
-    wiz830mj_nBRDY(1) => GPIO_1(2);
-    wiz830mj_nBRDY(2) => GPIO_1_IN(1);
-    wiz830mj_nBRDY(3) => GPIO_1_IN(0);
-    test_req        => test_req;
+    wiz830mj_DATA(7) => GPIO_1(8),
+    wiz830mj_DATA(6) => GPIO_1(9),
+    wiz830mj_DATA(5) => GPIO_1(10),
+    wiz830mj_DATA(4) => GPIO_1(11),
+    wiz830mj_DATA(3) => GPIO_1(12),
+    wiz830mj_DATA(2) => GPIO_1(13),
+    wiz830mj_DATA(1) => GPIO_1(14),
+    wiz830mj_DATA(0) => GPIO_1(15),
+    wiz830mj_nCS    => GPIO_1(0),
+    wiz830mj_nRD    => GPIO_1(1),
+    wiz830mj_nWR    => GPIO_1(3),
+    wiz830mj_nINT   => GPIO_1(5),
+    wiz830mj_nRESET => GPIO_1(7),
+    -- wiz830mj_BRDY
+    wiz830mj_BRDY(0) => GPIO_1(4),
+    wiz830mj_BRDY(1) => GPIO_1(2),
+    wiz830mj_BRDY(2) => GPIO_1_IN(1),
+    wiz830mj_BRDY(3) => GPIO_1_IN(0),
+    test_req        => test_req,
     test_busy       => test_busy
     );
   

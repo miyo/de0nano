@@ -13,7 +13,7 @@ entity WIZ830MJ_Test is
     wiz830mj_nWR : out std_logic;
     wiz830mj_nINT : in std_logic;
     wiz830mj_nRESET : out std_logic;
-    wiz830mj_nBRDY : in std_logic;
+    wiz830mj_BRDY : in std_logic_vector(4-1 downto 0);
     test_req : in std_logic;
     test_busy : out std_logic
   );
@@ -25,7 +25,7 @@ architecture RTL of WIZ830MJ_Test is
     port (
       clk : in std_logic;
       reset : in std_logic;
-      address : in std_logic_vector(31-1 downto 0);
+      address : in std_logic_vector(32-1 downto 0);
       wdata : in std_logic_vector(8-1 downto 0);
       rdata : out std_logic_vector(8-1 downto 0);
       cs : in std_logic;
@@ -44,7 +44,7 @@ architecture RTL of WIZ830MJ_Test is
       nWR : out std_logic;
       nINT : in std_logic;
       nRESET : out std_logic;
-      nBRDY : in std_logic
+      BRDY : in std_logic_vector(4-1 downto 0)
     );
   end component wiz830mj_iface;
 
@@ -55,7 +55,7 @@ architecture RTL of WIZ830MJ_Test is
 
   signal wiz830mj_clk : std_logic;
   signal wiz830mj_reset : std_logic;
-  signal wiz830mj_address : std_logic_vector(31-1 downto 0) := (others => '0');
+  signal wiz830mj_address : std_logic_vector(32-1 downto 0) := (others => '0');
   signal wiz830mj_wdata : std_logic_vector(8-1 downto 0) := (others => '0');
   signal wiz830mj_rdata : std_logic_vector(8-1 downto 0);
   signal wiz830mj_cs : std_logic := '0';
@@ -636,7 +636,7 @@ begin
     nWR => wiz830mj_nWR,
     nINT => wiz830mj_nINT,
     nRESET => wiz830mj_nRESET,
-    nBRDY => wiz830mj_nBRDY
+    BRDY => wiz830mj_BRDY
   );
 
 

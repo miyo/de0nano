@@ -24,7 +24,7 @@ public class WIZ830MJ_Iface extends HDLModule{
 		super("wiz830mj_iface", "clk", "reset");
 
 		// for user logic
-		newPort("address",      DIR.IN,  HDLPrimitiveType.genVectorType(31));
+		newPort("address",      DIR.IN,  HDLPrimitiveType.genVectorType(32));
 		newPort("wdata",        DIR.IN,  HDLPrimitiveType.genVectorType(8));
 		newPort("rdata",        DIR.OUT, HDLPrimitiveType.genVectorType(8));
 		newPort("cs",           DIR.IN,  HDLPrimitiveType.genBitType());
@@ -45,7 +45,7 @@ public class WIZ830MJ_Iface extends HDLModule{
 		newPort("nWR",    DIR.OUT,   HDLPrimitiveType.genBitType(), EnumSet.of(HDLPort.OPTION.EXPORT));
 		newPort("nINT",   DIR.IN,    HDLPrimitiveType.genBitType(), EnumSet.of(HDLPort.OPTION.EXPORT));
 		newPort("nRESET", DIR.OUT,   HDLPrimitiveType.genBitType(), EnumSet.of(HDLPort.OPTION.EXPORT));
-		newPort("nBRDY",  DIR.IN,    HDLPrimitiveType.genBitType(), EnumSet.of(HDLPort.OPTION.EXPORT));
+		newPort("BRDY",   DIR.IN,    HDLPrimitiveType.genVectorType(4), EnumSet.of(HDLPort.OPTION.EXPORT));
 	}
 
 }

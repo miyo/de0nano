@@ -29,7 +29,7 @@ entity wiz830mj_iface is
     bready0      : out std_logic;
     bready1      : out std_logic;
     bready2      : out std_logic;
-    bready3      : out std_logic;
+    bready3      : out std_logic
     );
 end wiz830mj_iface;
 
@@ -46,7 +46,10 @@ begin
         nRD       <= '1';
         nWR       <= '1';
         interrupt <= '0';
-        bready    <= '0';
+        bready0   <= '0';
+        bready1   <= '0';
+        bready2   <= '0';
+        bready3   <= '0';
         DATA      <= (others => 'Z');
       else
         bready0   <= BRDY(0);
@@ -69,7 +72,7 @@ begin
         else
           DATA <= (others => 'Z');
         end if;
-      
+      end if;
     end if;
   end process;
   
