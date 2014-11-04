@@ -30,8 +30,13 @@ architecture RTL of top is
       wiz830mj_nINT   : in    std_logic;
       wiz830mj_nRESET : out   std_logic;
       wiz830mj_BRDY   : in    std_logic_vector(4-1 downto 0);
-      test_req        : in    std_logic;
-      test_busy       : out   std_logic
+      field_led_output : out signed(32-1 downto 0);
+      field_led_input : in signed(32-1 downto 0);
+      field_led_input_we : in std_logic;
+      test_req : in std_logic;
+      test_busy : out std_logic;
+      blink_led_req : in std_logic;
+      blink_led_busy : out std_logic
       );
   end component WIZ830MJ_Test;
 
@@ -40,6 +45,8 @@ architecture RTL of top is
 
   signal test_req  : std_logic := '0';
   signal test_busy : std_logic := '0';
+
+  signal led_out : signed(31 downto 0);
 
 begin
 
@@ -88,8 +95,15 @@ begin
     wiz830mj_BRDY(1) => GPIO_1(2),
     wiz830mj_BRDY(2) => GPIO_1_IN(1),
     wiz830mj_BRDY(3) => GPIO_1_IN(0),
-    test_req        => test_req,
-    test_busy       => test_busy
+    field_led_output => led_out,
+    field_led_input => (others => '0'),
+    field_led_input_we => '0',
+    test_req => nReset,
+    test_busy => open,
+    blink_led_req => '1',
+    blink_led_busy => open
     );
+
+  LED <= std_logic_vector(led_out(7 downto 0));
   
 end RTL;
