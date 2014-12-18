@@ -22,17 +22,17 @@ architecture RTL of top is
     port (
       clk             : in    std_logic;
       reset           : in    std_logic;
-      wiz830mj_ADDR   : out   std_logic_vector(10-1 downto 0);
-      wiz830mj_DATA   : inout std_logic_vector(8-1 downto 0);
-      wiz830mj_nCS    : out   std_logic;
-      wiz830mj_nRD    : out   std_logic;
-      wiz830mj_nWR    : out   std_logic;
-      wiz830mj_nINT   : in    std_logic;
-      wiz830mj_nRESET : out   std_logic;
-      wiz830mj_BRDY   : in    std_logic_vector(4-1 downto 0);
-      field_led_output : out signed(32-1 downto 0);
-      field_led_input : in signed(32-1 downto 0);
-      field_led_input_we : in std_logic;
+      class_wiz830mj_0000_ADDR_exp   : out   std_logic_vector(10-1 downto 0);
+      class_wiz830mj_0000_DATA_exp   : inout std_logic_vector(8-1 downto 0);
+      class_wiz830mj_0000_nCS_exp    : out   std_logic;
+      class_wiz830mj_0000_nRD_exp    : out   std_logic;
+      class_wiz830mj_0000_nWR_exp    : out   std_logic;
+      class_wiz830mj_0000_nINT_exp   : in    std_logic;
+      class_wiz830mj_0000_nRESET_exp : out   std_logic;
+      class_wiz830mj_0000_BRDY_exp   : in    std_logic_vector(4-1 downto 0);
+      led_out : out signed(32-1 downto 0);
+      led_in : in signed(32-1 downto 0);
+      led_we : in std_logic;
       test_req : in std_logic;
       test_busy : out std_logic;
       blink_led_req : in std_logic;
@@ -66,38 +66,38 @@ begin
     clk             => CLOCK_50,
     reset           => not nReset,
     -- wiz830mj_ADDR
-    wiz830mj_ADDR(9) => GPIO_1(17),
-    wiz830mj_ADDR(8) => GPIO_1(16),
-    wiz830mj_ADDR(7) => GPIO_1(19),
-    wiz830mj_ADDR(6) => GPIO_1(18),
-    wiz830mj_ADDR(5) => GPIO_1(21),
-    wiz830mj_ADDR(4) => GPIO_1(20),
-    wiz830mj_ADDR(3) => GPIO_1(23),
-    wiz830mj_ADDR(2) => GPIO_1(22),
-    wiz830mj_ADDR(1) => GPIO_1(25),
-    wiz830mj_ADDR(0) => GPIO_1(24),
+    class_wiz830mj_0000_ADDR_exp(9) => GPIO_1(17),
+    class_wiz830mj_0000_ADDR_exp(8) => GPIO_1(16),
+    class_wiz830mj_0000_ADDR_exp(7) => GPIO_1(19),
+    class_wiz830mj_0000_ADDR_exp(6) => GPIO_1(18),
+    class_wiz830mj_0000_ADDR_exp(5) => GPIO_1(21),
+    class_wiz830mj_0000_ADDR_exp(4) => GPIO_1(20),
+    class_wiz830mj_0000_ADDR_exp(3) => GPIO_1(23),
+    class_wiz830mj_0000_ADDR_exp(2) => GPIO_1(22),
+    class_wiz830mj_0000_ADDR_exp(1) => GPIO_1(25),
+    class_wiz830mj_0000_ADDR_exp(0) => GPIO_1(24),
     -- wiz830mj_DATA
-    wiz830mj_DATA(7) => GPIO_1(8),
-    wiz830mj_DATA(6) => GPIO_1(9),
-    wiz830mj_DATA(5) => GPIO_1(10),
-    wiz830mj_DATA(4) => GPIO_1(11),
-    wiz830mj_DATA(3) => GPIO_1(12),
-    wiz830mj_DATA(2) => GPIO_1(13),
-    wiz830mj_DATA(1) => GPIO_1(14),
-    wiz830mj_DATA(0) => GPIO_1(15),
-    wiz830mj_nCS    => GPIO_1(0),
-    wiz830mj_nRD    => GPIO_1(1),
-    wiz830mj_nWR    => GPIO_1(3),
-    wiz830mj_nINT   => GPIO_1(5),
-    wiz830mj_nRESET => GPIO_1(7),
+    class_wiz830mj_0000_DATA_exp(7) => GPIO_1(8),
+    class_wiz830mj_0000_DATA_exp(6) => GPIO_1(9),
+    class_wiz830mj_0000_DATA_exp(5) => GPIO_1(10),
+    class_wiz830mj_0000_DATA_exp(4) => GPIO_1(11),
+    class_wiz830mj_0000_DATA_exp(3) => GPIO_1(12),
+    class_wiz830mj_0000_DATA_exp(2) => GPIO_1(13),
+    class_wiz830mj_0000_DATA_exp(1) => GPIO_1(14),
+    class_wiz830mj_0000_DATA_exp(0) => GPIO_1(15),
+    class_wiz830mj_0000_nCS_exp    => GPIO_1(0),
+    class_wiz830mj_0000_nRD_exp    => GPIO_1(1),
+    class_wiz830mj_0000_nWR_exp    => GPIO_1(3),
+    class_wiz830mj_0000_nINT_exp   => GPIO_1(5),
+    class_wiz830mj_0000_nRESET_exp => GPIO_1(7),
     -- wiz830mj_BRDY
-    wiz830mj_BRDY(0) => GPIO_1(4),
-    wiz830mj_BRDY(1) => GPIO_1(2),
-    wiz830mj_BRDY(2) => GPIO_1_IN(1),
-    wiz830mj_BRDY(3) => GPIO_1_IN(0),
-    field_led_output => led_out,
-    field_led_input => (others => '0'),
-    field_led_input_we => '0',
+    class_wiz830mj_0000_BRDY_exp(0) => GPIO_1(4),
+    class_wiz830mj_0000_BRDY_exp(1) => GPIO_1(2),
+    class_wiz830mj_0000_BRDY_exp(2) => GPIO_1_IN(1),
+    class_wiz830mj_0000_BRDY_exp(3) => GPIO_1_IN(0),
+    led_out => led_out,
+    led_in => (others => '0'),
+    led_we => '0',
     test_req => nReset,
     test_busy => open,
     blink_led_req => '1',
