@@ -36,6 +36,7 @@ end wiz830mj_iface;
 architecture RTL of wiz830mj_iface is
 
   signal we_d : std_logic;
+  signal wdata_d : std_logic_vector(7 downto 0);
 
 begin
 
@@ -55,6 +56,7 @@ begin
         DATA      <= (others => 'Z');
       else
         we_d <= we;
+        wdata_d <= wdata;
         bready0   <= BRDY(0);
         bready1   <= BRDY(1);
         bready2   <= BRDY(2);
@@ -71,7 +73,7 @@ begin
         elsif we_d = '1' then -- keep 1cycle after we has been deasserted.
           nWR  <= '1';
           nRD  <= '1';
-          DATA <= wdata;
+          DATA <= wdata_d;
         elsif oe = '1' then
           nWR <= '1';
           nRD <= '0';

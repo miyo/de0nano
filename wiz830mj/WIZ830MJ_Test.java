@@ -23,7 +23,7 @@ public class WIZ830MJ_Test{
 	wiz830mj.address = addr;
 	wiz830mj.cs = true;
 	wiz830mj.oe = true;
-	wait_cycles(3);
+	wait_cycles(5);
 	byte v = wiz830mj.rdata;
 	wiz830mj.oe = false;
 	wiz830mj.cs = false;
@@ -65,56 +65,56 @@ public class WIZ830MJ_Test{
 	write_data(0x001b, (byte)2);
     }
 
-    private final static int Sn_MR0       = 0x200;
-    private final static int Sn_MR1       = 0x201;
-    private final static int Sn_CR0       = 0x202;
-    private final static int Sn_CR1       = 0x203;
-    private final static int Sn_IMR0      = 0x204;
-    private final static int Sn_IMR1      = 0x205;
-    private final static int Sn_IR0       = 0x206;
-    private final static int Sn_IR1       = 0x207;
-    private final static int Sn_SSR0      = 0x208;
-    private final static int Sn_SSR1      = 0x209;
-    private final static int Sn_PORTR0    = 0x20a;
-    private final static int Sn_PORTR1    = 0x20b;
-    private final static int Sn_DHAR0     = 0x20c;
-    private final static int Sn_DHAR1     = 0x20d;
-    private final static int Sn_DHAR2     = 0x20e;
-    private final static int Sn_DHAR3     = 0x20f;
-    private final static int Sn_DHAR4     = 0x210;
-    private final static int Sn_DHAR5     = 0x211;
-    private final static int Sn_DPORTR0   = 0x212;
-    private final static int Sn_DPORTR1   = 0x213;
-    private final static int Sn_DIPR0     = 0x214;
-    private final static int Sn_DIPR1     = 0x215;
-    private final static int Sn_DIPR2     = 0x216;
-    private final static int Sn_DIPR3     = 0x217;
-    private final static int Sn_MSSR0     = 0x218;
-    private final static int Sn_MSSR1     = 0x219;
-    private final static int Sn_KPALVTR   = 0x21a;
-    private final static int Sn_PROTOR    = 0x21b;
-    private final static int Sn_TOSR0     = 0x21c;
-    private final static int Sn_TOSR1     = 0x21d;
-    private final static int Sn_TTLR0     = 0x21e;
-    private final static int Sn_TTLR1     = 0x21f;
-    private final static int Sn_TX_WRSR0  = 0x220;
-    private final static int Sn_TX_WRSR1  = 0x221;
-    private final static int Sn_TX_WRSR2  = 0x222;
-    private final static int Sn_TX_WRSR3  = 0x223;
-    private final static int Sn_TX_FSR0   = 0x224;
-    private final static int Sn_TX_FSR1   = 0x225;
-    private final static int Sn_TX_FSR2   = 0x226;
-    private final static int Sn_TX_FSR3   = 0x227;
-    private final static int Sn_RX_RSR0   = 0x228;
-    private final static int Sn_RX_RSR1   = 0x229;
-    private final static int Sn_RX_RSR2   = 0x22a;
-    private final static int Sn_RX_RSR3   = 0x22b;
-    private final static int Sn_FRAGR0    = 0x22c;
-    private final static int Sn_FRAGR1    = 0x22d;
-    private final static int Sn_TX_FIFOR0 = 0x22e;
-    private final static int Sn_TX_FIFOR1 = 0x22f;
-    private final static int Sn_RX_FIFOR0 = 0x230;
-    private final static int Sn_RX_FIFOR1 = 0x231;
+    private final static int Sn_MR0       = 0x08200;
+    private final static int Sn_MR1       = 0x08201;
+    private final static int Sn_CR0       = 0x08202;
+    private final static int Sn_CR1       = 0x08203;
+    private final static int Sn_IMR0      = 0x08204;
+    private final static int Sn_IMR1      = 0x08205;
+    private final static int Sn_IR0       = 0x08206;
+    private final static int Sn_IR1       = 0x08207;
+    private final static int Sn_SSR0      = 0x08208;
+    private final static int Sn_SSR1      = 0x08209;
+    private final static int Sn_PORTR0    = 0x0820a;
+    private final static int Sn_PORTR1    = 0x0820b;
+    private final static int Sn_DHAR0     = 0x0820c;
+    private final static int Sn_DHAR1     = 0x0820d;
+    private final static int Sn_DHAR2     = 0x0820e;
+    private final static int Sn_DHAR3     = 0x0820f;
+    private final static int Sn_DHAR4     = 0x08210;
+    private final static int Sn_DHAR5     = 0x08211;
+    private final static int Sn_DPORTR0   = 0x08212;
+    private final static int Sn_DPORTR1   = 0x08213;
+    private final static int Sn_DIPR0     = 0x08214;
+    private final static int Sn_DIPR1     = 0x08215;
+    private final static int Sn_DIPR2     = 0x08216;
+    private final static int Sn_DIPR3     = 0x08217;
+    private final static int Sn_MSSR0     = 0x08218;
+    private final static int Sn_MSSR1     = 0x08219;
+    private final static int Sn_KPALVTR   = 0x0821a;
+    private final static int Sn_PROTOR    = 0x0821b;
+    private final static int Sn_TOSR0     = 0x0821c;
+    private final static int Sn_TOSR1     = 0x0821d;
+    private final static int Sn_TTLR0     = 0x0821e;
+    private final static int Sn_TTLR1     = 0x0821f;
+    private final static int Sn_TX_WRSR0  = 0x08220;
+    private final static int Sn_TX_WRSR1  = 0x08221;
+    private final static int Sn_TX_WRSR2  = 0x08222;
+    private final static int Sn_TX_WRSR3  = 0x08223;
+    private final static int Sn_TX_FSR0   = 0x08224;
+    private final static int Sn_TX_FSR1   = 0x08225;
+    private final static int Sn_TX_FSR2   = 0x08226;
+    private final static int Sn_TX_FSR3   = 0x08227;
+    private final static int Sn_RX_RSR0   = 0x08228;
+    private final static int Sn_RX_RSR1   = 0x08229;
+    private final static int Sn_RX_RSR2   = 0x0822a;
+    private final static int Sn_RX_RSR3   = 0x0822b;
+    private final static int Sn_FRAGR0    = 0x0822c;
+    private final static int Sn_FRAGR1    = 0x0822d;
+    private final static int Sn_TX_FIFOR0 = 0x0822e;
+    private final static int Sn_TX_FIFOR1 = 0x0822f;
+    private final static int Sn_RX_FIFOR0 = 0x08230;
+    private final static int Sn_RX_FIFOR1 = 0x08231;
 
     private final static byte Sn_MR_CLOSE  = (byte)0;
     private final static byte Sn_MR_TCP    = (byte)1;
@@ -157,7 +157,8 @@ public class WIZ830MJ_Test{
     private final static byte Sn_SOCK_ARP       = (byte)0x01;
 
     private byte tcp_server_open(int port){
-	write_data(Sn_MR1 + (port << 6), Sn_MR_TCP); // S0_MR1: TCP mode
+	write_data(Sn_MR1 + (port << 6), (byte)(0x20 | Sn_MR_TCP)); // S0_MR1: TCP mode
+	//	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
 	write_data(Sn_PORTR0 + (port << 6), (byte)0);
 	write_data(Sn_PORTR1 + (port << 6), (byte)80); // port 80
 	write_data(Sn_CR1 + (port << 6), Sn_CR_OPEN); // open
@@ -170,8 +171,9 @@ public class WIZ830MJ_Test{
     }
 
     private void wait_for_established(int port){
+	byte v = 0;
 	while(true){
-	    byte v = read_data(Sn_SSR1 + (port << 6));
+	    v = read_data(Sn_SSR1 + (port << 6));
 	    if(v == Sn_SOCK_ESTABLISHED){
 		return;
 	    }
@@ -193,23 +195,29 @@ public class WIZ830MJ_Test{
     }
 
     private final byte[] buffer = new byte[8192];
-    private void pull_recv_data(int port, int len){
-	int read_len = (len >> 1);
-	if((len & 0x01) == 0x01){ read_len = read_len + 1; }
+    private int pull_recv_data(int port){
+	int v0 = (int)read_data(Sn_RX_FIFOR0 + (port << 6));
+	int v1 = (int)read_data(Sn_RX_FIFOR1 + (port << 6));
+	int actual_len = (v0 << 8) + v1;
+	int read_len = (actual_len >> 1);
+	if((actual_len & 0x01) == 0x01){ read_len = read_len + 1; }
 	for(int i = 0; i < read_len; i++){
 	    buffer[(i<<1) + 0] = read_data(Sn_RX_FIFOR0 + (port << 6));
 	    buffer[(i<<1) + 1] = read_data(Sn_RX_FIFOR1 + (port << 6));
 	}
 	write_data(Sn_CR1 + (port << 6), Sn_CR_RECV);
+	return actual_len;
     }
 
     private void push_send_data(int port, int len){
+	//	int write_len = (len >> 1);
+	//	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	int write_len = (len >> 1);
 	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	for(int i = 0; i < write_len; i++){
-	    byte v = buffer[(i<<1) + 0];
+	    byte v = buffer[(i<<1)+0];
 	    write_data(Sn_TX_FIFOR0 + (port << 6), v);
-	    v = buffer[(i<<1) + 1];
+	    v = buffer[(i<<1)+1];
 	    write_data(Sn_TX_FIFOR1 + (port << 6), v);
 	}
 	write_data(Sn_CR1 + (port << 6), Sn_CR_RECV);
@@ -220,35 +228,59 @@ public class WIZ830MJ_Test{
     }
 
     private void tcp_server(int port){
-	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
+	//led = (0x01 << 2) + 0x03;
+	//	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
+	write_data(Sn_IMR1 + (port << 6), (byte)0x00); // don't use interrupt
+	//led = (0x02 << 2) + 0x03;
 	byte v = tcp_server_open(port);
+	//led = (0x03 << 2) + 0x03;
 	while(v != Sn_SOCK_INIT){
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
 	    v = tcp_server_open(port);
 	}
+	led = (int)v;
+	//led = (0x04 << 2) + 0x03;
 	v = tcp_server_listen(port);
+	//led = (0x05 << 2) + 0x03;
 	while(v != Sn_SOCK_LISTEN){
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
 	    v = tcp_server_listen(port);
 	}
+	//led = (0x06 << 2) + 0x03;
 	wait_for_established(port);
+
+	//led = 0x80 + led;
+
+	//led = (0x07 << 2) + 0x03;
+	led = 0;
+	led = read_data(Sn_MR0 + (port << 6));
 	while(true){
 	    int len = wait_for_recv(port);
-	    pull_recv_data(port, len);
+	    led = len;
+	    len = pull_recv_data(port);
+	    led = len;
 	    push_send_data(port, len);
 	}
+	//	led = (0x08 << 2) + 0x03;
     }
 
     public void test(){
+	led = 0x00;
 	init();
+
+	led = 0x01;
+
 	network_configuration();
+	led = 0x03;
 
 	tcp_server(0);
+	led = 255;
 
 	while(true){;}
     }
 
     public void blink_led(){
+	/*
 	while(true){
 	    if(led == 255){
 		led = 0;
@@ -257,6 +289,7 @@ public class WIZ830MJ_Test{
 	    }
 	    for(int i = 0; i < 1000000; i++){ ; }
 	}
+	*/
     }
 
 }
