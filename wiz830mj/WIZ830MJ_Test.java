@@ -226,6 +226,7 @@ public class WIZ830MJ_Test{
     }
 
     private void tcp_server(int port){
+	//	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
 	write_data(Sn_IMR1 + (port << 6), (byte)0x00); // don't use interrupt
 	byte v = tcp_server_open(port);
 	while(v != Sn_SOCK_INIT){
