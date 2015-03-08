@@ -210,8 +210,6 @@ public class WIZ830MJ_Test{
     }
 
     private void push_send_data(int port, int len){
-	//	int write_len = (len >> 1);
-	//	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	int write_len = (len >> 1);
 	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	for(int i = 0; i < write_len; i++){
@@ -228,30 +226,20 @@ public class WIZ830MJ_Test{
     }
 
     private void tcp_server(int port){
-	//led = (0x01 << 2) + 0x03;
-	//	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
 	write_data(Sn_IMR1 + (port << 6), (byte)0x00); // don't use interrupt
-	//led = (0x02 << 2) + 0x03;
 	byte v = tcp_server_open(port);
-	//led = (0x03 << 2) + 0x03;
 	while(v != Sn_SOCK_INIT){
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
 	    v = tcp_server_open(port);
 	}
 	led = (int)v;
-	//led = (0x04 << 2) + 0x03;
 	v = tcp_server_listen(port);
-	//led = (0x05 << 2) + 0x03;
 	while(v != Sn_SOCK_LISTEN){
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
 	    v = tcp_server_listen(port);
 	}
-	//led = (0x06 << 2) + 0x03;
 	wait_for_established(port);
 
-	//led = 0x80 + led;
-
-	//led = (0x07 << 2) + 0x03;
 	led = 0;
 	led = read_data(Sn_MR0 + (port << 6));
 	while(true){
@@ -261,7 +249,6 @@ public class WIZ830MJ_Test{
 	    led = len;
 	    push_send_data(port, len);
 	}
-	//	led = (0x08 << 2) + 0x03;
     }
 
     public void test(){
