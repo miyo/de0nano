@@ -217,8 +217,6 @@ public class WIZ830MJ_Httpd{
 
     private void push_send_data(int port, int len){
 	int write_len = (len >> 1);
-	write_data(Sn_RX_FIFOR0 + (port << 6), (byte)((len >> 8) & 0xFF));
-	write_data(Sn_RX_FIFOR0 + (port << 6), (byte)(len & 0xFF));
 	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	for(int i = 0; i < write_len; i++){
 	    byte v = buffer[(i<<1)+0];
