@@ -1,5 +1,5 @@
 
-public class WIZ830MJ_Test{
+public class WIZ830MJ_Httpd{
 
     private final WIZ830MJ_Iface wiz830mj = new WIZ830MJ_Iface();
 
@@ -191,7 +191,7 @@ public class WIZ830MJ_Test{
 	    if(v != 0){
 		return v;
 	    }
-
+	    
 	    v = read_data(Sn_SSR1 + (port << 6));
 	    if(v == Sn_SOCK_CLOSE_WAIT || v == Sn_SOCK_CLOSED){
 		write_data(Sn_CR1 + (port << 6), Sn_CR_DISCON);
@@ -216,9 +216,9 @@ public class WIZ830MJ_Test{
     }
 
     private void push_send_data(int port, int len){
+	int write_len = (len >> 1);
 	write_data(Sn_RX_FIFOR0 + (port << 6), (byte)((len >> 8) & 0xFF));
 	write_data(Sn_RX_FIFOR0 + (port << 6), (byte)(len & 0xFF));
-	int write_len = (len >> 1);
 	if((len & 0x01) == 0x01){ write_len = write_len + 1; }
 	for(int i = 0; i < write_len; i++){
 	    byte v = buffer[(i<<1)+0];
@@ -233,6 +233,109 @@ public class WIZ830MJ_Test{
 	write_data(Sn_CR1 + (port << 6), Sn_CR_SEND);
     }
 
+    private final HttpResponseHeader resp = new HttpResponseHeader();
+    
+    private int[] data = new int[1024];
+
+    private int pack(char a, char b, char c, char d){
+	return (((int)a&0xFF) << 24) + (((int)b&0xFF) << 16) + (((int)c&0xFF) << 8) + ((int)d&0xFF);
+    }
+
+    private int content_words = 8;
+    private int content_length_field = 0x33322020; // "32  " 
+
+    private final Misc misc = new Misc();
+   
+    private void init_contents(){
+	
+	data[0] = pack('<', 'h', 't', 'm');
+	data[1] = pack('l', '>', '<', 'b');
+	data[2] = pack('o', 'd', 'y', '>');
+	data[3] = pack('A', 'r', 'g', 'u');
+	data[4] = pack('m', 'e', 'n', 't');
+	data[5] = pack('?', '=', ' ', ' ');
+	data[6] = pack('<', '/', 'b', 'o');
+	data[7] = pack('d', 'y', '>', '<');
+	data[8] = pack('/', 'h', 't', 'm');
+	data[9] = pack('l', '>', '\n', '\n');
+        
+	content_words = 10;
+	content_length_field = misc.i_to_4digit_ascii(content_words << 2);
+        
+    }
+
+    byte arg0 = (byte)' ', arg1 = (byte)' ';
+
+    private int ready_contents(){
+	// header
+	for(int i = 0; i < resp.length; i++){
+	    int v = resp.data[i];
+	    buffer[(i<<2)+0] = (byte)(v >> 24);
+	    buffer[(i<<2)+1] = (byte)(v >> 16);
+	    buffer[(i<<2)+2] = (byte)(v >>  8);
+	    buffer[(i<<2)+3] = (byte)(v >>  0);
+	}
+	buffer[(8<<2)+0] = (byte)(content_length_field >> 24);
+	buffer[(8<<2)+1] = (byte)(content_length_field >> 16);
+	buffer[(8<<2)+2] = (byte)(content_length_field >>  8);
+	buffer[(8<<2)+3] = (byte)(content_length_field >>  0);
+        
+	// data
+	int offset = resp.length;
+	for(int i = 0; i < content_words; i++){
+	    int v = data[i];
+	    int ptr = (offset + i) << 2;
+	    buffer[ptr+0] = (byte)(v >> 24);
+	    buffer[ptr+1] = (byte)(v >> 16);
+	    buffer[ptr+2] = (byte)(v >>  8);
+	    buffer[ptr+3] = (byte)(v >>  0);
+	    if(i == 5){
+		buffer[ptr+2] = arg0;
+		buffer[ptr+3] = arg1;
+	    }
+	}
+	return (resp.length + content_words) << 2;
+    }
+
+    private void action(int len){
+	int S = 0;
+	byte v0 = 0, v1 = 0;
+	for(int i = 0; i < len; i++){
+	    byte b = buffer[i];
+	    switch(S){
+	    case 0:
+		if(b == (byte)'?'){ S = 1; } else { S = 0; }
+		break;
+	    case 1:
+		if(b == (byte)'v'){ S = 2; } else { S = 0; }
+		break;
+	    case 2:
+		if(b == (byte)'='){ S = 3; } else { S = 0; }
+		break;
+	    case 3:
+		if(misc.isHex(b)){ v0 = b; S = 4; }else{ S = 0; }
+		break;
+	    case 4:
+		if(misc.isHex(b)){ v1 = b; S = 5; }else{ S = 0; }
+		break;
+	    case 5:
+		break;
+	    default:
+		S = 0;
+	    }
+	}
+	if(S == 5){
+	    int v = misc.toHex2(v0, v1);
+	    led = v;
+	    arg0 = v0;
+	    arg1 = v1;
+	}else{
+	    arg0 = (byte)'?';
+	    arg1 = (byte)'?';
+	}
+
+    }
+
     private void tcp_server(int port){
 	//	write_data(Sn_MR0 + (port << 6), (byte)0x01); // Use alignment
 	write_data(Sn_IMR1 + (port << 6), (byte)0x00); // don't use interrupt
@@ -241,7 +344,7 @@ public class WIZ830MJ_Test{
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
 	    v = tcp_server_open(port);
 	}
-	led = (int)v;
+	//led = (int)v;
 	v = tcp_server_listen(port);
 	while(v != Sn_SOCK_LISTEN){
 	    write_data(Sn_CR1 + (port << 6), Sn_CR_CLOSE);
@@ -249,30 +352,33 @@ public class WIZ830MJ_Test{
 	}
 	wait_for_established(port);
 
-	led = 0;
-	led = read_data(Sn_MR0 + (port << 6));
+	//led = 0;
+	read_data(Sn_MR0 + (port << 6));
 	while(true){
 	    int len = wait_for_recv(port);
 	    if(len == 0){
 		break;
 	    }
-	    led = len;
 	    len = pull_recv_data(port);
-	    led = len;
+	    action(len);
+	    len = ready_contents();
 	    push_send_data(port, len);
 	}
+	return;
     }
 
     public void test(){
 	led = 0x00;
 	init();
-
 	led = 0x01;
 
 	network_configuration();
 	led = 0x03;
 
-	led = 255;
+	init_contents();
+	led = 0x04;
+
+	led = 0;
 
 	while(true){
 	    tcp_server(0);

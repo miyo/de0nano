@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity top is
+entity httpd is
 
   port(
     CLOCK_50 : in std_logic;
@@ -14,11 +14,11 @@ entity top is
     LED : out std_logic_vector(7 downto 0)
     );
   
-end top;
+end httpd;
 
-architecture RTL of top is
+architecture RTL of httpd is
 
-  component WIZ830MJ_Test
+  component WIZ830MJ_Httpd
     port (
       clk             : in    std_logic;
       reset           : in    std_logic;
@@ -38,7 +38,7 @@ architecture RTL of top is
       blink_led_req : in std_logic;
       blink_led_busy : out std_logic
       );
-  end component WIZ830MJ_Test;
+  end component WIZ830MJ_Httpd;
 
   signal reset_counter : unsigned(7 downto 0) := (others => '0');
   signal nReset        : std_logic            := '0';
@@ -62,7 +62,7 @@ begin
     end if;
   end process;
   
-  U: WIZ830MJ_Test port map(
+  U: WIZ830MJ_Httpd port map(
     clk             => CLOCK_50,
     reset           => not nReset,
     -- wiz830mj_ADDR

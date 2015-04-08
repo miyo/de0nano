@@ -63,8 +63,8 @@ architecture RTL of WIZ830MJ_Test is
       reset : in std_logic;
       length : out signed(31 downto 0);
       address_b : in signed(31 downto 0);
-      din_b : in signed(7 downto 0);
-      dout_b : out signed(7 downto 0);
+      din_b : in signed(WIDTH-1 downto 0);
+      dout_b : out signed(WIDTH-1 downto 0);
       we_b : in std_logic;
       oe_b : in std_logic
     );
@@ -286,105 +286,126 @@ architecture RTL of WIZ830MJ_Test is
   signal binary_expr_00187 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00188 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00189 : std_logic := '0';
-  signal pull_recv_data_port_0190 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00190 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00191 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00192 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00193 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00194 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00195 : std_logic := '0';
+  signal cast_expr_00196 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00197 : std_logic := '0';
+  signal binary_expr_00198 : std_logic := '0';
+  signal binary_expr_00200 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00201 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_port_0202 : signed(32-1 downto 0) := (others => '0');
   signal pull_recv_data_port_local : signed(32-1 downto 0) := (others => '0');
-  signal pull_recv_data_v0_0191 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00192 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00193 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00194 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00195 : signed(32-1 downto 0) := (others => '0');
-  signal pull_recv_data_v1_0196 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00197 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00198 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00199 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00200 : signed(32-1 downto 0) := (others => '0');
-  signal pull_recv_data_actual_len_0201 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00202 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00203 : signed(32-1 downto 0) := (others => '0');
-  signal pull_recv_data_read_len_0204 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_v0_0203 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00204 : signed(8-1 downto 0) := (others => '0');
   signal binary_expr_00205 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00206 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00207 : std_logic := '0';
-  signal binary_expr_00225 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00226 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00208 : signed(32-1 downto 0) := (others => '0');
-  signal pull_recv_data_i_0209 : signed(32-1 downto 0) := X"00000000";
-  signal binary_expr_00210 : std_logic := '0';
-  signal unary_expr_00211 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00212 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00213 : signed(32-1 downto 0) := (others => '0');
-  signal array_access_00214 : signed(8-1 downto 0) := (others => '0');
-  signal method_result_00215 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00216 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00207 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_v1_0208 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00209 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00210 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00211 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00212 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_actual_len_0213 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00214 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00215 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_read_len_0216 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00217 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00218 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00219 : signed(32-1 downto 0) := (others => '0');
-  signal array_access_00220 : signed(8-1 downto 0) := (others => '0');
-  signal method_result_00221 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00222 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00223 : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_port_0227 : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_port_local : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_len_0228 : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_len_local : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_write_len_0229 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00219 : std_logic := '0';
+  signal binary_expr_00237 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00238 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00220 : signed(32-1 downto 0) := (others => '0');
+  signal pull_recv_data_i_0221 : signed(32-1 downto 0) := X"00000000";
+  signal binary_expr_00222 : std_logic := '0';
+  signal unary_expr_00223 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00224 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00225 : signed(32-1 downto 0) := (others => '0');
+  signal array_access_00226 : signed(8-1 downto 0) := (others => '0');
+  signal method_result_00227 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00228 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00229 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00230 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00231 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00232 : std_logic := '0';
-  signal binary_expr_00251 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00252 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00254 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00255 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00256 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00257 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00259 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00260 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00261 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00262 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00264 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00265 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00266 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00267 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00269 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00270 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00233 : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_i_0234 : signed(32-1 downto 0) := X"00000000";
-  signal binary_expr_00235 : std_logic := '0';
-  signal unary_expr_00236 : signed(32-1 downto 0) := (others => '0');
-  signal push_send_data_v_0237 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00238 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00239 : signed(32-1 downto 0) := (others => '0');
-  signal array_access_00240 : signed(8-1 downto 0) := (others => '0');
+  signal array_access_00232 : signed(8-1 downto 0) := (others => '0');
+  signal method_result_00233 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00234 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00235 : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_port_0239 : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_port_local : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_len_0240 : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_len_local : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00242 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00243 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00244 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00245 : signed(32-1 downto 0) := (others => '0');
-  signal array_access_00246 : signed(8-1 downto 0) := (others => '0');
+  signal cast_expr_00246 : signed(8-1 downto 0) := (others => '0');
   signal binary_expr_00248 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00249 : signed(32-1 downto 0) := (others => '0');
-  signal tcp_server_port_0271 : signed(32-1 downto 0) := (others => '0');
-  signal tcp_server_port_local : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00273 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00250 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00251 : signed(8-1 downto 0) := (others => '0');
+  signal push_send_data_write_len_0252 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00253 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00254 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00255 : std_logic := '0';
   signal binary_expr_00274 : signed(32-1 downto 0) := (others => '0');
-  signal tcp_server_v_0275 : signed(8-1 downto 0) := (others => '0');
-  signal method_result_00276 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00277 : std_logic := '0';
-  signal cast_expr_00282 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00283 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00284 : std_logic := '0';
-  signal method_result_00290 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00291 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00292 : signed(32-1 downto 0) := (others => '0');
-  signal cast_expr_00293 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00275 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00277 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00278 : signed(32-1 downto 0) := (others => '0');
   signal binary_expr_00279 : signed(32-1 downto 0) := (others => '0');
-  signal binary_expr_00280 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00281 : signed(8-1 downto 0) := (others => '0');
-  signal binary_expr_00286 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00280 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00282 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00283 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00284 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00285 : signed(8-1 downto 0) := (others => '0');
   signal binary_expr_00287 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00288 : signed(8-1 downto 0) := (others => '0');
-  signal tcp_server_len_0294 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00295 : signed(32-1 downto 0) := (others => '0');
-  signal method_result_00296 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00288 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00289 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00290 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00292 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00293 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00256 : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_i_0257 : signed(32-1 downto 0) := X"00000000";
+  signal binary_expr_00258 : std_logic := '0';
+  signal unary_expr_00259 : signed(32-1 downto 0) := (others => '0');
+  signal push_send_data_v_0260 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00261 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00262 : signed(32-1 downto 0) := (others => '0');
+  signal array_access_00263 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00265 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00266 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00267 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00268 : signed(32-1 downto 0) := (others => '0');
+  signal array_access_00269 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00271 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00272 : signed(32-1 downto 0) := (others => '0');
+  signal tcp_server_port_0294 : signed(32-1 downto 0) := (others => '0');
+  signal tcp_server_port_local : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00296 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00297 : signed(32-1 downto 0) := (others => '0');
+  signal tcp_server_v_0298 : signed(8-1 downto 0) := (others => '0');
+  signal method_result_00299 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00300 : std_logic := '0';
+  signal cast_expr_00305 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00306 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00307 : std_logic := '0';
+  signal method_result_00313 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00314 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00315 : signed(32-1 downto 0) := (others => '0');
+  signal cast_expr_00316 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00302 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00303 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00304 : signed(8-1 downto 0) := (others => '0');
+  signal binary_expr_00309 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00310 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00311 : signed(8-1 downto 0) := (others => '0');
+  signal tcp_server_len_0317 : signed(32-1 downto 0) := (others => '0');
+  signal method_result_00318 : signed(32-1 downto 0) := (others => '0');
+  signal binary_expr_00319 : std_logic := '0';
+  signal method_result_00320 : signed(32-1 downto 0) := (others => '0');
   signal wait_cycles_busy : std_logic := '0';
   signal wait_cycles_req_flag : std_logic;
   signal wait_cycles_req_local : std_logic := '0';
@@ -441,7 +462,6 @@ architecture RTL of WIZ830MJ_Test is
     wait_cycles_method_S_0004,
     wait_cycles_method_S_0005,
     wait_cycles_method_S_0006,
-    wait_cycles_method_S_0007,
     wait_cycles_method_S_0008,
     wait_cycles_method_S_0009,
     wait_cycles_method_S_0010  
@@ -480,8 +500,8 @@ architecture RTL of WIZ830MJ_Test is
     write_data_method_S_0013,
     write_data_method_S_0014,
     write_data_method_S_0015,
-    write_data_method_write_data_method_S_0010_body,
-    write_data_method_write_data_method_S_0010_wait  
+    write_data_method_S_0010_body,
+    write_data_method_S_0010_wait  
   );
   signal write_data_method : Type_write_data_method := write_data_method_IDLE;
   signal write_data_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -519,8 +539,8 @@ architecture RTL of WIZ830MJ_Test is
     read_data_method_S_0014,
     read_data_method_S_0015,
     read_data_method_S_0016,
-    read_data_method_read_data_method_S_0008_body,
-    read_data_method_read_data_method_S_0008_wait  
+    read_data_method_S_0008_body,
+    read_data_method_S_0008_wait  
   );
   signal read_data_method : Type_read_data_method := read_data_method_IDLE;
   signal read_data_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -556,10 +576,10 @@ architecture RTL of WIZ830MJ_Test is
     init_method_S_0012,
     init_method_S_0013,
     init_method_S_0014,
-    init_method_init_method_S_0010_body,
-    init_method_init_method_S_0010_wait,
-    init_method_init_method_S_0013_body,
-    init_method_init_method_S_0013_wait  
+    init_method_S_0010_body,
+    init_method_S_0010_wait,
+    init_method_S_0013_body,
+    init_method_S_0013_wait  
   );
   signal init_method : Type_init_method := init_method_IDLE;
   signal init_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -601,42 +621,42 @@ architecture RTL of WIZ830MJ_Test is
     network_configuration_method_S_0018,
     network_configuration_method_S_0019,
     network_configuration_method_S_0020,
-    network_configuration_method_network_configuration_method_S_0002_body,
-    network_configuration_method_network_configuration_method_S_0002_wait,
-    network_configuration_method_network_configuration_method_S_0003_body,
-    network_configuration_method_network_configuration_method_S_0003_wait,
-    network_configuration_method_network_configuration_method_S_0004_body,
-    network_configuration_method_network_configuration_method_S_0004_wait,
-    network_configuration_method_network_configuration_method_S_0005_body,
-    network_configuration_method_network_configuration_method_S_0005_wait,
-    network_configuration_method_network_configuration_method_S_0006_body,
-    network_configuration_method_network_configuration_method_S_0006_wait,
-    network_configuration_method_network_configuration_method_S_0007_body,
-    network_configuration_method_network_configuration_method_S_0007_wait,
-    network_configuration_method_network_configuration_method_S_0008_body,
-    network_configuration_method_network_configuration_method_S_0008_wait,
-    network_configuration_method_network_configuration_method_S_0009_body,
-    network_configuration_method_network_configuration_method_S_0009_wait,
-    network_configuration_method_network_configuration_method_S_0010_body,
-    network_configuration_method_network_configuration_method_S_0010_wait,
-    network_configuration_method_network_configuration_method_S_0011_body,
-    network_configuration_method_network_configuration_method_S_0011_wait,
-    network_configuration_method_network_configuration_method_S_0012_body,
-    network_configuration_method_network_configuration_method_S_0012_wait,
-    network_configuration_method_network_configuration_method_S_0013_body,
-    network_configuration_method_network_configuration_method_S_0013_wait,
-    network_configuration_method_network_configuration_method_S_0014_body,
-    network_configuration_method_network_configuration_method_S_0014_wait,
-    network_configuration_method_network_configuration_method_S_0015_body,
-    network_configuration_method_network_configuration_method_S_0015_wait,
-    network_configuration_method_network_configuration_method_S_0016_body,
-    network_configuration_method_network_configuration_method_S_0016_wait,
-    network_configuration_method_network_configuration_method_S_0017_body,
-    network_configuration_method_network_configuration_method_S_0017_wait,
-    network_configuration_method_network_configuration_method_S_0018_body,
-    network_configuration_method_network_configuration_method_S_0018_wait,
-    network_configuration_method_network_configuration_method_S_0019_body,
-    network_configuration_method_network_configuration_method_S_0019_wait  
+    network_configuration_method_S_0002_body,
+    network_configuration_method_S_0002_wait,
+    network_configuration_method_S_0003_body,
+    network_configuration_method_S_0003_wait,
+    network_configuration_method_S_0004_body,
+    network_configuration_method_S_0004_wait,
+    network_configuration_method_S_0005_body,
+    network_configuration_method_S_0005_wait,
+    network_configuration_method_S_0006_body,
+    network_configuration_method_S_0006_wait,
+    network_configuration_method_S_0007_body,
+    network_configuration_method_S_0007_wait,
+    network_configuration_method_S_0008_body,
+    network_configuration_method_S_0008_wait,
+    network_configuration_method_S_0009_body,
+    network_configuration_method_S_0009_wait,
+    network_configuration_method_S_0010_body,
+    network_configuration_method_S_0010_wait,
+    network_configuration_method_S_0011_body,
+    network_configuration_method_S_0011_wait,
+    network_configuration_method_S_0012_body,
+    network_configuration_method_S_0012_wait,
+    network_configuration_method_S_0013_body,
+    network_configuration_method_S_0013_wait,
+    network_configuration_method_S_0014_body,
+    network_configuration_method_S_0014_wait,
+    network_configuration_method_S_0015_body,
+    network_configuration_method_S_0015_wait,
+    network_configuration_method_S_0016_body,
+    network_configuration_method_S_0016_wait,
+    network_configuration_method_S_0017_body,
+    network_configuration_method_S_0017_wait,
+    network_configuration_method_S_0018_body,
+    network_configuration_method_S_0018_wait,
+    network_configuration_method_S_0019_body,
+    network_configuration_method_S_0019_wait  
   );
   signal network_configuration_method : Type_network_configuration_method := network_configuration_method_IDLE;
   signal network_configuration_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -745,33 +765,27 @@ architecture RTL of WIZ830MJ_Test is
     tcp_server_open_method_S_0000,
     tcp_server_open_method_S_0001,
     tcp_server_open_method_S_0002,
-    tcp_server_open_method_S_0003,
-    tcp_server_open_method_S_0006,
     tcp_server_open_method_S_0007,
     tcp_server_open_method_S_0008,
-    tcp_server_open_method_S_0009,
     tcp_server_open_method_S_0010,
     tcp_server_open_method_S_0011,
-    tcp_server_open_method_S_0012,
     tcp_server_open_method_S_0013,
     tcp_server_open_method_S_0014,
-    tcp_server_open_method_S_0015,
     tcp_server_open_method_S_0016,
     tcp_server_open_method_S_0017,
-    tcp_server_open_method_S_0018,
     tcp_server_open_method_S_0019,
     tcp_server_open_method_S_0020,
     tcp_server_open_method_S_0021,
-    tcp_server_open_method_tcp_server_open_method_S_0007_body,
-    tcp_server_open_method_tcp_server_open_method_S_0007_wait,
-    tcp_server_open_method_tcp_server_open_method_S_0010_body,
-    tcp_server_open_method_tcp_server_open_method_S_0010_wait,
-    tcp_server_open_method_tcp_server_open_method_S_0013_body,
-    tcp_server_open_method_tcp_server_open_method_S_0013_wait,
-    tcp_server_open_method_tcp_server_open_method_S_0016_body,
-    tcp_server_open_method_tcp_server_open_method_S_0016_wait,
-    tcp_server_open_method_tcp_server_open_method_S_0019_body,
-    tcp_server_open_method_tcp_server_open_method_S_0019_wait  
+    tcp_server_open_method_S_0007_body,
+    tcp_server_open_method_S_0007_wait,
+    tcp_server_open_method_S_0010_body,
+    tcp_server_open_method_S_0010_wait,
+    tcp_server_open_method_S_0013_body,
+    tcp_server_open_method_S_0013_wait,
+    tcp_server_open_method_S_0016_body,
+    tcp_server_open_method_S_0016_wait,
+    tcp_server_open_method_S_0019_body,
+    tcp_server_open_method_S_0019_wait  
   );
   signal tcp_server_open_method : Type_tcp_server_open_method := tcp_server_open_method_IDLE;
   signal tcp_server_open_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -808,17 +822,15 @@ architecture RTL of WIZ830MJ_Test is
     tcp_server_listen_method_S_0000,
     tcp_server_listen_method_S_0001,
     tcp_server_listen_method_S_0002,
-    tcp_server_listen_method_S_0003,
     tcp_server_listen_method_S_0004,
     tcp_server_listen_method_S_0005,
-    tcp_server_listen_method_S_0006,
     tcp_server_listen_method_S_0007,
     tcp_server_listen_method_S_0008,
     tcp_server_listen_method_S_0009,
-    tcp_server_listen_method_tcp_server_listen_method_S_0004_body,
-    tcp_server_listen_method_tcp_server_listen_method_S_0004_wait,
-    tcp_server_listen_method_tcp_server_listen_method_S_0007_body,
-    tcp_server_listen_method_tcp_server_listen_method_S_0007_wait  
+    tcp_server_listen_method_S_0004_body,
+    tcp_server_listen_method_S_0004_wait,
+    tcp_server_listen_method_S_0007_body,
+    tcp_server_listen_method_S_0007_wait  
   );
   signal tcp_server_listen_method : Type_tcp_server_listen_method := tcp_server_listen_method_IDLE;
   signal tcp_server_listen_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -849,18 +861,16 @@ architecture RTL of WIZ830MJ_Test is
     wait_for_established_method_S_0003,
     wait_for_established_method_S_0004,
     wait_for_established_method_S_0005,
-    wait_for_established_method_S_0006,
     wait_for_established_method_S_0007,
     wait_for_established_method_S_0008,
-    wait_for_established_method_S_0009,
     wait_for_established_method_S_0010,
     wait_for_established_method_S_0011,
     wait_for_established_method_S_0012,
     wait_for_established_method_S_0013,
     wait_for_established_method_S_0014,
     wait_for_established_method_S_0015,
-    wait_for_established_method_wait_for_established_method_S_0007_body,
-    wait_for_established_method_wait_for_established_method_S_0007_wait  
+    wait_for_established_method_S_0007_body,
+    wait_for_established_method_S_0007_wait  
   );
   signal wait_for_established_method : Type_wait_for_established_method := wait_for_established_method_IDLE;
   signal wait_for_established_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -889,31 +899,37 @@ architecture RTL of WIZ830MJ_Test is
     wait_for_recv_method_S_0003,
     wait_for_recv_method_S_0004,
     wait_for_recv_method_S_0005,
-    wait_for_recv_method_S_0007,
     wait_for_recv_method_S_0008,
     wait_for_recv_method_S_0009,
-    wait_for_recv_method_S_0010,
     wait_for_recv_method_S_0013,
     wait_for_recv_method_S_0014,
-    wait_for_recv_method_S_0015,
     wait_for_recv_method_S_0018,
     wait_for_recv_method_S_0019,
-    wait_for_recv_method_S_0020,
-    wait_for_recv_method_S_0024,
-    wait_for_recv_method_S_0025,
-    wait_for_recv_method_S_0026,
     wait_for_recv_method_S_0027,
     wait_for_recv_method_S_0028,
     wait_for_recv_method_S_0029,
     wait_for_recv_method_S_0030,
     wait_for_recv_method_S_0031,
-    wait_for_recv_method_S_0032,
-    wait_for_recv_method_wait_for_recv_method_S_0008_body,
-    wait_for_recv_method_wait_for_recv_method_S_0008_wait,
-    wait_for_recv_method_wait_for_recv_method_S_0013_body,
-    wait_for_recv_method_wait_for_recv_method_S_0013_wait,
-    wait_for_recv_method_wait_for_recv_method_S_0018_body,
-    wait_for_recv_method_wait_for_recv_method_S_0018_wait  
+    wait_for_recv_method_S_0033,
+    wait_for_recv_method_S_0034,
+    wait_for_recv_method_S_0041,
+    wait_for_recv_method_S_0042,
+    wait_for_recv_method_S_0043,
+    wait_for_recv_method_S_0045,
+    wait_for_recv_method_S_0046,
+    wait_for_recv_method_S_0047,
+    wait_for_recv_method_S_0048,
+    wait_for_recv_method_S_0049,
+    wait_for_recv_method_S_0008_body,
+    wait_for_recv_method_S_0008_wait,
+    wait_for_recv_method_S_0013_body,
+    wait_for_recv_method_S_0013_wait,
+    wait_for_recv_method_S_0018_body,
+    wait_for_recv_method_S_0018_wait,
+    wait_for_recv_method_S_0033_body,
+    wait_for_recv_method_S_0033_wait,
+    wait_for_recv_method_S_0045_body,
+    wait_for_recv_method_S_0045_wait  
   );
   signal wait_for_recv_method : Type_wait_for_recv_method := wait_for_recv_method_IDLE;
   signal wait_for_recv_method_delay : signed(32-1 downto 0) := (others => '0');
@@ -942,296 +958,308 @@ architecture RTL of WIZ830MJ_Test is
   signal tmp_0205 : std_logic;
   signal tmp_0206 : std_logic;
   signal tmp_0207 : std_logic;
+  signal read_data_call_flag_0033 : std_logic;
   signal tmp_0208 : std_logic;
   signal tmp_0209 : std_logic;
   signal tmp_0210 : std_logic;
   signal tmp_0211 : std_logic;
-  signal tmp_0212 : signed(32-1 downto 0);
-  signal tmp_0213 : signed(32-1 downto 0);
-  signal tmp_0214 : signed(32-1 downto 0);
-  signal tmp_0215 : signed(32-1 downto 0);
-  signal tmp_0216 : signed(32-1 downto 0);
-  signal tmp_0217 : signed(32-1 downto 0);
-  signal tmp_0218 : signed(32-1 downto 0);
-  signal tmp_0219 : signed(32-1 downto 0);
-  signal tmp_0220 : signed(32-1 downto 0);
-  signal tmp_0221 : signed(32-1 downto 0);
+  signal tmp_0212 : std_logic;
+  signal tmp_0213 : std_logic;
+  signal write_data_call_flag_0045 : std_logic;
+  signal tmp_0214 : std_logic;
+  signal tmp_0215 : std_logic;
+  signal tmp_0216 : std_logic;
+  signal tmp_0217 : std_logic;
+  signal tmp_0218 : std_logic;
+  signal tmp_0219 : std_logic;
+  signal tmp_0220 : std_logic;
+  signal tmp_0221 : std_logic;
   signal tmp_0222 : signed(32-1 downto 0);
   signal tmp_0223 : signed(32-1 downto 0);
   signal tmp_0224 : signed(32-1 downto 0);
-  signal tmp_0225 : std_logic;
+  signal tmp_0225 : signed(32-1 downto 0);
+  signal tmp_0226 : signed(32-1 downto 0);
+  signal tmp_0227 : signed(32-1 downto 0);
+  signal tmp_0228 : signed(32-1 downto 0);
+  signal tmp_0229 : signed(32-1 downto 0);
+  signal tmp_0230 : signed(32-1 downto 0);
+  signal tmp_0231 : signed(32-1 downto 0);
+  signal tmp_0232 : signed(32-1 downto 0);
+  signal tmp_0233 : signed(32-1 downto 0);
+  signal tmp_0234 : signed(32-1 downto 0);
+  signal tmp_0235 : std_logic;
+  signal tmp_0236 : signed(32-1 downto 0);
+  signal tmp_0237 : signed(32-1 downto 0);
+  signal tmp_0238 : signed(32-1 downto 0);
+  signal tmp_0239 : signed(32-1 downto 0);
+  signal tmp_0240 : signed(32-1 downto 0);
+  signal tmp_0241 : std_logic;
+  signal tmp_0242 : std_logic;
+  signal tmp_0243 : std_logic;
+  signal tmp_0244 : signed(32-1 downto 0);
+  signal tmp_0245 : signed(32-1 downto 0);
   type Type_pull_recv_data_method is (
     pull_recv_data_method_IDLE,
     pull_recv_data_method_S_0000,
     pull_recv_data_method_S_0001,
     pull_recv_data_method_S_0002,
-    pull_recv_data_method_S_0003,
     pull_recv_data_method_S_0004,
     pull_recv_data_method_S_0005,
-    pull_recv_data_method_S_0006,
     pull_recv_data_method_S_0009,
     pull_recv_data_method_S_0010,
-    pull_recv_data_method_S_0011,
-    pull_recv_data_method_S_0013,
-    pull_recv_data_method_S_0014,
-    pull_recv_data_method_S_0015,
-    pull_recv_data_method_S_0016,
     pull_recv_data_method_S_0019,
     pull_recv_data_method_S_0020,
     pull_recv_data_method_S_0021,
-    pull_recv_data_method_S_0022,
     pull_recv_data_method_S_0023,
     pull_recv_data_method_S_0024,
     pull_recv_data_method_S_0025,
     pull_recv_data_method_S_0026,
     pull_recv_data_method_S_0027,
     pull_recv_data_method_S_0028,
-    pull_recv_data_method_S_0029,
     pull_recv_data_method_S_0030,
     pull_recv_data_method_S_0031,
-    pull_recv_data_method_S_0032,
     pull_recv_data_method_S_0033,
     pull_recv_data_method_S_0034,
-    pull_recv_data_method_S_0035,
     pull_recv_data_method_S_0036,
     pull_recv_data_method_S_0037,
-    pull_recv_data_method_S_0039,
     pull_recv_data_method_S_0040,
     pull_recv_data_method_S_0041,
-    pull_recv_data_method_S_0042,
     pull_recv_data_method_S_0043,
     pull_recv_data_method_S_0044,
     pull_recv_data_method_S_0045,
     pull_recv_data_method_S_0046,
-    pull_recv_data_method_S_0047,
     pull_recv_data_method_S_0048,
     pull_recv_data_method_S_0049,
     pull_recv_data_method_S_0050,
-    pull_recv_data_method_pull_recv_data_method_S_0004_body,
-    pull_recv_data_method_pull_recv_data_method_S_0004_wait,
-    pull_recv_data_method_pull_recv_data_method_S_0009_body,
-    pull_recv_data_method_pull_recv_data_method_S_0009_wait,
-    pull_recv_data_method_pull_recv_data_method_S_0036_body,
-    pull_recv_data_method_pull_recv_data_method_S_0036_wait,
-    pull_recv_data_method_pull_recv_data_method_S_0043_body,
-    pull_recv_data_method_pull_recv_data_method_S_0043_wait,
-    pull_recv_data_method_pull_recv_data_method_S_0048_body,
-    pull_recv_data_method_pull_recv_data_method_S_0048_wait  
+    pull_recv_data_method_S_0004_body,
+    pull_recv_data_method_S_0004_wait,
+    pull_recv_data_method_S_0009_body,
+    pull_recv_data_method_S_0009_wait,
+    pull_recv_data_method_S_0036_body,
+    pull_recv_data_method_S_0036_wait,
+    pull_recv_data_method_S_0043_body,
+    pull_recv_data_method_S_0043_wait,
+    pull_recv_data_method_S_0048_body,
+    pull_recv_data_method_S_0048_wait  
   );
   signal pull_recv_data_method : Type_pull_recv_data_method := pull_recv_data_method_IDLE;
   signal pull_recv_data_method_delay : signed(32-1 downto 0) := (others => '0');
   signal pull_recv_data_req_flag_d : std_logic := '0';
   signal pull_recv_data_req_flag_edge : std_logic;
-  signal tmp_0226 : std_logic;
-  signal tmp_0227 : std_logic;
-  signal tmp_0228 : std_logic;
-  signal tmp_0229 : std_logic;
-  signal read_data_call_flag_0004 : std_logic;
-  signal tmp_0230 : std_logic;
-  signal tmp_0231 : std_logic;
-  signal tmp_0232 : std_logic;
-  signal tmp_0233 : std_logic;
-  signal read_data_call_flag_0009 : std_logic;
-  signal tmp_0234 : std_logic;
-  signal tmp_0235 : std_logic;
-  signal tmp_0236 : std_logic;
-  signal tmp_0237 : std_logic;
-  signal tmp_0238 : std_logic;
-  signal tmp_0239 : std_logic;
-  signal tmp_0240 : std_logic;
-  signal tmp_0241 : std_logic;
-  signal read_data_call_flag_0036 : std_logic;
-  signal tmp_0242 : std_logic;
-  signal tmp_0243 : std_logic;
-  signal tmp_0244 : std_logic;
-  signal tmp_0245 : std_logic;
-  signal read_data_call_flag_0043 : std_logic;
   signal tmp_0246 : std_logic;
   signal tmp_0247 : std_logic;
   signal tmp_0248 : std_logic;
   signal tmp_0249 : std_logic;
-  signal write_data_call_flag_0048 : std_logic;
+  signal read_data_call_flag_0004 : std_logic;
   signal tmp_0250 : std_logic;
   signal tmp_0251 : std_logic;
   signal tmp_0252 : std_logic;
   signal tmp_0253 : std_logic;
+  signal read_data_call_flag_0009 : std_logic;
   signal tmp_0254 : std_logic;
   signal tmp_0255 : std_logic;
   signal tmp_0256 : std_logic;
   signal tmp_0257 : std_logic;
-  signal tmp_0258 : signed(32-1 downto 0);
-  signal tmp_0259 : signed(32-1 downto 0);
-  signal tmp_0260 : signed(32-1 downto 0);
-  signal tmp_0261 : signed(32-1 downto 0);
-  signal tmp_0262 : signed(32-1 downto 0);
-  signal tmp_0263 : signed(32-1 downto 0);
-  signal tmp_0264 : signed(32-1 downto 0);
-  signal tmp_0265 : signed(32-1 downto 0);
-  signal tmp_0266 : signed(32-1 downto 0);
-  signal tmp_0267 : signed(32-1 downto 0);
+  signal tmp_0258 : std_logic;
+  signal tmp_0259 : std_logic;
+  signal tmp_0260 : std_logic;
+  signal tmp_0261 : std_logic;
+  signal read_data_call_flag_0036 : std_logic;
+  signal tmp_0262 : std_logic;
+  signal tmp_0263 : std_logic;
+  signal tmp_0264 : std_logic;
+  signal tmp_0265 : std_logic;
+  signal read_data_call_flag_0043 : std_logic;
+  signal tmp_0266 : std_logic;
+  signal tmp_0267 : std_logic;
   signal tmp_0268 : std_logic;
-  signal tmp_0269 : signed(32-1 downto 0);
+  signal tmp_0269 : std_logic;
+  signal write_data_call_flag_0048 : std_logic;
   signal tmp_0270 : std_logic;
-  signal tmp_0271 : signed(32-1 downto 0);
-  signal tmp_0272 : signed(32-1 downto 0);
-  signal tmp_0273 : signed(32-1 downto 0);
-  signal tmp_0274 : signed(32-1 downto 0);
-  signal tmp_0275 : signed(32-1 downto 0);
-  signal tmp_0276 : signed(32-1 downto 0);
-  signal tmp_0277 : signed(32-1 downto 0);
+  signal tmp_0271 : std_logic;
+  signal tmp_0272 : std_logic;
+  signal tmp_0273 : std_logic;
+  signal tmp_0274 : std_logic;
+  signal tmp_0275 : std_logic;
+  signal tmp_0276 : std_logic;
+  signal tmp_0277 : std_logic;
   signal tmp_0278 : signed(32-1 downto 0);
   signal tmp_0279 : signed(32-1 downto 0);
   signal tmp_0280 : signed(32-1 downto 0);
   signal tmp_0281 : signed(32-1 downto 0);
+  signal tmp_0282 : signed(32-1 downto 0);
+  signal tmp_0283 : signed(32-1 downto 0);
+  signal tmp_0284 : signed(32-1 downto 0);
+  signal tmp_0285 : signed(32-1 downto 0);
+  signal tmp_0286 : signed(32-1 downto 0);
+  signal tmp_0287 : signed(32-1 downto 0);
+  signal tmp_0288 : std_logic;
+  signal tmp_0289 : signed(32-1 downto 0);
+  signal tmp_0290 : std_logic;
+  signal tmp_0291 : signed(32-1 downto 0);
+  signal tmp_0292 : signed(32-1 downto 0);
+  signal tmp_0293 : signed(32-1 downto 0);
+  signal tmp_0294 : signed(32-1 downto 0);
+  signal tmp_0295 : signed(32-1 downto 0);
+  signal tmp_0296 : signed(32-1 downto 0);
+  signal tmp_0297 : signed(32-1 downto 0);
+  signal tmp_0298 : signed(32-1 downto 0);
+  signal tmp_0299 : signed(32-1 downto 0);
+  signal tmp_0300 : signed(32-1 downto 0);
+  signal tmp_0301 : signed(32-1 downto 0);
   type Type_push_send_data_method is (
     push_send_data_method_IDLE,
     push_send_data_method_S_0000,
     push_send_data_method_S_0001,
     push_send_data_method_S_0002,
-    push_send_data_method_S_0003,
-    push_send_data_method_S_0006,
     push_send_data_method_S_0007,
     push_send_data_method_S_0008,
-    push_send_data_method_S_0009,
-    push_send_data_method_S_0010,
-    push_send_data_method_S_0011,
     push_send_data_method_S_0012,
     push_send_data_method_S_0013,
-    push_send_data_method_S_0014,
-    push_send_data_method_S_0015,
-    push_send_data_method_S_0016,
     push_send_data_method_S_0017,
     push_send_data_method_S_0018,
     push_send_data_method_S_0019,
-    push_send_data_method_S_0020,
     push_send_data_method_S_0021,
+    push_send_data_method_S_0022,
     push_send_data_method_S_0023,
     push_send_data_method_S_0024,
     push_send_data_method_S_0025,
     push_send_data_method_S_0026,
-    push_send_data_method_S_0027,
     push_send_data_method_S_0028,
-    push_send_data_method_S_0030,
+    push_send_data_method_S_0029,
     push_send_data_method_S_0031,
     push_send_data_method_S_0032,
-    push_send_data_method_S_0033,
-    push_send_data_method_S_0034,
     push_send_data_method_S_0035,
     push_send_data_method_S_0036,
-    push_send_data_method_S_0037,
-    push_send_data_method_S_0040,
-    push_send_data_method_S_0041,
+    push_send_data_method_S_0038,
+    push_send_data_method_S_0039,
     push_send_data_method_S_0042,
-    push_send_data_method_S_0045,
+    push_send_data_method_S_0043,
+    push_send_data_method_S_0044,
     push_send_data_method_S_0046,
     push_send_data_method_S_0047,
-    push_send_data_method_S_0050,
     push_send_data_method_S_0051,
     push_send_data_method_S_0052,
-    push_send_data_method_S_0053,
-    push_send_data_method_S_0054,
-    push_send_data_method_push_send_data_method_S_0024_body,
-    push_send_data_method_push_send_data_method_S_0024_wait,
-    push_send_data_method_push_send_data_method_S_0031_body,
-    push_send_data_method_push_send_data_method_S_0031_wait,
-    push_send_data_method_push_send_data_method_S_0035_body,
-    push_send_data_method_push_send_data_method_S_0035_wait,
-    push_send_data_method_push_send_data_method_S_0040_body,
-    push_send_data_method_push_send_data_method_S_0040_wait,
-    push_send_data_method_push_send_data_method_S_0045_body,
-    push_send_data_method_push_send_data_method_S_0045_wait,
-    push_send_data_method_push_send_data_method_S_0050_body,
-    push_send_data_method_push_send_data_method_S_0050_wait,
-    push_send_data_method_push_send_data_method_S_0053_body,
-    push_send_data_method_push_send_data_method_S_0053_wait  
+    push_send_data_method_S_0056,
+    push_send_data_method_S_0057,
+    push_send_data_method_S_0061,
+    push_send_data_method_S_0062,
+    push_send_data_method_S_0064,
+    push_send_data_method_S_0065,
+    push_send_data_method_S_0007_body,
+    push_send_data_method_S_0007_wait,
+    push_send_data_method_S_0012_body,
+    push_send_data_method_S_0012_wait,
+    push_send_data_method_S_0035_body,
+    push_send_data_method_S_0035_wait,
+    push_send_data_method_S_0042_body,
+    push_send_data_method_S_0042_wait,
+    push_send_data_method_S_0046_body,
+    push_send_data_method_S_0046_wait,
+    push_send_data_method_S_0051_body,
+    push_send_data_method_S_0051_wait,
+    push_send_data_method_S_0056_body,
+    push_send_data_method_S_0056_wait,
+    push_send_data_method_S_0061_body,
+    push_send_data_method_S_0061_wait,
+    push_send_data_method_S_0064_body,
+    push_send_data_method_S_0064_wait  
   );
   signal push_send_data_method : Type_push_send_data_method := push_send_data_method_IDLE;
   signal push_send_data_method_delay : signed(32-1 downto 0) := (others => '0');
   signal push_send_data_req_flag_d : std_logic := '0';
   signal push_send_data_req_flag_edge : std_logic;
-  signal tmp_0282 : std_logic;
-  signal tmp_0283 : std_logic;
-  signal tmp_0284 : std_logic;
-  signal tmp_0285 : std_logic;
-  signal tmp_0286 : std_logic;
-  signal tmp_0287 : std_logic;
-  signal tmp_0288 : std_logic;
-  signal tmp_0289 : std_logic;
-  signal write_data_call_flag_0024 : std_logic;
-  signal tmp_0290 : std_logic;
-  signal tmp_0291 : std_logic;
-  signal tmp_0292 : std_logic;
-  signal tmp_0293 : std_logic;
-  signal write_data_call_flag_0031 : std_logic;
-  signal tmp_0294 : std_logic;
-  signal tmp_0295 : std_logic;
-  signal tmp_0296 : std_logic;
-  signal tmp_0297 : std_logic;
-  signal write_data_call_flag_0035 : std_logic;
-  signal tmp_0298 : std_logic;
-  signal tmp_0299 : std_logic;
-  signal tmp_0300 : std_logic;
-  signal tmp_0301 : std_logic;
-  signal write_data_call_flag_0040 : std_logic;
   signal tmp_0302 : std_logic;
   signal tmp_0303 : std_logic;
   signal tmp_0304 : std_logic;
   signal tmp_0305 : std_logic;
-  signal write_data_call_flag_0045 : std_logic;
   signal tmp_0306 : std_logic;
   signal tmp_0307 : std_logic;
   signal tmp_0308 : std_logic;
   signal tmp_0309 : std_logic;
-  signal write_data_call_flag_0050 : std_logic;
+  signal write_data_call_flag_0035 : std_logic;
   signal tmp_0310 : std_logic;
   signal tmp_0311 : std_logic;
   signal tmp_0312 : std_logic;
   signal tmp_0313 : std_logic;
-  signal write_data_call_flag_0053 : std_logic;
+  signal write_data_call_flag_0042 : std_logic;
   signal tmp_0314 : std_logic;
   signal tmp_0315 : std_logic;
   signal tmp_0316 : std_logic;
   signal tmp_0317 : std_logic;
+  signal write_data_call_flag_0046 : std_logic;
   signal tmp_0318 : std_logic;
   signal tmp_0319 : std_logic;
   signal tmp_0320 : std_logic;
   signal tmp_0321 : std_logic;
-  signal tmp_0322 : signed(32-1 downto 0);
-  signal tmp_0323 : signed(32-1 downto 0);
+  signal write_data_call_flag_0051 : std_logic;
+  signal tmp_0322 : std_logic;
+  signal tmp_0323 : std_logic;
   signal tmp_0324 : std_logic;
-  signal tmp_0325 : signed(32-1 downto 0);
+  signal tmp_0325 : std_logic;
+  signal write_data_call_flag_0056 : std_logic;
   signal tmp_0326 : std_logic;
-  signal tmp_0327 : signed(32-1 downto 0);
-  signal tmp_0328 : signed(32-1 downto 0);
-  signal tmp_0329 : signed(32-1 downto 0);
-  signal tmp_0330 : signed(32-1 downto 0);
-  signal tmp_0331 : signed(32-1 downto 0);
-  signal tmp_0332 : signed(32-1 downto 0);
-  signal tmp_0333 : signed(32-1 downto 0);
-  signal tmp_0334 : signed(32-1 downto 0);
-  signal tmp_0335 : signed(32-1 downto 0);
-  signal tmp_0336 : signed(32-1 downto 0);
-  signal tmp_0337 : signed(32-1 downto 0);
-  signal tmp_0338 : signed(32-1 downto 0);
-  signal tmp_0339 : signed(32-1 downto 0);
-  signal tmp_0340 : signed(32-1 downto 0);
-  signal tmp_0341 : signed(8-1 downto 0);
+  signal tmp_0327 : std_logic;
+  signal tmp_0328 : std_logic;
+  signal tmp_0329 : std_logic;
+  signal write_data_call_flag_0061 : std_logic;
+  signal tmp_0330 : std_logic;
+  signal tmp_0331 : std_logic;
+  signal tmp_0332 : std_logic;
+  signal tmp_0333 : std_logic;
+  signal write_data_call_flag_0064 : std_logic;
+  signal tmp_0334 : std_logic;
+  signal tmp_0335 : std_logic;
+  signal tmp_0336 : std_logic;
+  signal tmp_0337 : std_logic;
+  signal tmp_0338 : std_logic;
+  signal tmp_0339 : std_logic;
+  signal tmp_0340 : std_logic;
+  signal tmp_0341 : std_logic;
   signal tmp_0342 : signed(32-1 downto 0);
   signal tmp_0343 : signed(32-1 downto 0);
   signal tmp_0344 : signed(32-1 downto 0);
-  signal tmp_0345 : signed(8-1 downto 0);
-  signal tmp_0346 : signed(32-1 downto 0);
+  signal tmp_0345 : signed(32-1 downto 0);
+  signal tmp_0346 : signed(8-1 downto 0);
   signal tmp_0347 : signed(32-1 downto 0);
   signal tmp_0348 : signed(32-1 downto 0);
-  signal tmp_0349 : signed(8-1 downto 0);
-  signal tmp_0350 : signed(32-1 downto 0);
+  signal tmp_0349 : signed(32-1 downto 0);
+  signal tmp_0350 : signed(8-1 downto 0);
   signal tmp_0351 : signed(32-1 downto 0);
+  signal tmp_0352 : signed(32-1 downto 0);
+  signal tmp_0353 : std_logic;
+  signal tmp_0354 : signed(32-1 downto 0);
+  signal tmp_0355 : std_logic;
+  signal tmp_0356 : signed(32-1 downto 0);
+  signal tmp_0357 : signed(32-1 downto 0);
+  signal tmp_0358 : signed(32-1 downto 0);
+  signal tmp_0359 : signed(32-1 downto 0);
+  signal tmp_0360 : signed(32-1 downto 0);
+  signal tmp_0361 : signed(32-1 downto 0);
+  signal tmp_0362 : signed(32-1 downto 0);
+  signal tmp_0363 : signed(32-1 downto 0);
+  signal tmp_0364 : signed(32-1 downto 0);
+  signal tmp_0365 : signed(32-1 downto 0);
+  signal tmp_0366 : signed(32-1 downto 0);
+  signal tmp_0367 : signed(32-1 downto 0);
+  signal tmp_0368 : signed(32-1 downto 0);
+  signal tmp_0369 : signed(32-1 downto 0);
+  signal tmp_0370 : signed(8-1 downto 0);
+  signal tmp_0371 : signed(32-1 downto 0);
+  signal tmp_0372 : signed(32-1 downto 0);
+  signal tmp_0373 : signed(32-1 downto 0);
+  signal tmp_0374 : signed(8-1 downto 0);
+  signal tmp_0375 : signed(32-1 downto 0);
+  signal tmp_0376 : signed(32-1 downto 0);
+  signal tmp_0377 : signed(32-1 downto 0);
+  signal tmp_0378 : signed(8-1 downto 0);
+  signal tmp_0379 : signed(32-1 downto 0);
+  signal tmp_0380 : signed(32-1 downto 0);
   type Type_tcp_server_method is (
     tcp_server_method_IDLE,
     tcp_server_method_S_0000,
     tcp_server_method_S_0001,
     tcp_server_method_S_0002,
-    tcp_server_method_S_0003,
     tcp_server_method_S_0004,
     tcp_server_method_S_0005,
     tcp_server_method_S_0006,
@@ -1239,7 +1267,6 @@ architecture RTL of WIZ830MJ_Test is
     tcp_server_method_S_0008,
     tcp_server_method_S_0009,
     tcp_server_method_S_0010,
-    tcp_server_method_S_0011,
     tcp_server_method_S_0012,
     tcp_server_method_S_0013,
     tcp_server_method_S_0014,
@@ -1252,7 +1279,6 @@ architecture RTL of WIZ830MJ_Test is
     tcp_server_method_S_0021,
     tcp_server_method_S_0022,
     tcp_server_method_S_0023,
-    tcp_server_method_S_0024,
     tcp_server_method_S_0025,
     tcp_server_method_S_0026,
     tcp_server_method_S_0027,
@@ -1267,118 +1293,120 @@ architecture RTL of WIZ830MJ_Test is
     tcp_server_method_S_0037,
     tcp_server_method_S_0038,
     tcp_server_method_S_0039,
-    tcp_server_method_S_0040,
     tcp_server_method_S_0041,
     tcp_server_method_S_0042,
     tcp_server_method_S_0043,
     tcp_server_method_S_0044,
     tcp_server_method_S_0045,
     tcp_server_method_S_0046,
-    tcp_server_method_tcp_server_method_S_0004_body,
-    tcp_server_method_tcp_server_method_S_0004_wait,
-    tcp_server_method_tcp_server_method_S_0005_body,
-    tcp_server_method_tcp_server_method_S_0005_wait,
-    tcp_server_method_tcp_server_method_S_0012_body,
-    tcp_server_method_tcp_server_method_S_0012_wait,
-    tcp_server_method_tcp_server_method_S_0013_body,
-    tcp_server_method_tcp_server_method_S_0013_wait,
-    tcp_server_method_tcp_server_method_S_0018_body,
-    tcp_server_method_tcp_server_method_S_0018_wait,
-    tcp_server_method_tcp_server_method_S_0025_body,
-    tcp_server_method_tcp_server_method_S_0025_wait,
-    tcp_server_method_tcp_server_method_S_0026_body,
-    tcp_server_method_tcp_server_method_S_0026_wait,
-    tcp_server_method_tcp_server_method_S_0029_body,
-    tcp_server_method_tcp_server_method_S_0029_wait,
-    tcp_server_method_tcp_server_method_S_0033_body,
-    tcp_server_method_tcp_server_method_S_0033_wait,
-    tcp_server_method_tcp_server_method_S_0038_body,
-    tcp_server_method_tcp_server_method_S_0038_wait,
-    tcp_server_method_tcp_server_method_S_0041_body,
-    tcp_server_method_tcp_server_method_S_0041_wait,
-    tcp_server_method_tcp_server_method_S_0044_body,
-    tcp_server_method_tcp_server_method_S_0044_wait  
+    tcp_server_method_S_0047,
+    tcp_server_method_S_0048,
+    tcp_server_method_S_0049,
+    tcp_server_method_S_0050,
+    tcp_server_method_S_0051,
+    tcp_server_method_S_0004_body,
+    tcp_server_method_S_0004_wait,
+    tcp_server_method_S_0005_body,
+    tcp_server_method_S_0005_wait,
+    tcp_server_method_S_0012_body,
+    tcp_server_method_S_0012_wait,
+    tcp_server_method_S_0013_body,
+    tcp_server_method_S_0013_wait,
+    tcp_server_method_S_0018_body,
+    tcp_server_method_S_0018_wait,
+    tcp_server_method_S_0025_body,
+    tcp_server_method_S_0025_wait,
+    tcp_server_method_S_0026_body,
+    tcp_server_method_S_0026_wait,
+    tcp_server_method_S_0029_body,
+    tcp_server_method_S_0029_wait,
+    tcp_server_method_S_0033_body,
+    tcp_server_method_S_0033_wait,
+    tcp_server_method_S_0038_body,
+    tcp_server_method_S_0038_wait,
+    tcp_server_method_S_0046_body,
+    tcp_server_method_S_0046_wait,
+    tcp_server_method_S_0049_body,
+    tcp_server_method_S_0049_wait  
   );
   signal tcp_server_method : Type_tcp_server_method := tcp_server_method_IDLE;
   signal tcp_server_method_delay : signed(32-1 downto 0) := (others => '0');
   signal tcp_server_req_flag_d : std_logic := '0';
   signal tcp_server_req_flag_edge : std_logic;
-  signal tmp_0352 : std_logic;
-  signal tmp_0353 : std_logic;
-  signal tmp_0354 : std_logic;
-  signal tmp_0355 : std_logic;
-  signal tcp_server_open_call_flag_0005 : std_logic;
-  signal tmp_0356 : std_logic;
-  signal tmp_0357 : std_logic;
-  signal tmp_0358 : std_logic;
-  signal tmp_0359 : std_logic;
-  signal tmp_0360 : std_logic;
-  signal tmp_0361 : std_logic;
-  signal tcp_server_open_call_flag_0013 : std_logic;
-  signal tmp_0362 : std_logic;
-  signal tmp_0363 : std_logic;
-  signal tmp_0364 : std_logic;
-  signal tmp_0365 : std_logic;
-  signal tcp_server_listen_call_flag_0018 : std_logic;
-  signal tmp_0366 : std_logic;
-  signal tmp_0367 : std_logic;
-  signal tmp_0368 : std_logic;
-  signal tmp_0369 : std_logic;
-  signal tmp_0370 : std_logic;
-  signal tmp_0371 : std_logic;
-  signal write_data_call_flag_0025 : std_logic;
-  signal tmp_0372 : std_logic;
-  signal tmp_0373 : std_logic;
-  signal tmp_0374 : std_logic;
-  signal tmp_0375 : std_logic;
-  signal tcp_server_listen_call_flag_0026 : std_logic;
-  signal tmp_0376 : std_logic;
-  signal tmp_0377 : std_logic;
-  signal tmp_0378 : std_logic;
-  signal tmp_0379 : std_logic;
-  signal wait_for_established_call_flag_0029 : std_logic;
-  signal tmp_0380 : std_logic;
   signal tmp_0381 : std_logic;
   signal tmp_0382 : std_logic;
   signal tmp_0383 : std_logic;
-  signal read_data_call_flag_0033 : std_logic;
   signal tmp_0384 : std_logic;
+  signal tcp_server_open_call_flag_0005 : std_logic;
   signal tmp_0385 : std_logic;
   signal tmp_0386 : std_logic;
   signal tmp_0387 : std_logic;
   signal tmp_0388 : std_logic;
   signal tmp_0389 : std_logic;
-  signal wait_for_recv_call_flag_0038 : std_logic;
   signal tmp_0390 : std_logic;
+  signal tcp_server_open_call_flag_0013 : std_logic;
   signal tmp_0391 : std_logic;
   signal tmp_0392 : std_logic;
   signal tmp_0393 : std_logic;
-  signal pull_recv_data_call_flag_0041 : std_logic;
   signal tmp_0394 : std_logic;
+  signal tcp_server_listen_call_flag_0018 : std_logic;
   signal tmp_0395 : std_logic;
   signal tmp_0396 : std_logic;
   signal tmp_0397 : std_logic;
-  signal push_send_data_call_flag_0044 : std_logic;
   signal tmp_0398 : std_logic;
   signal tmp_0399 : std_logic;
   signal tmp_0400 : std_logic;
+  signal write_data_call_flag_0025 : std_logic;
   signal tmp_0401 : std_logic;
   signal tmp_0402 : std_logic;
   signal tmp_0403 : std_logic;
   signal tmp_0404 : std_logic;
+  signal tcp_server_listen_call_flag_0026 : std_logic;
   signal tmp_0405 : std_logic;
-  signal tmp_0406 : signed(32-1 downto 0);
-  signal tmp_0407 : signed(32-1 downto 0);
+  signal tmp_0406 : std_logic;
+  signal tmp_0407 : std_logic;
   signal tmp_0408 : std_logic;
-  signal tmp_0409 : signed(32-1 downto 0);
-  signal tmp_0410 : signed(32-1 downto 0);
-  signal tmp_0411 : signed(32-1 downto 0);
+  signal wait_for_established_call_flag_0029 : std_logic;
+  signal tmp_0409 : std_logic;
+  signal tmp_0410 : std_logic;
+  signal tmp_0411 : std_logic;
   signal tmp_0412 : std_logic;
-  signal tmp_0413 : signed(32-1 downto 0);
-  signal tmp_0414 : signed(32-1 downto 0);
-  signal tmp_0415 : signed(32-1 downto 0);
-  signal tmp_0416 : signed(32-1 downto 0);
-  signal tmp_0417 : signed(32-1 downto 0);
+  signal tmp_0413 : std_logic;
+  signal tmp_0414 : std_logic;
+  signal wait_for_recv_call_flag_0038 : std_logic;
+  signal tmp_0415 : std_logic;
+  signal tmp_0416 : std_logic;
+  signal tmp_0417 : std_logic;
+  signal tmp_0418 : std_logic;
+  signal tmp_0419 : std_logic;
+  signal tmp_0420 : std_logic;
+  signal pull_recv_data_call_flag_0046 : std_logic;
+  signal tmp_0421 : std_logic;
+  signal tmp_0422 : std_logic;
+  signal tmp_0423 : std_logic;
+  signal tmp_0424 : std_logic;
+  signal push_send_data_call_flag_0049 : std_logic;
+  signal tmp_0425 : std_logic;
+  signal tmp_0426 : std_logic;
+  signal tmp_0427 : std_logic;
+  signal tmp_0428 : std_logic;
+  signal tmp_0429 : std_logic;
+  signal tmp_0430 : std_logic;
+  signal tmp_0431 : std_logic;
+  signal tmp_0432 : std_logic;
+  signal tmp_0433 : signed(32-1 downto 0);
+  signal tmp_0434 : signed(32-1 downto 0);
+  signal tmp_0435 : std_logic;
+  signal tmp_0436 : signed(32-1 downto 0);
+  signal tmp_0437 : signed(32-1 downto 0);
+  signal tmp_0438 : signed(32-1 downto 0);
+  signal tmp_0439 : std_logic;
+  signal tmp_0440 : signed(32-1 downto 0);
+  signal tmp_0441 : signed(32-1 downto 0);
+  signal tmp_0442 : signed(32-1 downto 0);
+  signal tmp_0443 : signed(32-1 downto 0);
+  signal tmp_0444 : signed(32-1 downto 0);
+  signal tmp_0445 : std_logic;
   type Type_test_method is (
     test_method_IDLE,
     test_method_S_0000,
@@ -1394,42 +1422,42 @@ architecture RTL of WIZ830MJ_Test is
     test_method_S_0010,
     test_method_S_0011,
     test_method_S_0012,
-    test_method_test_method_S_0003_body,
-    test_method_test_method_S_0003_wait,
-    test_method_test_method_S_0005_body,
-    test_method_test_method_S_0005_wait,
-    test_method_test_method_S_0007_body,
-    test_method_test_method_S_0007_wait  
+    test_method_S_0003_body,
+    test_method_S_0003_wait,
+    test_method_S_0005_body,
+    test_method_S_0005_wait,
+    test_method_S_0010_body,
+    test_method_S_0010_wait  
   );
   signal test_method : Type_test_method := test_method_IDLE;
   signal test_method_delay : signed(32-1 downto 0) := (others => '0');
   signal test_req_flag_d : std_logic := '0';
   signal test_req_flag_edge : std_logic;
-  signal tmp_0418 : std_logic;
-  signal tmp_0419 : std_logic;
-  signal tmp_0420 : std_logic;
-  signal tmp_0421 : std_logic;
+  signal tmp_0446 : std_logic;
+  signal tmp_0447 : std_logic;
+  signal tmp_0448 : std_logic;
+  signal tmp_0449 : std_logic;
   signal init_call_flag_0003 : std_logic;
-  signal tmp_0422 : std_logic;
-  signal tmp_0423 : std_logic;
-  signal tmp_0424 : std_logic;
-  signal tmp_0425 : std_logic;
+  signal tmp_0450 : std_logic;
+  signal tmp_0451 : std_logic;
+  signal tmp_0452 : std_logic;
+  signal tmp_0453 : std_logic;
   signal network_configuration_call_flag_0005 : std_logic;
-  signal tmp_0426 : std_logic;
-  signal tmp_0427 : std_logic;
-  signal tmp_0428 : std_logic;
-  signal tmp_0429 : std_logic;
-  signal tcp_server_call_flag_0007 : std_logic;
-  signal tmp_0430 : std_logic;
-  signal tmp_0431 : std_logic;
-  signal tmp_0432 : std_logic;
-  signal tmp_0433 : std_logic;
-  signal tmp_0434 : std_logic;
-  signal tmp_0435 : std_logic;
-  signal tmp_0436 : std_logic;
-  signal tmp_0437 : std_logic;
-  signal tmp_0438 : std_logic;
-  signal tmp_0439 : std_logic;
+  signal tmp_0454 : std_logic;
+  signal tmp_0455 : std_logic;
+  signal tmp_0456 : std_logic;
+  signal tmp_0457 : std_logic;
+  signal tmp_0458 : std_logic;
+  signal tmp_0459 : std_logic;
+  signal tcp_server_call_flag_0010 : std_logic;
+  signal tmp_0460 : std_logic;
+  signal tmp_0461 : std_logic;
+  signal tmp_0462 : std_logic;
+  signal tmp_0463 : std_logic;
+  signal tmp_0464 : std_logic;
+  signal tmp_0465 : std_logic;
+  signal tmp_0466 : std_logic;
+  signal tmp_0467 : std_logic;
   type Type_blink_led_method is (
     blink_led_method_IDLE,
     blink_led_method_S_0000,
@@ -1440,14 +1468,14 @@ architecture RTL of WIZ830MJ_Test is
   signal blink_led_method_delay : signed(32-1 downto 0) := (others => '0');
   signal blink_led_req_flag_d : std_logic := '0';
   signal blink_led_req_flag_edge : std_logic;
-  signal tmp_0440 : std_logic;
-  signal tmp_0441 : std_logic;
-  signal tmp_0442 : std_logic;
-  signal tmp_0443 : std_logic;
-  signal tmp_0444 : std_logic;
-  signal tmp_0445 : std_logic;
-  signal tmp_0446 : std_logic;
-  signal tmp_0447 : std_logic;
+  signal tmp_0468 : std_logic;
+  signal tmp_0469 : std_logic;
+  signal tmp_0470 : std_logic;
+  signal tmp_0471 : std_logic;
+  signal tmp_0472 : std_logic;
+  signal tmp_0473 : std_logic;
+  signal tmp_0474 : std_logic;
+  signal tmp_0475 : std_logic;
 
 begin
 
@@ -1485,7 +1513,7 @@ begin
         if test_method = test_method_S_0000 then
           test_busy_sig <= '0';
         elsif test_method = test_method_S_0001 then
-          test_busy_sig <= tmp_0421;
+          test_busy_sig <= tmp_0449;
         end if;
       end if;
     end if;
@@ -1502,7 +1530,7 @@ begin
         if blink_led_method = blink_led_method_S_0000 then
           blink_led_busy_sig <= '0';
         elsif blink_led_method = blink_led_method_S_0001 then
-          blink_led_busy_sig <= tmp_0443;
+          blink_led_busy_sig <= tmp_0471;
         end if;
       end if;
     end if;
@@ -1656,17 +1684,17 @@ begin
   tmp_0143 <= tmp_0140 and tmp_0142;
   tmp_0144 <= tcp_server_open_port_0136(25 downto 0) & (6-1 downto 0 => '0');
   tmp_0145 <= (32-1 downto 8 => class_Sn_MR_TCP_0054(7)) & class_Sn_MR_TCP_0054;
-  tmp_0146 <= class_Sn_MR1_0004 + binary_expr_00138;
-  tmp_0147 <= X"00000020" or cast_expr_00140;
-  tmp_0148 <= binary_expr_00141(32 - 24 - 1 downto 0);
+  tmp_0146 <= class_Sn_MR1_0004 + tmp_0144;
+  tmp_0147 <= X"00000020" or tmp_0145;
+  tmp_0148 <= tmp_0147(32 - 24 - 1 downto 0);
   tmp_0149 <= tcp_server_open_port_0136(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0150 <= class_Sn_PORTR0_0013 + binary_expr_00144;
+  tmp_0150 <= class_Sn_PORTR0_0013 + tmp_0149;
   tmp_0151 <= tcp_server_open_port_0136(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0152 <= class_Sn_PORTR1_0014 + binary_expr_00147;
+  tmp_0152 <= class_Sn_PORTR1_0014 + tmp_0151;
   tmp_0153 <= tcp_server_open_port_0136(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0154 <= class_Sn_CR1_0006 + binary_expr_00150;
+  tmp_0154 <= class_Sn_CR1_0006 + tmp_0153;
   tmp_0155 <= tcp_server_open_port_0136(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0156 <= class_Sn_SSR1_0012 + binary_expr_00153;
+  tmp_0156 <= class_Sn_SSR1_0012 + tmp_0155;
   tmp_0157 <= not tcp_server_listen_req_flag_d;
   tmp_0158 <= tcp_server_listen_req_flag and tmp_0157;
   tmp_0159 <= tcp_server_listen_req_flag or tcp_server_listen_req_flag_d;
@@ -1680,9 +1708,9 @@ begin
   tmp_0167 <= tmp_0166 and tcp_server_listen_req_flag_edge;
   tmp_0168 <= tmp_0165 and tmp_0167;
   tmp_0169 <= tcp_server_listen_port_0155(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0170 <= class_Sn_CR1_0006 + binary_expr_00157;
+  tmp_0170 <= class_Sn_CR1_0006 + tmp_0169;
   tmp_0171 <= tcp_server_listen_port_0155(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0172 <= class_Sn_SSR1_0012 + binary_expr_00160;
+  tmp_0172 <= class_Sn_SSR1_0012 + tmp_0171;
   tmp_0173 <= not wait_for_established_req_flag_d;
   tmp_0174 <= wait_for_established_req_flag and tmp_0173;
   tmp_0175 <= wait_for_established_req_flag or wait_for_established_req_flag_d;
@@ -1696,8 +1724,8 @@ begin
   tmp_0183 <= tmp_0182 and wait_for_established_req_flag_edge;
   tmp_0184 <= tmp_0181 and tmp_0183;
   tmp_0185 <= wait_for_established_port_0162(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0186 <= class_Sn_SSR1_0012 + binary_expr_00165;
-  tmp_0187 <= '1' when wait_for_established_v_0163 = class_Sn_SOCK_ESTABLISHED_0076 else '0';
+  tmp_0186 <= class_Sn_SSR1_0012 + tmp_0185;
+  tmp_0187 <= '1' when method_result_00164 = class_Sn_SOCK_ESTABLISHED_0076 else '0';
   tmp_0188 <= not wait_for_recv_req_flag_d;
   tmp_0189 <= wait_for_recv_req_flag and tmp_0188;
   tmp_0190 <= wait_for_recv_req_flag or wait_for_recv_req_flag_d;
@@ -1718,108 +1746,108 @@ begin
   tmp_0205 <= '1' when tmp_0204 = '1' else '0';
   tmp_0206 <= '1' when binary_expr_00189 = '1' else '0';
   tmp_0207 <= '1' when binary_expr_00189 = '0' else '0';
-  tmp_0208 <= '1' when wait_for_recv_method /= wait_for_recv_method_S_0000 else '0';
-  tmp_0209 <= '1' when wait_for_recv_method /= wait_for_recv_method_S_0001 else '0';
-  tmp_0210 <= tmp_0209 and wait_for_recv_req_flag_edge;
-  tmp_0211 <= tmp_0208 and tmp_0210;
-  tmp_0212 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0213 <= class_Sn_RX_RSR1_0044 + binary_expr_00172;
-  tmp_0214 <= (32-1 downto 8 => method_result_00171(7)) & method_result_00171;
-  tmp_0215 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0216 <= class_Sn_RX_RSR2_0045 + binary_expr_00177;
-  tmp_0217 <= (32-1 downto 8 => method_result_00176(7)) & method_result_00176;
-  tmp_0218 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0219 <= class_Sn_RX_RSR3_0046 + binary_expr_00182;
-  tmp_0220 <= (32-1 downto 8 => method_result_00181(7)) & method_result_00181;
-  tmp_0221 <= wait_for_recv_v0_0170(15 downto 0) & (16-1 downto 0 => '0');
-  tmp_0222 <= wait_for_recv_v1_0175(23 downto 0) & (8-1 downto 0 => '0');
-  tmp_0223 <= binary_expr_00185 + binary_expr_00186;
-  tmp_0224 <= binary_expr_00187 + wait_for_recv_v2_0180;
-  tmp_0225 <= '1' when wait_for_recv_v_0169 /= X"00000000" else '0';
-  tmp_0226 <= not pull_recv_data_req_flag_d;
-  tmp_0227 <= pull_recv_data_req_flag and tmp_0226;
-  tmp_0228 <= pull_recv_data_req_flag or pull_recv_data_req_flag_d;
-  tmp_0229 <= pull_recv_data_req_flag or pull_recv_data_req_flag_d;
-  tmp_0230 <= '1' when read_data_busy = '0' else '0';
-  tmp_0231 <= '1' when read_data_req_local = '0' else '0';
-  tmp_0232 <= tmp_0230 and tmp_0231;
-  tmp_0233 <= '1' when tmp_0232 = '1' else '0';
-  tmp_0234 <= '1' when read_data_busy = '0' else '0';
-  tmp_0235 <= '1' when read_data_req_local = '0' else '0';
-  tmp_0236 <= tmp_0234 and tmp_0235;
-  tmp_0237 <= '1' when tmp_0236 = '1' else '0';
-  tmp_0238 <= '1' when binary_expr_00207 = '1' else '0';
-  tmp_0239 <= '1' when binary_expr_00207 = '0' else '0';
-  tmp_0240 <= '1' when binary_expr_00210 = '1' else '0';
-  tmp_0241 <= '1' when binary_expr_00210 = '0' else '0';
-  tmp_0242 <= '1' when read_data_busy = '0' else '0';
-  tmp_0243 <= '1' when read_data_req_local = '0' else '0';
-  tmp_0244 <= tmp_0242 and tmp_0243;
-  tmp_0245 <= '1' when tmp_0244 = '1' else '0';
-  tmp_0246 <= '1' when read_data_busy = '0' else '0';
-  tmp_0247 <= '1' when read_data_req_local = '0' else '0';
-  tmp_0248 <= tmp_0246 and tmp_0247;
-  tmp_0249 <= '1' when tmp_0248 = '1' else '0';
-  tmp_0250 <= '1' when write_data_busy = '0' else '0';
-  tmp_0251 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0208 <= '1' when read_data_busy = '0' else '0';
+  tmp_0209 <= '1' when read_data_req_local = '0' else '0';
+  tmp_0210 <= tmp_0208 and tmp_0209;
+  tmp_0211 <= '1' when tmp_0210 = '1' else '0';
+  tmp_0212 <= '1' when binary_expr_00198 = '1' else '0';
+  tmp_0213 <= '1' when binary_expr_00198 = '0' else '0';
+  tmp_0214 <= '1' when write_data_busy = '0' else '0';
+  tmp_0215 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0216 <= tmp_0214 and tmp_0215;
+  tmp_0217 <= '1' when tmp_0216 = '1' else '0';
+  tmp_0218 <= '1' when wait_for_recv_method /= wait_for_recv_method_S_0000 else '0';
+  tmp_0219 <= '1' when wait_for_recv_method /= wait_for_recv_method_S_0001 else '0';
+  tmp_0220 <= tmp_0219 and wait_for_recv_req_flag_edge;
+  tmp_0221 <= tmp_0218 and tmp_0220;
+  tmp_0222 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0223 <= class_Sn_RX_RSR1_0044 + tmp_0222;
+  tmp_0224 <= (32-1 downto 8 => method_result_00171(7)) & method_result_00171;
+  tmp_0225 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0226 <= class_Sn_RX_RSR2_0045 + tmp_0225;
+  tmp_0227 <= (32-1 downto 8 => method_result_00176(7)) & method_result_00176;
+  tmp_0228 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0229 <= class_Sn_RX_RSR3_0046 + tmp_0228;
+  tmp_0230 <= (32-1 downto 8 => method_result_00181(7)) & method_result_00181;
+  tmp_0231 <= wait_for_recv_v0_0170(15 downto 0) & (16-1 downto 0 => '0');
+  tmp_0232 <= wait_for_recv_v1_0175(23 downto 0) & (8-1 downto 0 => '0');
+  tmp_0233 <= tmp_0231 + tmp_0232;
+  tmp_0234 <= tmp_0233 + tmp_0230;
+  tmp_0235 <= '1' when tmp_0234 /= X"00000000" else '0';
+  tmp_0236 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0237 <= class_Sn_SSR1_0012 + tmp_0236;
+  tmp_0238 <= (32-1 downto 8 => method_result_00190(7)) & method_result_00190;
+  tmp_0239 <= (32-1 downto 8 => class_Sn_SOCK_CLOSE_WAIT_0077(7)) & class_Sn_SOCK_CLOSE_WAIT_0077;
+  tmp_0240 <= (32-1 downto 8 => class_Sn_SOCK_CLOSED_0073(7)) & class_Sn_SOCK_CLOSED_0073;
+  tmp_0241 <= '1' when tmp_0238 = tmp_0239 else '0';
+  tmp_0242 <= '1' when tmp_0238 = tmp_0240 else '0';
+  tmp_0243 <= tmp_0241 or tmp_0242;
+  tmp_0244 <= wait_for_recv_port_0168(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0245 <= class_Sn_CR1_0006 + tmp_0244;
+  tmp_0246 <= not pull_recv_data_req_flag_d;
+  tmp_0247 <= pull_recv_data_req_flag and tmp_0246;
+  tmp_0248 <= pull_recv_data_req_flag or pull_recv_data_req_flag_d;
+  tmp_0249 <= pull_recv_data_req_flag or pull_recv_data_req_flag_d;
+  tmp_0250 <= '1' when read_data_busy = '0' else '0';
+  tmp_0251 <= '1' when read_data_req_local = '0' else '0';
   tmp_0252 <= tmp_0250 and tmp_0251;
   tmp_0253 <= '1' when tmp_0252 = '1' else '0';
-  tmp_0254 <= '1' when pull_recv_data_method /= pull_recv_data_method_S_0000 else '0';
-  tmp_0255 <= '1' when pull_recv_data_method /= pull_recv_data_method_S_0001 else '0';
-  tmp_0256 <= tmp_0255 and pull_recv_data_req_flag_edge;
-  tmp_0257 <= tmp_0254 and tmp_0256;
-  tmp_0258 <= pull_recv_data_port_0190(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0259 <= class_Sn_RX_FIFOR0_0051 + binary_expr_00193;
-  tmp_0260 <= (32-1 downto 8 => method_result_00192(7)) & method_result_00192;
-  tmp_0261 <= pull_recv_data_port_0190(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0262 <= class_Sn_RX_FIFOR1_0052 + binary_expr_00198;
-  tmp_0263 <= (32-1 downto 8 => method_result_00197(7)) & method_result_00197;
-  tmp_0264 <= pull_recv_data_v0_0191(23 downto 0) & (8-1 downto 0 => '0');
-  tmp_0265 <= binary_expr_00202 + pull_recv_data_v1_0196;
-  tmp_0266 <= (1-1 downto 0 => pull_recv_data_actual_len_0201(31)) & pull_recv_data_actual_len_0201(31 downto 1);
-  tmp_0267 <= pull_recv_data_actual_len_0201 and X"00000001";
-  tmp_0268 <= '1' when binary_expr_00206 = X"00000001" else '0';
-  tmp_0269 <= pull_recv_data_read_len_0204 + X"00000001";
-  tmp_0270 <= '1' when pull_recv_data_i_0209 < pull_recv_data_read_len_0204 else '0';
-  tmp_0271 <= pull_recv_data_i_0209 + X"00000001";
-  tmp_0272 <= pull_recv_data_i_0209(30 downto 0) & (1-1 downto 0 => '0');
-  tmp_0273 <= binary_expr_00212 + X"00000000";
-  tmp_0274 <= pull_recv_data_port_0190(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0275 <= class_Sn_RX_FIFOR0_0051 + binary_expr_00216;
-  tmp_0276 <= pull_recv_data_i_0209(30 downto 0) & (1-1 downto 0 => '0');
-  tmp_0277 <= binary_expr_00218 + X"00000001";
-  tmp_0278 <= pull_recv_data_port_0190(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0279 <= class_Sn_RX_FIFOR1_0052 + binary_expr_00222;
-  tmp_0280 <= pull_recv_data_port_0190(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0281 <= class_Sn_CR1_0006 + binary_expr_00225;
-  tmp_0282 <= not push_send_data_req_flag_d;
-  tmp_0283 <= push_send_data_req_flag and tmp_0282;
-  tmp_0284 <= push_send_data_req_flag or push_send_data_req_flag_d;
-  tmp_0285 <= push_send_data_req_flag or push_send_data_req_flag_d;
-  tmp_0286 <= '1' when binary_expr_00232 = '1' else '0';
-  tmp_0287 <= '1' when binary_expr_00232 = '0' else '0';
-  tmp_0288 <= '1' when binary_expr_00235 = '1' else '0';
-  tmp_0289 <= '1' when binary_expr_00235 = '0' else '0';
-  tmp_0290 <= '1' when write_data_busy = '0' else '0';
-  tmp_0291 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0292 <= tmp_0290 and tmp_0291;
-  tmp_0293 <= '1' when tmp_0292 = '1' else '0';
-  tmp_0294 <= '1' when write_data_busy = '0' else '0';
-  tmp_0295 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0296 <= tmp_0294 and tmp_0295;
-  tmp_0297 <= '1' when tmp_0296 = '1' else '0';
-  tmp_0298 <= '1' when write_data_busy = '0' else '0';
-  tmp_0299 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0300 <= tmp_0298 and tmp_0299;
-  tmp_0301 <= '1' when tmp_0300 = '1' else '0';
-  tmp_0302 <= '1' when write_data_busy = '0' else '0';
-  tmp_0303 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0304 <= tmp_0302 and tmp_0303;
-  tmp_0305 <= '1' when tmp_0304 = '1' else '0';
-  tmp_0306 <= '1' when write_data_busy = '0' else '0';
-  tmp_0307 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0308 <= tmp_0306 and tmp_0307;
-  tmp_0309 <= '1' when tmp_0308 = '1' else '0';
+  tmp_0254 <= '1' when read_data_busy = '0' else '0';
+  tmp_0255 <= '1' when read_data_req_local = '0' else '0';
+  tmp_0256 <= tmp_0254 and tmp_0255;
+  tmp_0257 <= '1' when tmp_0256 = '1' else '0';
+  tmp_0258 <= '1' when binary_expr_00219 = '1' else '0';
+  tmp_0259 <= '1' when binary_expr_00219 = '0' else '0';
+  tmp_0260 <= '1' when binary_expr_00222 = '1' else '0';
+  tmp_0261 <= '1' when binary_expr_00222 = '0' else '0';
+  tmp_0262 <= '1' when read_data_busy = '0' else '0';
+  tmp_0263 <= '1' when read_data_req_local = '0' else '0';
+  tmp_0264 <= tmp_0262 and tmp_0263;
+  tmp_0265 <= '1' when tmp_0264 = '1' else '0';
+  tmp_0266 <= '1' when read_data_busy = '0' else '0';
+  tmp_0267 <= '1' when read_data_req_local = '0' else '0';
+  tmp_0268 <= tmp_0266 and tmp_0267;
+  tmp_0269 <= '1' when tmp_0268 = '1' else '0';
+  tmp_0270 <= '1' when write_data_busy = '0' else '0';
+  tmp_0271 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0272 <= tmp_0270 and tmp_0271;
+  tmp_0273 <= '1' when tmp_0272 = '1' else '0';
+  tmp_0274 <= '1' when pull_recv_data_method /= pull_recv_data_method_S_0000 else '0';
+  tmp_0275 <= '1' when pull_recv_data_method /= pull_recv_data_method_S_0001 else '0';
+  tmp_0276 <= tmp_0275 and pull_recv_data_req_flag_edge;
+  tmp_0277 <= tmp_0274 and tmp_0276;
+  tmp_0278 <= pull_recv_data_port_0202(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0279 <= class_Sn_RX_FIFOR0_0051 + tmp_0278;
+  tmp_0280 <= (32-1 downto 8 => method_result_00204(7)) & method_result_00204;
+  tmp_0281 <= pull_recv_data_port_0202(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0282 <= class_Sn_RX_FIFOR1_0052 + tmp_0281;
+  tmp_0283 <= (32-1 downto 8 => method_result_00209(7)) & method_result_00209;
+  tmp_0284 <= pull_recv_data_v0_0203(23 downto 0) & (8-1 downto 0 => '0');
+  tmp_0285 <= tmp_0284 + tmp_0283;
+  tmp_0286 <= (1-1 downto 0 => tmp_0285(31)) & tmp_0285(31 downto 1);
+  tmp_0287 <= tmp_0285 and X"00000001";
+  tmp_0288 <= '1' when tmp_0287 = X"00000001" else '0';
+  tmp_0289 <= pull_recv_data_read_len_0216 + X"00000001";
+  tmp_0290 <= '1' when pull_recv_data_i_0221 < pull_recv_data_read_len_0216 else '0';
+  tmp_0291 <= pull_recv_data_i_0221 + X"00000001";
+  tmp_0292 <= pull_recv_data_i_0221(30 downto 0) & (1-1 downto 0 => '0');
+  tmp_0293 <= tmp_0292 + X"00000000";
+  tmp_0294 <= pull_recv_data_port_0202(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0295 <= class_Sn_RX_FIFOR0_0051 + tmp_0294;
+  tmp_0296 <= pull_recv_data_i_0221(30 downto 0) & (1-1 downto 0 => '0');
+  tmp_0297 <= tmp_0296 + X"00000001";
+  tmp_0298 <= pull_recv_data_port_0202(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0299 <= class_Sn_RX_FIFOR1_0052 + tmp_0298;
+  tmp_0300 <= pull_recv_data_port_0202(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0301 <= class_Sn_CR1_0006 + tmp_0300;
+  tmp_0302 <= not push_send_data_req_flag_d;
+  tmp_0303 <= push_send_data_req_flag and tmp_0302;
+  tmp_0304 <= push_send_data_req_flag or push_send_data_req_flag_d;
+  tmp_0305 <= push_send_data_req_flag or push_send_data_req_flag_d;
+  tmp_0306 <= '1' when binary_expr_00255 = '1' else '0';
+  tmp_0307 <= '1' when binary_expr_00255 = '0' else '0';
+  tmp_0308 <= '1' when binary_expr_00258 = '1' else '0';
+  tmp_0309 <= '1' when binary_expr_00258 = '0' else '0';
   tmp_0310 <= '1' when write_data_busy = '0' else '0';
   tmp_0311 <= '1' when write_data_req_local = '0' else '0';
   tmp_0312 <= tmp_0310 and tmp_0311;
@@ -1828,136 +1856,164 @@ begin
   tmp_0315 <= '1' when write_data_req_local = '0' else '0';
   tmp_0316 <= tmp_0314 and tmp_0315;
   tmp_0317 <= '1' when tmp_0316 = '1' else '0';
-  tmp_0318 <= '1' when push_send_data_method /= push_send_data_method_S_0000 else '0';
-  tmp_0319 <= '1' when push_send_data_method /= push_send_data_method_S_0001 else '0';
-  tmp_0320 <= tmp_0319 and push_send_data_req_flag_edge;
-  tmp_0321 <= tmp_0318 and tmp_0320;
-  tmp_0322 <= (1-1 downto 0 => push_send_data_len_0228(31)) & push_send_data_len_0228(31 downto 1);
-  tmp_0323 <= push_send_data_len_0228 and X"00000001";
-  tmp_0324 <= '1' when binary_expr_00231 = X"00000001" else '0';
-  tmp_0325 <= push_send_data_write_len_0229 + X"00000001";
-  tmp_0326 <= '1' when push_send_data_i_0234 < push_send_data_write_len_0229 else '0';
-  tmp_0327 <= push_send_data_i_0234 + X"00000001";
-  tmp_0328 <= push_send_data_i_0234(30 downto 0) & (1-1 downto 0 => '0');
-  tmp_0329 <= binary_expr_00238 + X"00000000";
-  tmp_0330 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0331 <= class_Sn_TX_FIFOR0_0049 + binary_expr_00242;
-  tmp_0332 <= push_send_data_i_0234(30 downto 0) & (1-1 downto 0 => '0');
-  tmp_0333 <= binary_expr_00244 + X"00000001";
-  tmp_0334 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0335 <= class_Sn_TX_FIFOR1_0050 + binary_expr_00248;
-  tmp_0336 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0337 <= class_Sn_CR1_0006 + binary_expr_00251;
-  tmp_0338 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0339 <= (16-1 downto 0 => push_send_data_len_0228(31)) & push_send_data_len_0228(31 downto 16);
-  tmp_0340 <= class_Sn_TX_WRSR1_0036 + binary_expr_00254;
-  tmp_0341 <= binary_expr_00256(32 - 24 - 1 downto 0);
-  tmp_0342 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0343 <= (8-1 downto 0 => push_send_data_len_0228(31)) & push_send_data_len_0228(31 downto 8);
-  tmp_0344 <= class_Sn_TX_WRSR2_0037 + binary_expr_00259;
-  tmp_0345 <= binary_expr_00261(32 - 24 - 1 downto 0);
-  tmp_0346 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0347 <= push_send_data_len_0228;
-  tmp_0348 <= class_Sn_TX_WRSR3_0038 + binary_expr_00264;
-  tmp_0349 <= binary_expr_00266(32 - 24 - 1 downto 0);
-  tmp_0350 <= push_send_data_port_0227(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0351 <= class_Sn_CR1_0006 + binary_expr_00269;
-  tmp_0352 <= not tcp_server_req_flag_d;
-  tmp_0353 <= tcp_server_req_flag and tmp_0352;
-  tmp_0354 <= tcp_server_req_flag or tcp_server_req_flag_d;
-  tmp_0355 <= tcp_server_req_flag or tcp_server_req_flag_d;
-  tmp_0356 <= '1' when tcp_server_open_busy = '0' else '0';
-  tmp_0357 <= '1' when tcp_server_open_req_local = '0' else '0';
-  tmp_0358 <= tmp_0356 and tmp_0357;
-  tmp_0359 <= '1' when tmp_0358 = '1' else '0';
-  tmp_0360 <= '1' when binary_expr_00277 = '1' else '0';
-  tmp_0361 <= '1' when binary_expr_00277 = '0' else '0';
-  tmp_0362 <= '1' when tcp_server_open_busy = '0' else '0';
-  tmp_0363 <= '1' when tcp_server_open_req_local = '0' else '0';
-  tmp_0364 <= tmp_0362 and tmp_0363;
-  tmp_0365 <= '1' when tmp_0364 = '1' else '0';
-  tmp_0366 <= '1' when tcp_server_listen_busy = '0' else '0';
-  tmp_0367 <= '1' when tcp_server_listen_req_local = '0' else '0';
-  tmp_0368 <= tmp_0366 and tmp_0367;
-  tmp_0369 <= '1' when tmp_0368 = '1' else '0';
-  tmp_0370 <= '1' when binary_expr_00284 = '1' else '0';
-  tmp_0371 <= '1' when binary_expr_00284 = '0' else '0';
-  tmp_0372 <= '1' when write_data_busy = '0' else '0';
-  tmp_0373 <= '1' when write_data_req_local = '0' else '0';
-  tmp_0374 <= tmp_0372 and tmp_0373;
-  tmp_0375 <= '1' when tmp_0374 = '1' else '0';
-  tmp_0376 <= '1' when tcp_server_listen_busy = '0' else '0';
-  tmp_0377 <= '1' when tcp_server_listen_req_local = '0' else '0';
-  tmp_0378 <= tmp_0376 and tmp_0377;
-  tmp_0379 <= '1' when tmp_0378 = '1' else '0';
-  tmp_0380 <= '1' when wait_for_established_busy = '0' else '0';
-  tmp_0381 <= '1' when wait_for_established_req_local = '0' else '0';
-  tmp_0382 <= tmp_0380 and tmp_0381;
-  tmp_0383 <= '1' when tmp_0382 = '1' else '0';
-  tmp_0384 <= '1' when read_data_busy = '0' else '0';
-  tmp_0385 <= '1' when read_data_req_local = '0' else '0';
-  tmp_0386 <= tmp_0384 and tmp_0385;
-  tmp_0387 <= '1' when tmp_0386 = '1' else '0';
-  tmp_0388 <= '1' and '1';
-  tmp_0389 <= '1' and '0';
-  tmp_0390 <= '1' when wait_for_recv_busy = '0' else '0';
-  tmp_0391 <= '1' when wait_for_recv_req_local = '0' else '0';
-  tmp_0392 <= tmp_0390 and tmp_0391;
-  tmp_0393 <= '1' when tmp_0392 = '1' else '0';
-  tmp_0394 <= '1' when pull_recv_data_busy = '0' else '0';
-  tmp_0395 <= '1' when pull_recv_data_req_local = '0' else '0';
-  tmp_0396 <= tmp_0394 and tmp_0395;
-  tmp_0397 <= '1' when tmp_0396 = '1' else '0';
-  tmp_0398 <= '1' when push_send_data_busy = '0' else '0';
-  tmp_0399 <= '1' when push_send_data_req_local = '0' else '0';
-  tmp_0400 <= tmp_0398 and tmp_0399;
-  tmp_0401 <= '1' when tmp_0400 = '1' else '0';
-  tmp_0402 <= '1' when tcp_server_method /= tcp_server_method_S_0000 else '0';
-  tmp_0403 <= '1' when tcp_server_method /= tcp_server_method_S_0001 else '0';
-  tmp_0404 <= tmp_0403 and tcp_server_req_flag_edge;
-  tmp_0405 <= tmp_0402 and tmp_0404;
-  tmp_0406 <= tcp_server_port_0271(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0407 <= class_Sn_IMR1_0008 + binary_expr_00273;
-  tmp_0408 <= '1' when tcp_server_v_0275 /= class_Sn_SOCK_INIT_0074 else '0';
-  tmp_0409 <= tcp_server_port_0271(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0410 <= class_Sn_CR1_0006 + binary_expr_00279;
-  tmp_0411 <= (32-1 downto 8 => tcp_server_v_0275(7)) & tcp_server_v_0275;
-  tmp_0412 <= '1' when tcp_server_v_0275 /= class_Sn_SOCK_LISTEN_0075 else '0';
-  tmp_0413 <= tcp_server_port_0271(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0414 <= class_Sn_CR1_0006 + binary_expr_00286;
-  tmp_0415 <= tcp_server_port_0271(25 downto 0) & (6-1 downto 0 => '0');
-  tmp_0416 <= class_Sn_MR0_0003 + binary_expr_00291;
-  tmp_0417 <= (32-1 downto 8 => method_result_00290(7)) & method_result_00290;
-  tmp_0418 <= not test_req_flag_d;
-  tmp_0419 <= test_req_flag and tmp_0418;
-  tmp_0420 <= test_req_flag or test_req_flag_d;
-  tmp_0421 <= test_req_flag or test_req_flag_d;
-  tmp_0422 <= '1' when init_busy = '0' else '0';
-  tmp_0423 <= '1' when init_req_local = '0' else '0';
-  tmp_0424 <= tmp_0422 and tmp_0423;
-  tmp_0425 <= '1' when tmp_0424 = '1' else '0';
-  tmp_0426 <= '1' when network_configuration_busy = '0' else '0';
-  tmp_0427 <= '1' when network_configuration_req_local = '0' else '0';
-  tmp_0428 <= tmp_0426 and tmp_0427;
-  tmp_0429 <= '1' when tmp_0428 = '1' else '0';
-  tmp_0430 <= '1' when tcp_server_busy = '0' else '0';
-  tmp_0431 <= '1' when tcp_server_req_local = '0' else '0';
-  tmp_0432 <= tmp_0430 and tmp_0431;
-  tmp_0433 <= '1' when tmp_0432 = '1' else '0';
-  tmp_0434 <= '1' and '1';
-  tmp_0435 <= '1' and '0';
-  tmp_0436 <= '1' when test_method /= test_method_S_0000 else '0';
-  tmp_0437 <= '1' when test_method /= test_method_S_0001 else '0';
-  tmp_0438 <= tmp_0437 and test_req_flag_edge;
-  tmp_0439 <= tmp_0436 and tmp_0438;
-  tmp_0440 <= not blink_led_req_flag_d;
-  tmp_0441 <= blink_led_req_flag and tmp_0440;
-  tmp_0442 <= blink_led_req_flag or blink_led_req_flag_d;
-  tmp_0443 <= blink_led_req_flag or blink_led_req_flag_d;
-  tmp_0444 <= '1' when blink_led_method /= blink_led_method_S_0000 else '0';
-  tmp_0445 <= '1' when blink_led_method /= blink_led_method_S_0001 else '0';
-  tmp_0446 <= tmp_0445 and blink_led_req_flag_edge;
-  tmp_0447 <= tmp_0444 and tmp_0446;
+  tmp_0318 <= '1' when write_data_busy = '0' else '0';
+  tmp_0319 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0320 <= tmp_0318 and tmp_0319;
+  tmp_0321 <= '1' when tmp_0320 = '1' else '0';
+  tmp_0322 <= '1' when write_data_busy = '0' else '0';
+  tmp_0323 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0324 <= tmp_0322 and tmp_0323;
+  tmp_0325 <= '1' when tmp_0324 = '1' else '0';
+  tmp_0326 <= '1' when write_data_busy = '0' else '0';
+  tmp_0327 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0328 <= tmp_0326 and tmp_0327;
+  tmp_0329 <= '1' when tmp_0328 = '1' else '0';
+  tmp_0330 <= '1' when write_data_busy = '0' else '0';
+  tmp_0331 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0332 <= tmp_0330 and tmp_0331;
+  tmp_0333 <= '1' when tmp_0332 = '1' else '0';
+  tmp_0334 <= '1' when write_data_busy = '0' else '0';
+  tmp_0335 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0336 <= tmp_0334 and tmp_0335;
+  tmp_0337 <= '1' when tmp_0336 = '1' else '0';
+  tmp_0338 <= '1' when push_send_data_method /= push_send_data_method_S_0000 else '0';
+  tmp_0339 <= '1' when push_send_data_method /= push_send_data_method_S_0001 else '0';
+  tmp_0340 <= tmp_0339 and push_send_data_req_flag_edge;
+  tmp_0341 <= tmp_0338 and tmp_0340;
+  tmp_0342 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0343 <= (8-1 downto 0 => push_send_data_len_0240(31)) & push_send_data_len_0240(31 downto 8);
+  tmp_0344 <= class_Sn_RX_FIFOR0_0051 + tmp_0342;
+  tmp_0345 <= tmp_0343 and X"000000ff";
+  tmp_0346 <= tmp_0345(32 - 24 - 1 downto 0);
+  tmp_0347 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0348 <= push_send_data_len_0240 and X"000000ff";
+  tmp_0349 <= class_Sn_RX_FIFOR0_0051 + tmp_0347;
+  tmp_0350 <= tmp_0348(32 - 24 - 1 downto 0);
+  tmp_0351 <= (1-1 downto 0 => push_send_data_len_0240(31)) & push_send_data_len_0240(31 downto 1);
+  tmp_0352 <= push_send_data_len_0240 and X"00000001";
+  tmp_0353 <= '1' when tmp_0352 = X"00000001" else '0';
+  tmp_0354 <= push_send_data_write_len_0252 + X"00000001";
+  tmp_0355 <= '1' when push_send_data_i_0257 < push_send_data_write_len_0252 else '0';
+  tmp_0356 <= push_send_data_i_0257 + X"00000001";
+  tmp_0357 <= push_send_data_i_0257(30 downto 0) & (1-1 downto 0 => '0');
+  tmp_0358 <= tmp_0357 + X"00000000";
+  tmp_0359 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0360 <= class_Sn_TX_FIFOR0_0049 + tmp_0359;
+  tmp_0361 <= push_send_data_i_0257(30 downto 0) & (1-1 downto 0 => '0');
+  tmp_0362 <= tmp_0361 + X"00000001";
+  tmp_0363 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0364 <= class_Sn_TX_FIFOR1_0050 + tmp_0363;
+  tmp_0365 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0366 <= class_Sn_CR1_0006 + tmp_0365;
+  tmp_0367 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0368 <= (16-1 downto 0 => push_send_data_len_0240(31)) & push_send_data_len_0240(31 downto 16);
+  tmp_0369 <= class_Sn_TX_WRSR1_0036 + tmp_0367;
+  tmp_0370 <= tmp_0368(32 - 24 - 1 downto 0);
+  tmp_0371 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0372 <= (8-1 downto 0 => push_send_data_len_0240(31)) & push_send_data_len_0240(31 downto 8);
+  tmp_0373 <= class_Sn_TX_WRSR2_0037 + tmp_0371;
+  tmp_0374 <= tmp_0372(32 - 24 - 1 downto 0);
+  tmp_0375 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0376 <= push_send_data_len_0240;
+  tmp_0377 <= class_Sn_TX_WRSR3_0038 + tmp_0375;
+  tmp_0378 <= tmp_0376(32 - 24 - 1 downto 0);
+  tmp_0379 <= push_send_data_port_0239(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0380 <= class_Sn_CR1_0006 + tmp_0379;
+  tmp_0381 <= not tcp_server_req_flag_d;
+  tmp_0382 <= tcp_server_req_flag and tmp_0381;
+  tmp_0383 <= tcp_server_req_flag or tcp_server_req_flag_d;
+  tmp_0384 <= tcp_server_req_flag or tcp_server_req_flag_d;
+  tmp_0385 <= '1' when tcp_server_open_busy = '0' else '0';
+  tmp_0386 <= '1' when tcp_server_open_req_local = '0' else '0';
+  tmp_0387 <= tmp_0385 and tmp_0386;
+  tmp_0388 <= '1' when tmp_0387 = '1' else '0';
+  tmp_0389 <= '1' when binary_expr_00300 = '1' else '0';
+  tmp_0390 <= '1' when binary_expr_00300 = '0' else '0';
+  tmp_0391 <= '1' when tcp_server_open_busy = '0' else '0';
+  tmp_0392 <= '1' when tcp_server_open_req_local = '0' else '0';
+  tmp_0393 <= tmp_0391 and tmp_0392;
+  tmp_0394 <= '1' when tmp_0393 = '1' else '0';
+  tmp_0395 <= '1' when tcp_server_listen_busy = '0' else '0';
+  tmp_0396 <= '1' when tcp_server_listen_req_local = '0' else '0';
+  tmp_0397 <= tmp_0395 and tmp_0396;
+  tmp_0398 <= '1' when tmp_0397 = '1' else '0';
+  tmp_0399 <= '1' when binary_expr_00307 = '1' else '0';
+  tmp_0400 <= '1' when binary_expr_00307 = '0' else '0';
+  tmp_0401 <= '1' when write_data_busy = '0' else '0';
+  tmp_0402 <= '1' when write_data_req_local = '0' else '0';
+  tmp_0403 <= tmp_0401 and tmp_0402;
+  tmp_0404 <= '1' when tmp_0403 = '1' else '0';
+  tmp_0405 <= '1' when tcp_server_listen_busy = '0' else '0';
+  tmp_0406 <= '1' when tcp_server_listen_req_local = '0' else '0';
+  tmp_0407 <= tmp_0405 and tmp_0406;
+  tmp_0408 <= '1' when tmp_0407 = '1' else '0';
+  tmp_0409 <= '1' when wait_for_established_busy = '0' else '0';
+  tmp_0410 <= '1' when wait_for_established_req_local = '0' else '0';
+  tmp_0411 <= tmp_0409 and tmp_0410;
+  tmp_0412 <= '1' when tmp_0411 = '1' else '0';
+  tmp_0413 <= '1' and '1';
+  tmp_0414 <= '1' and '0';
+  tmp_0415 <= '1' when wait_for_recv_busy = '0' else '0';
+  tmp_0416 <= '1' when wait_for_recv_req_local = '0' else '0';
+  tmp_0417 <= tmp_0415 and tmp_0416;
+  tmp_0418 <= '1' when tmp_0417 = '1' else '0';
+  tmp_0419 <= '1' when binary_expr_00319 = '1' else '0';
+  tmp_0420 <= '1' when binary_expr_00319 = '0' else '0';
+  tmp_0421 <= '1' when pull_recv_data_busy = '0' else '0';
+  tmp_0422 <= '1' when pull_recv_data_req_local = '0' else '0';
+  tmp_0423 <= tmp_0421 and tmp_0422;
+  tmp_0424 <= '1' when tmp_0423 = '1' else '0';
+  tmp_0425 <= '1' when push_send_data_busy = '0' else '0';
+  tmp_0426 <= '1' when push_send_data_req_local = '0' else '0';
+  tmp_0427 <= tmp_0425 and tmp_0426;
+  tmp_0428 <= '1' when tmp_0427 = '1' else '0';
+  tmp_0429 <= '1' when tcp_server_method /= tcp_server_method_S_0000 else '0';
+  tmp_0430 <= '1' when tcp_server_method /= tcp_server_method_S_0001 else '0';
+  tmp_0431 <= tmp_0430 and tcp_server_req_flag_edge;
+  tmp_0432 <= tmp_0429 and tmp_0431;
+  tmp_0433 <= tcp_server_port_0294(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0434 <= class_Sn_IMR1_0008 + tmp_0433;
+  tmp_0435 <= '1' when tcp_server_v_0298 /= class_Sn_SOCK_INIT_0074 else '0';
+  tmp_0436 <= tcp_server_port_0294(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0437 <= class_Sn_CR1_0006 + tmp_0436;
+  tmp_0438 <= (32-1 downto 8 => tcp_server_v_0298(7)) & tcp_server_v_0298;
+  tmp_0439 <= '1' when tcp_server_v_0298 /= class_Sn_SOCK_LISTEN_0075 else '0';
+  tmp_0440 <= tcp_server_port_0294(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0441 <= class_Sn_CR1_0006 + tmp_0440;
+  tmp_0442 <= tcp_server_port_0294(25 downto 0) & (6-1 downto 0 => '0');
+  tmp_0443 <= class_Sn_MR0_0003 + binary_expr_00314;
+  tmp_0444 <= (32-1 downto 8 => method_result_00313(7)) & method_result_00313;
+  tmp_0445 <= '1' when method_result_00318 = X"00000000" else '0';
+  tmp_0446 <= not test_req_flag_d;
+  tmp_0447 <= test_req_flag and tmp_0446;
+  tmp_0448 <= test_req_flag or test_req_flag_d;
+  tmp_0449 <= test_req_flag or test_req_flag_d;
+  tmp_0450 <= '1' when init_busy = '0' else '0';
+  tmp_0451 <= '1' when init_req_local = '0' else '0';
+  tmp_0452 <= tmp_0450 and tmp_0451;
+  tmp_0453 <= '1' when tmp_0452 = '1' else '0';
+  tmp_0454 <= '1' when network_configuration_busy = '0' else '0';
+  tmp_0455 <= '1' when network_configuration_req_local = '0' else '0';
+  tmp_0456 <= tmp_0454 and tmp_0455;
+  tmp_0457 <= '1' when tmp_0456 = '1' else '0';
+  tmp_0458 <= '1' and '1';
+  tmp_0459 <= '1' and '0';
+  tmp_0460 <= '1' when tcp_server_busy = '0' else '0';
+  tmp_0461 <= '1' when tcp_server_req_local = '0' else '0';
+  tmp_0462 <= tmp_0460 and tmp_0461;
+  tmp_0463 <= '1' when tmp_0462 = '1' else '0';
+  tmp_0464 <= '1' when test_method /= test_method_S_0000 else '0';
+  tmp_0465 <= '1' when test_method /= test_method_S_0001 else '0';
+  tmp_0466 <= tmp_0465 and test_req_flag_edge;
+  tmp_0467 <= tmp_0464 and tmp_0466;
+  tmp_0468 <= not blink_led_req_flag_d;
+  tmp_0469 <= blink_led_req_flag and tmp_0468;
+  tmp_0470 <= blink_led_req_flag or blink_led_req_flag_d;
+  tmp_0471 <= blink_led_req_flag or blink_led_req_flag_d;
+  tmp_0472 <= '1' when blink_led_method /= blink_led_method_S_0000 else '0';
+  tmp_0473 <= '1' when blink_led_method /= blink_led_method_S_0001 else '0';
+  tmp_0474 <= tmp_0473 and blink_led_req_flag_edge;
+  tmp_0475 <= tmp_0472 and tmp_0474;
 
   -- sequencers
   process (clk)
@@ -1971,7 +2027,6 @@ begin
           when wait_cycles_method_IDLE => 
             wait_cycles_method <= wait_cycles_method_S_0000;
           when wait_cycles_method_S_0000 => 
-            wait_cycles_method <= wait_cycles_method_S_0001;
             wait_cycles_method <= wait_cycles_method_S_0001;
           when wait_cycles_method_S_0001 => 
             if tmp_0006 = '1' then
@@ -1990,8 +2045,6 @@ begin
           when wait_cycles_method_S_0005 => 
             wait_cycles_method <= wait_cycles_method_S_0010;
           when wait_cycles_method_S_0006 => 
-            wait_cycles_method <= wait_cycles_method_S_0007;
-          when wait_cycles_method_S_0007 => 
             wait_cycles_method <= wait_cycles_method_S_0008;
           when wait_cycles_method_S_0008 => 
             wait_cycles_method <= wait_cycles_method_S_0003;
@@ -2021,7 +2074,6 @@ begin
             write_data_method <= write_data_method_S_0000;
           when write_data_method_S_0000 => 
             write_data_method <= write_data_method_S_0001;
-            write_data_method <= write_data_method_S_0001;
           when write_data_method_S_0001 => 
             if tmp_0018 = '1' then
               write_data_method <= write_data_method_S_0002;
@@ -2043,7 +2095,7 @@ begin
           when write_data_method_S_0009 => 
             write_data_method <= write_data_method_S_0010;
           when write_data_method_S_0010 => 
-            write_data_method <= write_data_method_write_data_method_S_0010_body;
+            write_data_method <= write_data_method_S_0010_body;
           when write_data_method_S_0011 => 
             write_data_method <= write_data_method_S_0012;
           when write_data_method_S_0012 => 
@@ -2054,9 +2106,9 @@ begin
             write_data_method <= write_data_method_S_0015;
           when write_data_method_S_0015 => 
             write_data_method <= write_data_method_S_0000;
-          when write_data_method_write_data_method_S_0010_body => 
-            write_data_method <= write_data_method_write_data_method_S_0010_wait;
-          when write_data_method_write_data_method_S_0010_wait => 
+          when write_data_method_S_0010_body => 
+            write_data_method <= write_data_method_S_0010_wait;
+          when write_data_method_S_0010_wait => 
             if wait_cycles_call_flag_0010 = '1' then
               write_data_method <= write_data_method_S_0011;
             end if;
@@ -2082,7 +2134,6 @@ begin
             read_data_method <= read_data_method_S_0000;
           when read_data_method_S_0000 => 
             read_data_method <= read_data_method_S_0001;
-            read_data_method <= read_data_method_S_0001;
           when read_data_method_S_0001 => 
             if tmp_0030 = '1' then
               read_data_method <= read_data_method_S_0002;
@@ -2100,7 +2151,7 @@ begin
           when read_data_method_S_0007 => 
             read_data_method <= read_data_method_S_0008;
           when read_data_method_S_0008 => 
-            read_data_method <= read_data_method_read_data_method_S_0008_body;
+            read_data_method <= read_data_method_S_0008_body;
           when read_data_method_S_0009 => 
             read_data_method <= read_data_method_S_0010;
           when read_data_method_S_0010 => 
@@ -2117,9 +2168,9 @@ begin
             read_data_method <= read_data_method_S_0000;
           when read_data_method_S_0016 => 
             read_data_method <= read_data_method_S_0000;
-          when read_data_method_read_data_method_S_0008_body => 
-            read_data_method <= read_data_method_read_data_method_S_0008_wait;
-          when read_data_method_read_data_method_S_0008_wait => 
+          when read_data_method_S_0008_body => 
+            read_data_method <= read_data_method_S_0008_wait;
+          when read_data_method_S_0008_wait => 
             if wait_cycles_call_flag_0008 = '1' then
               read_data_method <= read_data_method_S_0009;
             end if;
@@ -2145,7 +2196,6 @@ begin
             init_method <= init_method_S_0000;
           when init_method_S_0000 => 
             init_method <= init_method_S_0001;
-            init_method <= init_method_S_0001;
           when init_method_S_0001 => 
             if tmp_0042 = '1' then
               init_method <= init_method_S_0002;
@@ -2167,24 +2217,24 @@ begin
           when init_method_S_0009 => 
             init_method <= init_method_S_0010;
           when init_method_S_0010 => 
-            init_method <= init_method_init_method_S_0010_body;
+            init_method <= init_method_S_0010_body;
           when init_method_S_0011 => 
             init_method <= init_method_S_0012;
           when init_method_S_0012 => 
             init_method <= init_method_S_0013;
           when init_method_S_0013 => 
-            init_method <= init_method_init_method_S_0013_body;
+            init_method <= init_method_S_0013_body;
           when init_method_S_0014 => 
             init_method <= init_method_S_0000;
-          when init_method_init_method_S_0010_body => 
-            init_method <= init_method_init_method_S_0010_wait;
-          when init_method_init_method_S_0010_wait => 
+          when init_method_S_0010_body => 
+            init_method <= init_method_S_0010_wait;
+          when init_method_S_0010_wait => 
             if wait_cycles_call_flag_0010 = '1' then
               init_method <= init_method_S_0011;
             end if;
-          when init_method_init_method_S_0013_body => 
-            init_method <= init_method_init_method_S_0013_wait;
-          when init_method_init_method_S_0013_wait => 
+          when init_method_S_0013_body => 
+            init_method <= init_method_S_0013_wait;
+          when init_method_S_0013_wait => 
             if wait_cycles_call_flag_0013 = '1' then
               init_method <= init_method_S_0014;
             end if;
@@ -2210,154 +2260,153 @@ begin
             network_configuration_method <= network_configuration_method_S_0000;
           when network_configuration_method_S_0000 => 
             network_configuration_method <= network_configuration_method_S_0001;
-            network_configuration_method <= network_configuration_method_S_0001;
           when network_configuration_method_S_0001 => 
             if tmp_0054 = '1' then
               network_configuration_method <= network_configuration_method_S_0002;
             end if;
           when network_configuration_method_S_0002 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0002_body;
+            network_configuration_method <= network_configuration_method_S_0002_body;
           when network_configuration_method_S_0003 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0003_body;
+            network_configuration_method <= network_configuration_method_S_0003_body;
           when network_configuration_method_S_0004 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0004_body;
+            network_configuration_method <= network_configuration_method_S_0004_body;
           when network_configuration_method_S_0005 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0005_body;
+            network_configuration_method <= network_configuration_method_S_0005_body;
           when network_configuration_method_S_0006 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0006_body;
+            network_configuration_method <= network_configuration_method_S_0006_body;
           when network_configuration_method_S_0007 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0007_body;
+            network_configuration_method <= network_configuration_method_S_0007_body;
           when network_configuration_method_S_0008 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0008_body;
+            network_configuration_method <= network_configuration_method_S_0008_body;
           when network_configuration_method_S_0009 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0009_body;
+            network_configuration_method <= network_configuration_method_S_0009_body;
           when network_configuration_method_S_0010 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0010_body;
+            network_configuration_method <= network_configuration_method_S_0010_body;
           when network_configuration_method_S_0011 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0011_body;
+            network_configuration_method <= network_configuration_method_S_0011_body;
           when network_configuration_method_S_0012 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0012_body;
+            network_configuration_method <= network_configuration_method_S_0012_body;
           when network_configuration_method_S_0013 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0013_body;
+            network_configuration_method <= network_configuration_method_S_0013_body;
           when network_configuration_method_S_0014 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0014_body;
+            network_configuration_method <= network_configuration_method_S_0014_body;
           when network_configuration_method_S_0015 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0015_body;
+            network_configuration_method <= network_configuration_method_S_0015_body;
           when network_configuration_method_S_0016 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0016_body;
+            network_configuration_method <= network_configuration_method_S_0016_body;
           when network_configuration_method_S_0017 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0017_body;
+            network_configuration_method <= network_configuration_method_S_0017_body;
           when network_configuration_method_S_0018 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0018_body;
+            network_configuration_method <= network_configuration_method_S_0018_body;
           when network_configuration_method_S_0019 => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0019_body;
+            network_configuration_method <= network_configuration_method_S_0019_body;
           when network_configuration_method_S_0020 => 
             network_configuration_method <= network_configuration_method_S_0000;
-          when network_configuration_method_network_configuration_method_S_0002_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0002_wait;
-          when network_configuration_method_network_configuration_method_S_0002_wait => 
+          when network_configuration_method_S_0002_body => 
+            network_configuration_method <= network_configuration_method_S_0002_wait;
+          when network_configuration_method_S_0002_wait => 
             if write_data_call_flag_0002 = '1' then
               network_configuration_method <= network_configuration_method_S_0003;
             end if;
-          when network_configuration_method_network_configuration_method_S_0003_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0003_wait;
-          when network_configuration_method_network_configuration_method_S_0003_wait => 
+          when network_configuration_method_S_0003_body => 
+            network_configuration_method <= network_configuration_method_S_0003_wait;
+          when network_configuration_method_S_0003_wait => 
             if write_data_call_flag_0003 = '1' then
               network_configuration_method <= network_configuration_method_S_0004;
             end if;
-          when network_configuration_method_network_configuration_method_S_0004_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0004_wait;
-          when network_configuration_method_network_configuration_method_S_0004_wait => 
+          when network_configuration_method_S_0004_body => 
+            network_configuration_method <= network_configuration_method_S_0004_wait;
+          when network_configuration_method_S_0004_wait => 
             if write_data_call_flag_0004 = '1' then
               network_configuration_method <= network_configuration_method_S_0005;
             end if;
-          when network_configuration_method_network_configuration_method_S_0005_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0005_wait;
-          when network_configuration_method_network_configuration_method_S_0005_wait => 
+          when network_configuration_method_S_0005_body => 
+            network_configuration_method <= network_configuration_method_S_0005_wait;
+          when network_configuration_method_S_0005_wait => 
             if write_data_call_flag_0005 = '1' then
               network_configuration_method <= network_configuration_method_S_0006;
             end if;
-          when network_configuration_method_network_configuration_method_S_0006_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0006_wait;
-          when network_configuration_method_network_configuration_method_S_0006_wait => 
+          when network_configuration_method_S_0006_body => 
+            network_configuration_method <= network_configuration_method_S_0006_wait;
+          when network_configuration_method_S_0006_wait => 
             if write_data_call_flag_0006 = '1' then
               network_configuration_method <= network_configuration_method_S_0007;
             end if;
-          when network_configuration_method_network_configuration_method_S_0007_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0007_wait;
-          when network_configuration_method_network_configuration_method_S_0007_wait => 
+          when network_configuration_method_S_0007_body => 
+            network_configuration_method <= network_configuration_method_S_0007_wait;
+          when network_configuration_method_S_0007_wait => 
             if write_data_call_flag_0007 = '1' then
               network_configuration_method <= network_configuration_method_S_0008;
             end if;
-          when network_configuration_method_network_configuration_method_S_0008_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0008_wait;
-          when network_configuration_method_network_configuration_method_S_0008_wait => 
+          when network_configuration_method_S_0008_body => 
+            network_configuration_method <= network_configuration_method_S_0008_wait;
+          when network_configuration_method_S_0008_wait => 
             if write_data_call_flag_0008 = '1' then
               network_configuration_method <= network_configuration_method_S_0009;
             end if;
-          when network_configuration_method_network_configuration_method_S_0009_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0009_wait;
-          when network_configuration_method_network_configuration_method_S_0009_wait => 
+          when network_configuration_method_S_0009_body => 
+            network_configuration_method <= network_configuration_method_S_0009_wait;
+          when network_configuration_method_S_0009_wait => 
             if write_data_call_flag_0009 = '1' then
               network_configuration_method <= network_configuration_method_S_0010;
             end if;
-          when network_configuration_method_network_configuration_method_S_0010_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0010_wait;
-          when network_configuration_method_network_configuration_method_S_0010_wait => 
+          when network_configuration_method_S_0010_body => 
+            network_configuration_method <= network_configuration_method_S_0010_wait;
+          when network_configuration_method_S_0010_wait => 
             if write_data_call_flag_0010 = '1' then
               network_configuration_method <= network_configuration_method_S_0011;
             end if;
-          when network_configuration_method_network_configuration_method_S_0011_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0011_wait;
-          when network_configuration_method_network_configuration_method_S_0011_wait => 
+          when network_configuration_method_S_0011_body => 
+            network_configuration_method <= network_configuration_method_S_0011_wait;
+          when network_configuration_method_S_0011_wait => 
             if write_data_call_flag_0011 = '1' then
               network_configuration_method <= network_configuration_method_S_0012;
             end if;
-          when network_configuration_method_network_configuration_method_S_0012_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0012_wait;
-          when network_configuration_method_network_configuration_method_S_0012_wait => 
+          when network_configuration_method_S_0012_body => 
+            network_configuration_method <= network_configuration_method_S_0012_wait;
+          when network_configuration_method_S_0012_wait => 
             if write_data_call_flag_0012 = '1' then
               network_configuration_method <= network_configuration_method_S_0013;
             end if;
-          when network_configuration_method_network_configuration_method_S_0013_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0013_wait;
-          when network_configuration_method_network_configuration_method_S_0013_wait => 
+          when network_configuration_method_S_0013_body => 
+            network_configuration_method <= network_configuration_method_S_0013_wait;
+          when network_configuration_method_S_0013_wait => 
             if write_data_call_flag_0013 = '1' then
               network_configuration_method <= network_configuration_method_S_0014;
             end if;
-          when network_configuration_method_network_configuration_method_S_0014_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0014_wait;
-          when network_configuration_method_network_configuration_method_S_0014_wait => 
+          when network_configuration_method_S_0014_body => 
+            network_configuration_method <= network_configuration_method_S_0014_wait;
+          when network_configuration_method_S_0014_wait => 
             if write_data_call_flag_0014 = '1' then
               network_configuration_method <= network_configuration_method_S_0015;
             end if;
-          when network_configuration_method_network_configuration_method_S_0015_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0015_wait;
-          when network_configuration_method_network_configuration_method_S_0015_wait => 
+          when network_configuration_method_S_0015_body => 
+            network_configuration_method <= network_configuration_method_S_0015_wait;
+          when network_configuration_method_S_0015_wait => 
             if write_data_call_flag_0015 = '1' then
               network_configuration_method <= network_configuration_method_S_0016;
             end if;
-          when network_configuration_method_network_configuration_method_S_0016_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0016_wait;
-          when network_configuration_method_network_configuration_method_S_0016_wait => 
+          when network_configuration_method_S_0016_body => 
+            network_configuration_method <= network_configuration_method_S_0016_wait;
+          when network_configuration_method_S_0016_wait => 
             if write_data_call_flag_0016 = '1' then
               network_configuration_method <= network_configuration_method_S_0017;
             end if;
-          when network_configuration_method_network_configuration_method_S_0017_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0017_wait;
-          when network_configuration_method_network_configuration_method_S_0017_wait => 
+          when network_configuration_method_S_0017_body => 
+            network_configuration_method <= network_configuration_method_S_0017_wait;
+          when network_configuration_method_S_0017_wait => 
             if write_data_call_flag_0017 = '1' then
               network_configuration_method <= network_configuration_method_S_0018;
             end if;
-          when network_configuration_method_network_configuration_method_S_0018_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0018_wait;
-          when network_configuration_method_network_configuration_method_S_0018_wait => 
+          when network_configuration_method_S_0018_body => 
+            network_configuration_method <= network_configuration_method_S_0018_wait;
+          when network_configuration_method_S_0018_wait => 
             if write_data_call_flag_0018 = '1' then
               network_configuration_method <= network_configuration_method_S_0019;
             end if;
-          when network_configuration_method_network_configuration_method_S_0019_body => 
-            network_configuration_method <= network_configuration_method_network_configuration_method_S_0019_wait;
-          when network_configuration_method_network_configuration_method_S_0019_wait => 
+          when network_configuration_method_S_0019_body => 
+            network_configuration_method <= network_configuration_method_S_0019_wait;
+          when network_configuration_method_S_0019_wait => 
             if write_data_call_flag_0019 = '1' then
               network_configuration_method <= network_configuration_method_S_0020;
             end if;
@@ -2383,74 +2432,61 @@ begin
             tcp_server_open_method <= tcp_server_open_method_S_0000;
           when tcp_server_open_method_S_0000 => 
             tcp_server_open_method <= tcp_server_open_method_S_0001;
-            tcp_server_open_method <= tcp_server_open_method_S_0001;
           when tcp_server_open_method_S_0001 => 
             if tmp_0134 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0002;
             end if;
           when tcp_server_open_method_S_0002 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0003;
-          when tcp_server_open_method_S_0003 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0006;
-          when tcp_server_open_method_S_0006 => 
             tcp_server_open_method <= tcp_server_open_method_S_0007;
           when tcp_server_open_method_S_0007 => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0007_body;
+            tcp_server_open_method <= tcp_server_open_method_S_0007_body;
           when tcp_server_open_method_S_0008 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0009;
-          when tcp_server_open_method_S_0009 => 
             tcp_server_open_method <= tcp_server_open_method_S_0010;
           when tcp_server_open_method_S_0010 => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0010_body;
+            tcp_server_open_method <= tcp_server_open_method_S_0010_body;
           when tcp_server_open_method_S_0011 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0012;
-          when tcp_server_open_method_S_0012 => 
             tcp_server_open_method <= tcp_server_open_method_S_0013;
           when tcp_server_open_method_S_0013 => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0013_body;
+            tcp_server_open_method <= tcp_server_open_method_S_0013_body;
           when tcp_server_open_method_S_0014 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0015;
-          when tcp_server_open_method_S_0015 => 
             tcp_server_open_method <= tcp_server_open_method_S_0016;
           when tcp_server_open_method_S_0016 => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0016_body;
+            tcp_server_open_method <= tcp_server_open_method_S_0016_body;
           when tcp_server_open_method_S_0017 => 
-            tcp_server_open_method <= tcp_server_open_method_S_0018;
-          when tcp_server_open_method_S_0018 => 
             tcp_server_open_method <= tcp_server_open_method_S_0019;
           when tcp_server_open_method_S_0019 => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0019_body;
+            tcp_server_open_method <= tcp_server_open_method_S_0019_body;
           when tcp_server_open_method_S_0020 => 
             tcp_server_open_method <= tcp_server_open_method_S_0000;
           when tcp_server_open_method_S_0021 => 
             tcp_server_open_method <= tcp_server_open_method_S_0000;
-          when tcp_server_open_method_tcp_server_open_method_S_0007_body => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0007_wait;
-          when tcp_server_open_method_tcp_server_open_method_S_0007_wait => 
+          when tcp_server_open_method_S_0007_body => 
+            tcp_server_open_method <= tcp_server_open_method_S_0007_wait;
+          when tcp_server_open_method_S_0007_wait => 
             if write_data_call_flag_0007 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0008;
             end if;
-          when tcp_server_open_method_tcp_server_open_method_S_0010_body => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0010_wait;
-          when tcp_server_open_method_tcp_server_open_method_S_0010_wait => 
+          when tcp_server_open_method_S_0010_body => 
+            tcp_server_open_method <= tcp_server_open_method_S_0010_wait;
+          when tcp_server_open_method_S_0010_wait => 
             if write_data_call_flag_0010 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0011;
             end if;
-          when tcp_server_open_method_tcp_server_open_method_S_0013_body => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0013_wait;
-          when tcp_server_open_method_tcp_server_open_method_S_0013_wait => 
+          when tcp_server_open_method_S_0013_body => 
+            tcp_server_open_method <= tcp_server_open_method_S_0013_wait;
+          when tcp_server_open_method_S_0013_wait => 
             if write_data_call_flag_0013 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0014;
             end if;
-          when tcp_server_open_method_tcp_server_open_method_S_0016_body => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0016_wait;
-          when tcp_server_open_method_tcp_server_open_method_S_0016_wait => 
+          when tcp_server_open_method_S_0016_body => 
+            tcp_server_open_method <= tcp_server_open_method_S_0016_wait;
+          when tcp_server_open_method_S_0016_wait => 
             if write_data_call_flag_0016 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0017;
             end if;
-          when tcp_server_open_method_tcp_server_open_method_S_0019_body => 
-            tcp_server_open_method <= tcp_server_open_method_tcp_server_open_method_S_0019_wait;
-          when tcp_server_open_method_tcp_server_open_method_S_0019_wait => 
+          when tcp_server_open_method_S_0019_body => 
+            tcp_server_open_method <= tcp_server_open_method_S_0019_wait;
+          when tcp_server_open_method_S_0019_wait => 
             if read_data_call_flag_0019 = '1' then
               tcp_server_open_method <= tcp_server_open_method_S_0020;
             end if;
@@ -2476,36 +2512,31 @@ begin
             tcp_server_listen_method <= tcp_server_listen_method_S_0000;
           when tcp_server_listen_method_S_0000 => 
             tcp_server_listen_method <= tcp_server_listen_method_S_0001;
-            tcp_server_listen_method <= tcp_server_listen_method_S_0001;
           when tcp_server_listen_method_S_0001 => 
             if tmp_0159 = '1' then
               tcp_server_listen_method <= tcp_server_listen_method_S_0002;
             end if;
           when tcp_server_listen_method_S_0002 => 
-            tcp_server_listen_method <= tcp_server_listen_method_S_0003;
-          when tcp_server_listen_method_S_0003 => 
             tcp_server_listen_method <= tcp_server_listen_method_S_0004;
           when tcp_server_listen_method_S_0004 => 
-            tcp_server_listen_method <= tcp_server_listen_method_tcp_server_listen_method_S_0004_body;
+            tcp_server_listen_method <= tcp_server_listen_method_S_0004_body;
           when tcp_server_listen_method_S_0005 => 
-            tcp_server_listen_method <= tcp_server_listen_method_S_0006;
-          when tcp_server_listen_method_S_0006 => 
             tcp_server_listen_method <= tcp_server_listen_method_S_0007;
           when tcp_server_listen_method_S_0007 => 
-            tcp_server_listen_method <= tcp_server_listen_method_tcp_server_listen_method_S_0007_body;
+            tcp_server_listen_method <= tcp_server_listen_method_S_0007_body;
           when tcp_server_listen_method_S_0008 => 
             tcp_server_listen_method <= tcp_server_listen_method_S_0000;
           when tcp_server_listen_method_S_0009 => 
             tcp_server_listen_method <= tcp_server_listen_method_S_0000;
-          when tcp_server_listen_method_tcp_server_listen_method_S_0004_body => 
-            tcp_server_listen_method <= tcp_server_listen_method_tcp_server_listen_method_S_0004_wait;
-          when tcp_server_listen_method_tcp_server_listen_method_S_0004_wait => 
+          when tcp_server_listen_method_S_0004_body => 
+            tcp_server_listen_method <= tcp_server_listen_method_S_0004_wait;
+          when tcp_server_listen_method_S_0004_wait => 
             if write_data_call_flag_0004 = '1' then
               tcp_server_listen_method <= tcp_server_listen_method_S_0005;
             end if;
-          when tcp_server_listen_method_tcp_server_listen_method_S_0007_body => 
-            tcp_server_listen_method <= tcp_server_listen_method_tcp_server_listen_method_S_0007_wait;
-          when tcp_server_listen_method_tcp_server_listen_method_S_0007_wait => 
+          when tcp_server_listen_method_S_0007_body => 
+            tcp_server_listen_method <= tcp_server_listen_method_S_0007_wait;
+          when tcp_server_listen_method_S_0007_wait => 
             if read_data_call_flag_0007 = '1' then
               tcp_server_listen_method <= tcp_server_listen_method_S_0008;
             end if;
@@ -2531,7 +2562,6 @@ begin
             wait_for_established_method <= wait_for_established_method_S_0000;
           when wait_for_established_method_S_0000 => 
             wait_for_established_method <= wait_for_established_method_S_0001;
-            wait_for_established_method <= wait_for_established_method_S_0001;
           when wait_for_established_method_S_0001 => 
             if tmp_0175 = '1' then
               wait_for_established_method <= wait_for_established_method_S_0002;
@@ -2547,14 +2577,10 @@ begin
           when wait_for_established_method_S_0004 => 
             wait_for_established_method <= wait_for_established_method_S_0015;
           when wait_for_established_method_S_0005 => 
-            wait_for_established_method <= wait_for_established_method_S_0006;
-          when wait_for_established_method_S_0006 => 
             wait_for_established_method <= wait_for_established_method_S_0007;
           when wait_for_established_method_S_0007 => 
-            wait_for_established_method <= wait_for_established_method_wait_for_established_method_S_0007_body;
+            wait_for_established_method <= wait_for_established_method_S_0007_body;
           when wait_for_established_method_S_0008 => 
-            wait_for_established_method <= wait_for_established_method_S_0009;
-          when wait_for_established_method_S_0009 => 
             wait_for_established_method <= wait_for_established_method_S_0010;
           when wait_for_established_method_S_0010 => 
             if tmp_0179 = '1' then
@@ -2572,9 +2598,9 @@ begin
             wait_for_established_method <= wait_for_established_method_S_0003;
           when wait_for_established_method_S_0015 => 
             wait_for_established_method <= wait_for_established_method_S_0000;
-          when wait_for_established_method_wait_for_established_method_S_0007_body => 
-            wait_for_established_method <= wait_for_established_method_wait_for_established_method_S_0007_wait;
-          when wait_for_established_method_wait_for_established_method_S_0007_wait => 
+          when wait_for_established_method_S_0007_body => 
+            wait_for_established_method <= wait_for_established_method_S_0007_wait;
+          when wait_for_established_method_S_0007_wait => 
             if read_data_call_flag_0007 = '1' then
               wait_for_established_method <= wait_for_established_method_S_0008;
             end if;
@@ -2600,7 +2626,6 @@ begin
             wait_for_recv_method <= wait_for_recv_method_S_0000;
           when wait_for_recv_method_S_0000 => 
             wait_for_recv_method <= wait_for_recv_method_S_0001;
-            wait_for_recv_method <= wait_for_recv_method_S_0001;
           when wait_for_recv_method_S_0001 => 
             if tmp_0190 = '1' then
               wait_for_recv_method <= wait_for_recv_method_S_0002;
@@ -2614,34 +2639,20 @@ begin
               wait_for_recv_method <= wait_for_recv_method_S_0004;
             end if;
           when wait_for_recv_method_S_0004 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0032;
+            wait_for_recv_method <= wait_for_recv_method_S_0049;
           when wait_for_recv_method_S_0005 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0007;
-          when wait_for_recv_method_S_0007 => 
             wait_for_recv_method <= wait_for_recv_method_S_0008;
           when wait_for_recv_method_S_0008 => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0008_body;
+            wait_for_recv_method <= wait_for_recv_method_S_0008_body;
           when wait_for_recv_method_S_0009 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0010;
-          when wait_for_recv_method_S_0010 => 
             wait_for_recv_method <= wait_for_recv_method_S_0013;
           when wait_for_recv_method_S_0013 => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0013_body;
+            wait_for_recv_method <= wait_for_recv_method_S_0013_body;
           when wait_for_recv_method_S_0014 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0015;
-          when wait_for_recv_method_S_0015 => 
             wait_for_recv_method <= wait_for_recv_method_S_0018;
           when wait_for_recv_method_S_0018 => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0018_body;
+            wait_for_recv_method <= wait_for_recv_method_S_0018_body;
           when wait_for_recv_method_S_0019 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0020;
-          when wait_for_recv_method_S_0020 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0024;
-          when wait_for_recv_method_S_0024 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0025;
-          when wait_for_recv_method_S_0025 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0026;
-          when wait_for_recv_method_S_0026 => 
             wait_for_recv_method <= wait_for_recv_method_S_0027;
           when wait_for_recv_method_S_0027 => 
             if tmp_0206 = '1' then
@@ -2656,31 +2667,65 @@ begin
           when wait_for_recv_method_S_0030 => 
             wait_for_recv_method <= wait_for_recv_method_S_0028;
           when wait_for_recv_method_S_0031 => 
-            wait_for_recv_method <= wait_for_recv_method_S_0003;
-          when wait_for_recv_method_S_0032 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0033;
+          when wait_for_recv_method_S_0033 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0033_body;
+          when wait_for_recv_method_S_0034 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0041;
+          when wait_for_recv_method_S_0041 => 
+            if tmp_0212 = '1' then
+              wait_for_recv_method <= wait_for_recv_method_S_0043;
+            elsif tmp_0213 = '1' then
+              wait_for_recv_method <= wait_for_recv_method_S_0042;
+            end if;
+          when wait_for_recv_method_S_0042 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0048;
+          when wait_for_recv_method_S_0043 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0045;
+          when wait_for_recv_method_S_0045 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0045_body;
+          when wait_for_recv_method_S_0046 => 
             wait_for_recv_method <= wait_for_recv_method_S_0000;
-          when wait_for_recv_method_wait_for_recv_method_S_0008_body => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0008_wait;
-          when wait_for_recv_method_wait_for_recv_method_S_0008_wait => 
+          when wait_for_recv_method_S_0047 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0042;
+          when wait_for_recv_method_S_0048 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0003;
+          when wait_for_recv_method_S_0049 => 
+            wait_for_recv_method <= wait_for_recv_method_S_0000;
+          when wait_for_recv_method_S_0008_body => 
+            wait_for_recv_method <= wait_for_recv_method_S_0008_wait;
+          when wait_for_recv_method_S_0008_wait => 
             if read_data_call_flag_0008 = '1' then
               wait_for_recv_method <= wait_for_recv_method_S_0009;
             end if;
-          when wait_for_recv_method_wait_for_recv_method_S_0013_body => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0013_wait;
-          when wait_for_recv_method_wait_for_recv_method_S_0013_wait => 
+          when wait_for_recv_method_S_0013_body => 
+            wait_for_recv_method <= wait_for_recv_method_S_0013_wait;
+          when wait_for_recv_method_S_0013_wait => 
             if read_data_call_flag_0013 = '1' then
               wait_for_recv_method <= wait_for_recv_method_S_0014;
             end if;
-          when wait_for_recv_method_wait_for_recv_method_S_0018_body => 
-            wait_for_recv_method <= wait_for_recv_method_wait_for_recv_method_S_0018_wait;
-          when wait_for_recv_method_wait_for_recv_method_S_0018_wait => 
+          when wait_for_recv_method_S_0018_body => 
+            wait_for_recv_method <= wait_for_recv_method_S_0018_wait;
+          when wait_for_recv_method_S_0018_wait => 
             if read_data_call_flag_0018 = '1' then
               wait_for_recv_method <= wait_for_recv_method_S_0019;
+            end if;
+          when wait_for_recv_method_S_0033_body => 
+            wait_for_recv_method <= wait_for_recv_method_S_0033_wait;
+          when wait_for_recv_method_S_0033_wait => 
+            if read_data_call_flag_0033 = '1' then
+              wait_for_recv_method <= wait_for_recv_method_S_0034;
+            end if;
+          when wait_for_recv_method_S_0045_body => 
+            wait_for_recv_method <= wait_for_recv_method_S_0045_wait;
+          when wait_for_recv_method_S_0045_wait => 
+            if write_data_call_flag_0045 = '1' then
+              wait_for_recv_method <= wait_for_recv_method_S_0046;
             end if;
           when others => null;
         end case;
         wait_for_recv_req_flag_d <= wait_for_recv_req_flag;
-        if (tmp_0208 and tmp_0210) = '1' then
+        if (tmp_0218 and tmp_0220) = '1' then
           wait_for_recv_method <= wait_for_recv_method_S_0001;
         end if;
       end if;
@@ -2699,46 +2744,29 @@ begin
             pull_recv_data_method <= pull_recv_data_method_S_0000;
           when pull_recv_data_method_S_0000 => 
             pull_recv_data_method <= pull_recv_data_method_S_0001;
-            pull_recv_data_method <= pull_recv_data_method_S_0001;
           when pull_recv_data_method_S_0001 => 
-            if tmp_0228 = '1' then
+            if tmp_0248 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0002;
             end if;
           when pull_recv_data_method_S_0002 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0003;
-          when pull_recv_data_method_S_0003 => 
             pull_recv_data_method <= pull_recv_data_method_S_0004;
           when pull_recv_data_method_S_0004 => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0004_body;
+            pull_recv_data_method <= pull_recv_data_method_S_0004_body;
           when pull_recv_data_method_S_0005 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0006;
-          when pull_recv_data_method_S_0006 => 
             pull_recv_data_method <= pull_recv_data_method_S_0009;
           when pull_recv_data_method_S_0009 => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0009_body;
+            pull_recv_data_method <= pull_recv_data_method_S_0009_body;
           when pull_recv_data_method_S_0010 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0011;
-          when pull_recv_data_method_S_0011 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0013;
-          when pull_recv_data_method_S_0013 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0014;
-          when pull_recv_data_method_S_0014 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0015;
-          when pull_recv_data_method_S_0015 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0016;
-          when pull_recv_data_method_S_0016 => 
             pull_recv_data_method <= pull_recv_data_method_S_0019;
           when pull_recv_data_method_S_0019 => 
-            if tmp_0238 = '1' then
+            if tmp_0258 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0021;
-            elsif tmp_0239 = '1' then
+            elsif tmp_0259 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0020;
             end if;
           when pull_recv_data_method_S_0020 => 
             pull_recv_data_method <= pull_recv_data_method_S_0024;
           when pull_recv_data_method_S_0021 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0022;
-          when pull_recv_data_method_S_0022 => 
             pull_recv_data_method <= pull_recv_data_method_S_0023;
           when pull_recv_data_method_S_0023 => 
             pull_recv_data_method <= pull_recv_data_method_S_0020;
@@ -2747,91 +2775,79 @@ begin
           when pull_recv_data_method_S_0025 => 
             pull_recv_data_method <= pull_recv_data_method_S_0026;
           when pull_recv_data_method_S_0026 => 
-            if tmp_0240 = '1' then
+            if tmp_0260 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0031;
-            elsif tmp_0241 = '1' then
+            elsif tmp_0261 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0027;
             end if;
           when pull_recv_data_method_S_0027 => 
             pull_recv_data_method <= pull_recv_data_method_S_0046;
           when pull_recv_data_method_S_0028 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0029;
-          when pull_recv_data_method_S_0029 => 
             pull_recv_data_method <= pull_recv_data_method_S_0030;
           when pull_recv_data_method_S_0030 => 
             pull_recv_data_method <= pull_recv_data_method_S_0025;
           when pull_recv_data_method_S_0031 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0032;
-          when pull_recv_data_method_S_0032 => 
             pull_recv_data_method <= pull_recv_data_method_S_0033;
           when pull_recv_data_method_S_0033 => 
             pull_recv_data_method <= pull_recv_data_method_S_0034;
           when pull_recv_data_method_S_0034 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0035;
-          when pull_recv_data_method_S_0035 => 
             pull_recv_data_method <= pull_recv_data_method_S_0036;
           when pull_recv_data_method_S_0036 => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0036_body;
+            pull_recv_data_method <= pull_recv_data_method_S_0036_body;
           when pull_recv_data_method_S_0037 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0039;
-          when pull_recv_data_method_S_0039 => 
             pull_recv_data_method <= pull_recv_data_method_S_0040;
           when pull_recv_data_method_S_0040 => 
             pull_recv_data_method <= pull_recv_data_method_S_0041;
           when pull_recv_data_method_S_0041 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0042;
-          when pull_recv_data_method_S_0042 => 
             pull_recv_data_method <= pull_recv_data_method_S_0043;
           when pull_recv_data_method_S_0043 => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0043_body;
+            pull_recv_data_method <= pull_recv_data_method_S_0043_body;
           when pull_recv_data_method_S_0044 => 
             pull_recv_data_method <= pull_recv_data_method_S_0045;
           when pull_recv_data_method_S_0045 => 
             pull_recv_data_method <= pull_recv_data_method_S_0028;
           when pull_recv_data_method_S_0046 => 
-            pull_recv_data_method <= pull_recv_data_method_S_0047;
-          when pull_recv_data_method_S_0047 => 
             pull_recv_data_method <= pull_recv_data_method_S_0048;
           when pull_recv_data_method_S_0048 => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0048_body;
+            pull_recv_data_method <= pull_recv_data_method_S_0048_body;
           when pull_recv_data_method_S_0049 => 
             pull_recv_data_method <= pull_recv_data_method_S_0000;
           when pull_recv_data_method_S_0050 => 
             pull_recv_data_method <= pull_recv_data_method_S_0000;
-          when pull_recv_data_method_pull_recv_data_method_S_0004_body => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0004_wait;
-          when pull_recv_data_method_pull_recv_data_method_S_0004_wait => 
+          when pull_recv_data_method_S_0004_body => 
+            pull_recv_data_method <= pull_recv_data_method_S_0004_wait;
+          when pull_recv_data_method_S_0004_wait => 
             if read_data_call_flag_0004 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0005;
             end if;
-          when pull_recv_data_method_pull_recv_data_method_S_0009_body => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0009_wait;
-          when pull_recv_data_method_pull_recv_data_method_S_0009_wait => 
+          when pull_recv_data_method_S_0009_body => 
+            pull_recv_data_method <= pull_recv_data_method_S_0009_wait;
+          when pull_recv_data_method_S_0009_wait => 
             if read_data_call_flag_0009 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0010;
             end if;
-          when pull_recv_data_method_pull_recv_data_method_S_0036_body => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0036_wait;
-          when pull_recv_data_method_pull_recv_data_method_S_0036_wait => 
+          when pull_recv_data_method_S_0036_body => 
+            pull_recv_data_method <= pull_recv_data_method_S_0036_wait;
+          when pull_recv_data_method_S_0036_wait => 
             if read_data_call_flag_0036 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0037;
             end if;
-          when pull_recv_data_method_pull_recv_data_method_S_0043_body => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0043_wait;
-          when pull_recv_data_method_pull_recv_data_method_S_0043_wait => 
+          when pull_recv_data_method_S_0043_body => 
+            pull_recv_data_method <= pull_recv_data_method_S_0043_wait;
+          when pull_recv_data_method_S_0043_wait => 
             if read_data_call_flag_0043 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0044;
             end if;
-          when pull_recv_data_method_pull_recv_data_method_S_0048_body => 
-            pull_recv_data_method <= pull_recv_data_method_pull_recv_data_method_S_0048_wait;
-          when pull_recv_data_method_pull_recv_data_method_S_0048_wait => 
+          when pull_recv_data_method_S_0048_body => 
+            pull_recv_data_method <= pull_recv_data_method_S_0048_wait;
+          when pull_recv_data_method_S_0048_wait => 
             if write_data_call_flag_0048 = '1' then
               pull_recv_data_method <= pull_recv_data_method_S_0049;
             end if;
           when others => null;
         end case;
         pull_recv_data_req_flag_d <= pull_recv_data_req_flag;
-        if (tmp_0254 and tmp_0256) = '1' then
+        if (tmp_0274 and tmp_0276) = '1' then
           pull_recv_data_method <= pull_recv_data_method_S_0001;
         end if;
       end if;
@@ -2850,161 +2866,156 @@ begin
             push_send_data_method <= push_send_data_method_S_0000;
           when push_send_data_method_S_0000 => 
             push_send_data_method <= push_send_data_method_S_0001;
-            push_send_data_method <= push_send_data_method_S_0001;
           when push_send_data_method_S_0001 => 
-            if tmp_0284 = '1' then
+            if tmp_0304 = '1' then
               push_send_data_method <= push_send_data_method_S_0002;
             end if;
           when push_send_data_method_S_0002 => 
-            push_send_data_method <= push_send_data_method_S_0003;
-          when push_send_data_method_S_0003 => 
-            push_send_data_method <= push_send_data_method_S_0006;
-          when push_send_data_method_S_0006 => 
-            if tmp_0286 = '1' then
-              push_send_data_method <= push_send_data_method_S_0008;
-            elsif tmp_0287 = '1' then
-              push_send_data_method <= push_send_data_method_S_0007;
-            end if;
-          when push_send_data_method_S_0007 => 
-            push_send_data_method <= push_send_data_method_S_0011;
-          when push_send_data_method_S_0008 => 
-            push_send_data_method <= push_send_data_method_S_0009;
-          when push_send_data_method_S_0009 => 
-            push_send_data_method <= push_send_data_method_S_0010;
-          when push_send_data_method_S_0010 => 
             push_send_data_method <= push_send_data_method_S_0007;
-          when push_send_data_method_S_0011 => 
+          when push_send_data_method_S_0007 => 
+            push_send_data_method <= push_send_data_method_S_0007_body;
+          when push_send_data_method_S_0008 => 
             push_send_data_method <= push_send_data_method_S_0012;
           when push_send_data_method_S_0012 => 
-            push_send_data_method <= push_send_data_method_S_0013;
+            push_send_data_method <= push_send_data_method_S_0012_body;
           when push_send_data_method_S_0013 => 
-            if tmp_0288 = '1' then
-              push_send_data_method <= push_send_data_method_S_0018;
-            elsif tmp_0289 = '1' then
-              push_send_data_method <= push_send_data_method_S_0014;
-            end if;
-          when push_send_data_method_S_0014 => 
-            push_send_data_method <= push_send_data_method_S_0033;
-          when push_send_data_method_S_0015 => 
-            push_send_data_method <= push_send_data_method_S_0016;
-          when push_send_data_method_S_0016 => 
             push_send_data_method <= push_send_data_method_S_0017;
           when push_send_data_method_S_0017 => 
-            push_send_data_method <= push_send_data_method_S_0012;
-          when push_send_data_method_S_0018 => 
-            push_send_data_method <= push_send_data_method_S_0019;
-          when push_send_data_method_S_0019 => 
-            push_send_data_method <= push_send_data_method_S_0020;
-          when push_send_data_method_S_0020 => 
-            if push_send_data_method_delay >= 2 then
-              push_send_data_method_delay <= (others => '0');
-              push_send_data_method <= push_send_data_method_S_0021;
-            else
-              push_send_data_method_delay <= push_send_data_method_delay + 1;
+            if tmp_0306 = '1' then
+              push_send_data_method <= push_send_data_method_S_0019;
+            elsif tmp_0307 = '1' then
+              push_send_data_method <= push_send_data_method_S_0018;
             end if;
+          when push_send_data_method_S_0018 => 
+            push_send_data_method <= push_send_data_method_S_0022;
+          when push_send_data_method_S_0019 => 
+            push_send_data_method <= push_send_data_method_S_0021;
           when push_send_data_method_S_0021 => 
+            push_send_data_method <= push_send_data_method_S_0018;
+          when push_send_data_method_S_0022 => 
             push_send_data_method <= push_send_data_method_S_0023;
           when push_send_data_method_S_0023 => 
             push_send_data_method <= push_send_data_method_S_0024;
           when push_send_data_method_S_0024 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0024_body;
+            if tmp_0308 = '1' then
+              push_send_data_method <= push_send_data_method_S_0029;
+            elsif tmp_0309 = '1' then
+              push_send_data_method <= push_send_data_method_S_0025;
+            end if;
           when push_send_data_method_S_0025 => 
-            push_send_data_method <= push_send_data_method_S_0026;
+            push_send_data_method <= push_send_data_method_S_0044;
           when push_send_data_method_S_0026 => 
-            push_send_data_method <= push_send_data_method_S_0027;
-          when push_send_data_method_S_0027 => 
+            push_send_data_method <= push_send_data_method_S_0028;
+          when push_send_data_method_S_0028 => 
+            push_send_data_method <= push_send_data_method_S_0023;
+          when push_send_data_method_S_0029 => 
+            push_send_data_method <= push_send_data_method_S_0031;
+          when push_send_data_method_S_0031 => 
             if push_send_data_method_delay >= 2 then
               push_send_data_method_delay <= (others => '0');
-              push_send_data_method <= push_send_data_method_S_0028;
+              push_send_data_method <= push_send_data_method_S_0032;
             else
               push_send_data_method_delay <= push_send_data_method_delay + 1;
             end if;
-          when push_send_data_method_S_0028 => 
-            push_send_data_method <= push_send_data_method_S_0030;
-          when push_send_data_method_S_0030 => 
-            push_send_data_method <= push_send_data_method_S_0031;
-          when push_send_data_method_S_0031 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0031_body;
           when push_send_data_method_S_0032 => 
-            push_send_data_method <= push_send_data_method_S_0015;
-          when push_send_data_method_S_0033 => 
-            push_send_data_method <= push_send_data_method_S_0034;
-          when push_send_data_method_S_0034 => 
             push_send_data_method <= push_send_data_method_S_0035;
           when push_send_data_method_S_0035 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0035_body;
+            push_send_data_method <= push_send_data_method_S_0035_body;
           when push_send_data_method_S_0036 => 
-            push_send_data_method <= push_send_data_method_S_0037;
-          when push_send_data_method_S_0037 => 
-            push_send_data_method <= push_send_data_method_S_0040;
-          when push_send_data_method_S_0040 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0040_body;
-          when push_send_data_method_S_0041 => 
+            push_send_data_method <= push_send_data_method_S_0038;
+          when push_send_data_method_S_0038 => 
+            if push_send_data_method_delay >= 2 then
+              push_send_data_method_delay <= (others => '0');
+              push_send_data_method <= push_send_data_method_S_0039;
+            else
+              push_send_data_method_delay <= push_send_data_method_delay + 1;
+            end if;
+          when push_send_data_method_S_0039 => 
             push_send_data_method <= push_send_data_method_S_0042;
           when push_send_data_method_S_0042 => 
-            push_send_data_method <= push_send_data_method_S_0045;
-          when push_send_data_method_S_0045 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0045_body;
+            push_send_data_method <= push_send_data_method_S_0042_body;
+          when push_send_data_method_S_0043 => 
+            push_send_data_method <= push_send_data_method_S_0026;
+          when push_send_data_method_S_0044 => 
+            push_send_data_method <= push_send_data_method_S_0046;
           when push_send_data_method_S_0046 => 
-            push_send_data_method <= push_send_data_method_S_0047;
+            push_send_data_method <= push_send_data_method_S_0046_body;
           when push_send_data_method_S_0047 => 
-            push_send_data_method <= push_send_data_method_S_0050;
-          when push_send_data_method_S_0050 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0050_body;
+            push_send_data_method <= push_send_data_method_S_0051;
           when push_send_data_method_S_0051 => 
-            push_send_data_method <= push_send_data_method_S_0052;
+            push_send_data_method <= push_send_data_method_S_0051_body;
           when push_send_data_method_S_0052 => 
-            push_send_data_method <= push_send_data_method_S_0053;
-          when push_send_data_method_S_0053 => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0053_body;
-          when push_send_data_method_S_0054 => 
+            push_send_data_method <= push_send_data_method_S_0056;
+          when push_send_data_method_S_0056 => 
+            push_send_data_method <= push_send_data_method_S_0056_body;
+          when push_send_data_method_S_0057 => 
+            push_send_data_method <= push_send_data_method_S_0061;
+          when push_send_data_method_S_0061 => 
+            push_send_data_method <= push_send_data_method_S_0061_body;
+          when push_send_data_method_S_0062 => 
+            push_send_data_method <= push_send_data_method_S_0064;
+          when push_send_data_method_S_0064 => 
+            push_send_data_method <= push_send_data_method_S_0064_body;
+          when push_send_data_method_S_0065 => 
             push_send_data_method <= push_send_data_method_S_0000;
-          when push_send_data_method_push_send_data_method_S_0024_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0024_wait;
-          when push_send_data_method_push_send_data_method_S_0024_wait => 
-            if write_data_call_flag_0024 = '1' then
-              push_send_data_method <= push_send_data_method_S_0025;
+          when push_send_data_method_S_0007_body => 
+            push_send_data_method <= push_send_data_method_S_0007_wait;
+          when push_send_data_method_S_0007_wait => 
+            if write_data_call_flag_0007 = '1' then
+              push_send_data_method <= push_send_data_method_S_0008;
             end if;
-          when push_send_data_method_push_send_data_method_S_0031_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0031_wait;
-          when push_send_data_method_push_send_data_method_S_0031_wait => 
-            if write_data_call_flag_0031 = '1' then
-              push_send_data_method <= push_send_data_method_S_0032;
+          when push_send_data_method_S_0012_body => 
+            push_send_data_method <= push_send_data_method_S_0012_wait;
+          when push_send_data_method_S_0012_wait => 
+            if write_data_call_flag_0012 = '1' then
+              push_send_data_method <= push_send_data_method_S_0013;
             end if;
-          when push_send_data_method_push_send_data_method_S_0035_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0035_wait;
-          when push_send_data_method_push_send_data_method_S_0035_wait => 
+          when push_send_data_method_S_0035_body => 
+            push_send_data_method <= push_send_data_method_S_0035_wait;
+          when push_send_data_method_S_0035_wait => 
             if write_data_call_flag_0035 = '1' then
               push_send_data_method <= push_send_data_method_S_0036;
             end if;
-          when push_send_data_method_push_send_data_method_S_0040_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0040_wait;
-          when push_send_data_method_push_send_data_method_S_0040_wait => 
-            if write_data_call_flag_0040 = '1' then
-              push_send_data_method <= push_send_data_method_S_0041;
+          when push_send_data_method_S_0042_body => 
+            push_send_data_method <= push_send_data_method_S_0042_wait;
+          when push_send_data_method_S_0042_wait => 
+            if write_data_call_flag_0042 = '1' then
+              push_send_data_method <= push_send_data_method_S_0043;
             end if;
-          when push_send_data_method_push_send_data_method_S_0045_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0045_wait;
-          when push_send_data_method_push_send_data_method_S_0045_wait => 
-            if write_data_call_flag_0045 = '1' then
-              push_send_data_method <= push_send_data_method_S_0046;
+          when push_send_data_method_S_0046_body => 
+            push_send_data_method <= push_send_data_method_S_0046_wait;
+          when push_send_data_method_S_0046_wait => 
+            if write_data_call_flag_0046 = '1' then
+              push_send_data_method <= push_send_data_method_S_0047;
             end if;
-          when push_send_data_method_push_send_data_method_S_0050_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0050_wait;
-          when push_send_data_method_push_send_data_method_S_0050_wait => 
-            if write_data_call_flag_0050 = '1' then
-              push_send_data_method <= push_send_data_method_S_0051;
+          when push_send_data_method_S_0051_body => 
+            push_send_data_method <= push_send_data_method_S_0051_wait;
+          when push_send_data_method_S_0051_wait => 
+            if write_data_call_flag_0051 = '1' then
+              push_send_data_method <= push_send_data_method_S_0052;
             end if;
-          when push_send_data_method_push_send_data_method_S_0053_body => 
-            push_send_data_method <= push_send_data_method_push_send_data_method_S_0053_wait;
-          when push_send_data_method_push_send_data_method_S_0053_wait => 
-            if write_data_call_flag_0053 = '1' then
-              push_send_data_method <= push_send_data_method_S_0054;
+          when push_send_data_method_S_0056_body => 
+            push_send_data_method <= push_send_data_method_S_0056_wait;
+          when push_send_data_method_S_0056_wait => 
+            if write_data_call_flag_0056 = '1' then
+              push_send_data_method <= push_send_data_method_S_0057;
+            end if;
+          when push_send_data_method_S_0061_body => 
+            push_send_data_method <= push_send_data_method_S_0061_wait;
+          when push_send_data_method_S_0061_wait => 
+            if write_data_call_flag_0061 = '1' then
+              push_send_data_method <= push_send_data_method_S_0062;
+            end if;
+          when push_send_data_method_S_0064_body => 
+            push_send_data_method <= push_send_data_method_S_0064_wait;
+          when push_send_data_method_S_0064_wait => 
+            if write_data_call_flag_0064 = '1' then
+              push_send_data_method <= push_send_data_method_S_0065;
             end if;
           when others => null;
         end case;
         push_send_data_req_flag_d <= push_send_data_req_flag;
-        if (tmp_0318 and tmp_0320) = '1' then
+        if (tmp_0338 and tmp_0340) = '1' then
           push_send_data_method <= push_send_data_method_S_0001;
         end if;
       end if;
@@ -3023,39 +3034,34 @@ begin
             tcp_server_method <= tcp_server_method_S_0000;
           when tcp_server_method_S_0000 => 
             tcp_server_method <= tcp_server_method_S_0001;
-            tcp_server_method <= tcp_server_method_S_0001;
           when tcp_server_method_S_0001 => 
-            if tmp_0354 = '1' then
+            if tmp_0383 = '1' then
               tcp_server_method <= tcp_server_method_S_0002;
             end if;
           when tcp_server_method_S_0002 => 
-            tcp_server_method <= tcp_server_method_S_0003;
-          when tcp_server_method_S_0003 => 
             tcp_server_method <= tcp_server_method_S_0004;
           when tcp_server_method_S_0004 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0004_body;
+            tcp_server_method <= tcp_server_method_S_0004_body;
           when tcp_server_method_S_0005 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0005_body;
+            tcp_server_method <= tcp_server_method_S_0005_body;
           when tcp_server_method_S_0006 => 
             tcp_server_method <= tcp_server_method_S_0007;
           when tcp_server_method_S_0007 => 
             tcp_server_method <= tcp_server_method_S_0008;
           when tcp_server_method_S_0008 => 
-            if tmp_0360 = '1' then
+            if tmp_0389 = '1' then
               tcp_server_method <= tcp_server_method_S_0010;
-            elsif tmp_0361 = '1' then
+            elsif tmp_0390 = '1' then
               tcp_server_method <= tcp_server_method_S_0009;
             end if;
           when tcp_server_method_S_0009 => 
             tcp_server_method <= tcp_server_method_S_0016;
           when tcp_server_method_S_0010 => 
-            tcp_server_method <= tcp_server_method_S_0011;
-          when tcp_server_method_S_0011 => 
             tcp_server_method <= tcp_server_method_S_0012;
           when tcp_server_method_S_0012 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0012_body;
+            tcp_server_method <= tcp_server_method_S_0012_body;
           when tcp_server_method_S_0013 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0013_body;
+            tcp_server_method <= tcp_server_method_S_0013_body;
           when tcp_server_method_S_0014 => 
             tcp_server_method <= tcp_server_method_S_0015;
           when tcp_server_method_S_0015 => 
@@ -3065,145 +3071,155 @@ begin
           when tcp_server_method_S_0017 => 
             tcp_server_method <= tcp_server_method_S_0018;
           when tcp_server_method_S_0018 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0018_body;
+            tcp_server_method <= tcp_server_method_S_0018_body;
           when tcp_server_method_S_0019 => 
             tcp_server_method <= tcp_server_method_S_0020;
           when tcp_server_method_S_0020 => 
             tcp_server_method <= tcp_server_method_S_0021;
           when tcp_server_method_S_0021 => 
-            if tmp_0370 = '1' then
+            if tmp_0399 = '1' then
               tcp_server_method <= tcp_server_method_S_0023;
-            elsif tmp_0371 = '1' then
+            elsif tmp_0400 = '1' then
               tcp_server_method <= tcp_server_method_S_0022;
             end if;
           when tcp_server_method_S_0022 => 
             tcp_server_method <= tcp_server_method_S_0029;
           when tcp_server_method_S_0023 => 
-            tcp_server_method <= tcp_server_method_S_0024;
-          when tcp_server_method_S_0024 => 
             tcp_server_method <= tcp_server_method_S_0025;
           when tcp_server_method_S_0025 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0025_body;
+            tcp_server_method <= tcp_server_method_S_0025_body;
           when tcp_server_method_S_0026 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0026_body;
+            tcp_server_method <= tcp_server_method_S_0026_body;
           when tcp_server_method_S_0027 => 
             tcp_server_method <= tcp_server_method_S_0028;
           when tcp_server_method_S_0028 => 
             tcp_server_method <= tcp_server_method_S_0020;
           when tcp_server_method_S_0029 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0029_body;
+            tcp_server_method <= tcp_server_method_S_0029_body;
           when tcp_server_method_S_0030 => 
             tcp_server_method <= tcp_server_method_S_0032;
           when tcp_server_method_S_0032 => 
             tcp_server_method <= tcp_server_method_S_0033;
           when tcp_server_method_S_0033 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0033_body;
+            tcp_server_method <= tcp_server_method_S_0033_body;
           when tcp_server_method_S_0034 => 
             tcp_server_method <= tcp_server_method_S_0035;
           when tcp_server_method_S_0035 => 
             tcp_server_method <= tcp_server_method_S_0036;
           when tcp_server_method_S_0036 => 
-            if tmp_0388 = '1' then
+            if tmp_0413 = '1' then
               tcp_server_method <= tcp_server_method_S_0038;
-            elsif tmp_0389 = '1' then
+            elsif tmp_0414 = '1' then
               tcp_server_method <= tcp_server_method_S_0037;
             end if;
           when tcp_server_method_S_0037 => 
-            tcp_server_method <= tcp_server_method_S_0046;
+            tcp_server_method <= tcp_server_method_S_0051;
           when tcp_server_method_S_0038 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0038_body;
+            tcp_server_method <= tcp_server_method_S_0038_body;
           when tcp_server_method_S_0039 => 
-            tcp_server_method <= tcp_server_method_S_0040;
-          when tcp_server_method_S_0040 => 
             tcp_server_method <= tcp_server_method_S_0041;
           when tcp_server_method_S_0041 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0041_body;
+            if tmp_0419 = '1' then
+              tcp_server_method <= tcp_server_method_S_0043;
+            elsif tmp_0420 = '1' then
+              tcp_server_method <= tcp_server_method_S_0042;
+            end if;
           when tcp_server_method_S_0042 => 
-            tcp_server_method <= tcp_server_method_S_0043;
+            tcp_server_method <= tcp_server_method_S_0045;
           when tcp_server_method_S_0043 => 
-            tcp_server_method <= tcp_server_method_S_0044;
+            tcp_server_method <= tcp_server_method_S_0037;
           when tcp_server_method_S_0044 => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0044_body;
+            tcp_server_method <= tcp_server_method_S_0042;
           when tcp_server_method_S_0045 => 
-            tcp_server_method <= tcp_server_method_S_0036;
+            tcp_server_method <= tcp_server_method_S_0046;
           when tcp_server_method_S_0046 => 
+            tcp_server_method <= tcp_server_method_S_0046_body;
+          when tcp_server_method_S_0047 => 
+            tcp_server_method <= tcp_server_method_S_0048;
+          when tcp_server_method_S_0048 => 
+            tcp_server_method <= tcp_server_method_S_0049;
+          when tcp_server_method_S_0049 => 
+            tcp_server_method <= tcp_server_method_S_0049_body;
+          when tcp_server_method_S_0050 => 
+            tcp_server_method <= tcp_server_method_S_0036;
+          when tcp_server_method_S_0051 => 
             tcp_server_method <= tcp_server_method_S_0000;
-          when tcp_server_method_tcp_server_method_S_0004_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0004_wait;
-          when tcp_server_method_tcp_server_method_S_0004_wait => 
+          when tcp_server_method_S_0004_body => 
+            tcp_server_method <= tcp_server_method_S_0004_wait;
+          when tcp_server_method_S_0004_wait => 
             if write_data_call_flag_0004 = '1' then
               tcp_server_method <= tcp_server_method_S_0005;
             end if;
-          when tcp_server_method_tcp_server_method_S_0005_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0005_wait;
-          when tcp_server_method_tcp_server_method_S_0005_wait => 
+          when tcp_server_method_S_0005_body => 
+            tcp_server_method <= tcp_server_method_S_0005_wait;
+          when tcp_server_method_S_0005_wait => 
             if tcp_server_open_call_flag_0005 = '1' then
               tcp_server_method <= tcp_server_method_S_0006;
             end if;
-          when tcp_server_method_tcp_server_method_S_0012_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0012_wait;
-          when tcp_server_method_tcp_server_method_S_0012_wait => 
+          when tcp_server_method_S_0012_body => 
+            tcp_server_method <= tcp_server_method_S_0012_wait;
+          when tcp_server_method_S_0012_wait => 
             if write_data_call_flag_0012 = '1' then
               tcp_server_method <= tcp_server_method_S_0013;
             end if;
-          when tcp_server_method_tcp_server_method_S_0013_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0013_wait;
-          when tcp_server_method_tcp_server_method_S_0013_wait => 
+          when tcp_server_method_S_0013_body => 
+            tcp_server_method <= tcp_server_method_S_0013_wait;
+          when tcp_server_method_S_0013_wait => 
             if tcp_server_open_call_flag_0013 = '1' then
               tcp_server_method <= tcp_server_method_S_0014;
             end if;
-          when tcp_server_method_tcp_server_method_S_0018_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0018_wait;
-          when tcp_server_method_tcp_server_method_S_0018_wait => 
+          when tcp_server_method_S_0018_body => 
+            tcp_server_method <= tcp_server_method_S_0018_wait;
+          when tcp_server_method_S_0018_wait => 
             if tcp_server_listen_call_flag_0018 = '1' then
               tcp_server_method <= tcp_server_method_S_0019;
             end if;
-          when tcp_server_method_tcp_server_method_S_0025_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0025_wait;
-          when tcp_server_method_tcp_server_method_S_0025_wait => 
+          when tcp_server_method_S_0025_body => 
+            tcp_server_method <= tcp_server_method_S_0025_wait;
+          when tcp_server_method_S_0025_wait => 
             if write_data_call_flag_0025 = '1' then
               tcp_server_method <= tcp_server_method_S_0026;
             end if;
-          when tcp_server_method_tcp_server_method_S_0026_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0026_wait;
-          when tcp_server_method_tcp_server_method_S_0026_wait => 
+          when tcp_server_method_S_0026_body => 
+            tcp_server_method <= tcp_server_method_S_0026_wait;
+          when tcp_server_method_S_0026_wait => 
             if tcp_server_listen_call_flag_0026 = '1' then
               tcp_server_method <= tcp_server_method_S_0027;
             end if;
-          when tcp_server_method_tcp_server_method_S_0029_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0029_wait;
-          when tcp_server_method_tcp_server_method_S_0029_wait => 
+          when tcp_server_method_S_0029_body => 
+            tcp_server_method <= tcp_server_method_S_0029_wait;
+          when tcp_server_method_S_0029_wait => 
             if wait_for_established_call_flag_0029 = '1' then
               tcp_server_method <= tcp_server_method_S_0030;
             end if;
-          when tcp_server_method_tcp_server_method_S_0033_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0033_wait;
-          when tcp_server_method_tcp_server_method_S_0033_wait => 
+          when tcp_server_method_S_0033_body => 
+            tcp_server_method <= tcp_server_method_S_0033_wait;
+          when tcp_server_method_S_0033_wait => 
             if read_data_call_flag_0033 = '1' then
               tcp_server_method <= tcp_server_method_S_0034;
             end if;
-          when tcp_server_method_tcp_server_method_S_0038_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0038_wait;
-          when tcp_server_method_tcp_server_method_S_0038_wait => 
+          when tcp_server_method_S_0038_body => 
+            tcp_server_method <= tcp_server_method_S_0038_wait;
+          when tcp_server_method_S_0038_wait => 
             if wait_for_recv_call_flag_0038 = '1' then
               tcp_server_method <= tcp_server_method_S_0039;
             end if;
-          when tcp_server_method_tcp_server_method_S_0041_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0041_wait;
-          when tcp_server_method_tcp_server_method_S_0041_wait => 
-            if pull_recv_data_call_flag_0041 = '1' then
-              tcp_server_method <= tcp_server_method_S_0042;
+          when tcp_server_method_S_0046_body => 
+            tcp_server_method <= tcp_server_method_S_0046_wait;
+          when tcp_server_method_S_0046_wait => 
+            if pull_recv_data_call_flag_0046 = '1' then
+              tcp_server_method <= tcp_server_method_S_0047;
             end if;
-          when tcp_server_method_tcp_server_method_S_0044_body => 
-            tcp_server_method <= tcp_server_method_tcp_server_method_S_0044_wait;
-          when tcp_server_method_tcp_server_method_S_0044_wait => 
-            if push_send_data_call_flag_0044 = '1' then
-              tcp_server_method <= tcp_server_method_S_0045;
+          when tcp_server_method_S_0049_body => 
+            tcp_server_method <= tcp_server_method_S_0049_wait;
+          when tcp_server_method_S_0049_wait => 
+            if push_send_data_call_flag_0049 = '1' then
+              tcp_server_method <= tcp_server_method_S_0050;
             end if;
           when others => null;
         end case;
         tcp_server_req_flag_d <= tcp_server_req_flag;
-        if (tmp_0402 and tmp_0404) = '1' then
+        if (tmp_0429 and tmp_0431) = '1' then
           tcp_server_method <= tcp_server_method_S_0001;
         end if;
       end if;
@@ -3222,59 +3238,58 @@ begin
             test_method <= test_method_S_0000;
           when test_method_S_0000 => 
             test_method <= test_method_S_0001;
-            test_method <= test_method_S_0001;
           when test_method_S_0001 => 
-            if tmp_0420 = '1' then
+            if tmp_0448 = '1' then
               test_method <= test_method_S_0002;
             end if;
           when test_method_S_0002 => 
             test_method <= test_method_S_0003;
           when test_method_S_0003 => 
-            test_method <= test_method_test_method_S_0003_body;
+            test_method <= test_method_S_0003_body;
           when test_method_S_0004 => 
             test_method <= test_method_S_0005;
           when test_method_S_0005 => 
-            test_method <= test_method_test_method_S_0005_body;
+            test_method <= test_method_S_0005_body;
           when test_method_S_0006 => 
             test_method <= test_method_S_0007;
           when test_method_S_0007 => 
-            test_method <= test_method_test_method_S_0007_body;
+            test_method <= test_method_S_0008;
           when test_method_S_0008 => 
-            test_method <= test_method_S_0009;
-          when test_method_S_0009 => 
-            if tmp_0434 = '1' then
-              test_method <= test_method_S_0011;
-            elsif tmp_0435 = '1' then
+            if tmp_0458 = '1' then
               test_method <= test_method_S_0010;
+            elsif tmp_0459 = '1' then
+              test_method <= test_method_S_0009;
             end if;
-          when test_method_S_0010 => 
+          when test_method_S_0009 => 
             test_method <= test_method_S_0012;
+          when test_method_S_0010 => 
+            test_method <= test_method_S_0010_body;
           when test_method_S_0011 => 
-            test_method <= test_method_S_0009;
+            test_method <= test_method_S_0008;
           when test_method_S_0012 => 
             test_method <= test_method_S_0000;
-          when test_method_test_method_S_0003_body => 
-            test_method <= test_method_test_method_S_0003_wait;
-          when test_method_test_method_S_0003_wait => 
+          when test_method_S_0003_body => 
+            test_method <= test_method_S_0003_wait;
+          when test_method_S_0003_wait => 
             if init_call_flag_0003 = '1' then
               test_method <= test_method_S_0004;
             end if;
-          when test_method_test_method_S_0005_body => 
-            test_method <= test_method_test_method_S_0005_wait;
-          when test_method_test_method_S_0005_wait => 
+          when test_method_S_0005_body => 
+            test_method <= test_method_S_0005_wait;
+          when test_method_S_0005_wait => 
             if network_configuration_call_flag_0005 = '1' then
               test_method <= test_method_S_0006;
             end if;
-          when test_method_test_method_S_0007_body => 
-            test_method <= test_method_test_method_S_0007_wait;
-          when test_method_test_method_S_0007_wait => 
-            if tcp_server_call_flag_0007 = '1' then
-              test_method <= test_method_S_0008;
+          when test_method_S_0010_body => 
+            test_method <= test_method_S_0010_wait;
+          when test_method_S_0010_wait => 
+            if tcp_server_call_flag_0010 = '1' then
+              test_method <= test_method_S_0011;
             end if;
           when others => null;
         end case;
         test_req_flag_d <= test_req_flag;
-        if (tmp_0436 and tmp_0438) = '1' then
+        if (tmp_0464 and tmp_0466) = '1' then
           test_method <= test_method_S_0001;
         end if;
       end if;
@@ -3293,9 +3308,8 @@ begin
             blink_led_method <= blink_led_method_S_0000;
           when blink_led_method_S_0000 => 
             blink_led_method <= blink_led_method_S_0001;
-            blink_led_method <= blink_led_method_S_0001;
           when blink_led_method_S_0001 => 
-            if tmp_0442 = '1' then
+            if tmp_0470 = '1' then
               blink_led_method <= blink_led_method_S_0002;
             end if;
           when blink_led_method_S_0002 => 
@@ -3303,7 +3317,7 @@ begin
           when others => null;
         end case;
         blink_led_req_flag_d <= blink_led_req_flag;
-        if (tmp_0444 and tmp_0446) = '1' then
+        if (tmp_0472 and tmp_0474) = '1' then
           blink_led_method <= blink_led_method_S_0001;
         end if;
       end if;
@@ -3424,22 +3438,22 @@ begin
         class_led_0002 <= (others => '0');
       else
         if tcp_server_method = tcp_server_method_S_0017 then
-          class_led_0002 <= cast_expr_00282;
+          class_led_0002 <= cast_expr_00305;
         elsif tcp_server_method = tcp_server_method_S_0030 then
           class_led_0002 <= X"00000000";
         elsif tcp_server_method = tcp_server_method_S_0035 then
-          class_led_0002 <= cast_expr_00293;
-        elsif tcp_server_method = tcp_server_method_S_0040 then
-          class_led_0002 <= tcp_server_len_0294;
-        elsif tcp_server_method = tcp_server_method_S_0043 then
-          class_led_0002 <= tcp_server_len_0294;
+          class_led_0002 <= cast_expr_00316;
+        elsif tcp_server_method = tcp_server_method_S_0045 then
+          class_led_0002 <= tcp_server_len_0317;
+        elsif tcp_server_method = tcp_server_method_S_0048 then
+          class_led_0002 <= tcp_server_len_0317;
         elsif test_method = test_method_S_0002 then
           class_led_0002 <= X"00000000";
         elsif test_method = test_method_S_0004 then
           class_led_0002 <= X"00000001";
         elsif test_method = test_method_S_0006 then
           class_led_0002 <= X"00000003";
-        elsif test_method = test_method_S_0008 then
+        elsif test_method = test_method_S_0007 then
           class_led_0002 <= X"000000ff";
         else
           class_led_0002 <= class_led_0002_mux;
@@ -3461,13 +3475,13 @@ begin
         class_buffer_0088_address_b <= (others => '0');
       else
         if pull_recv_data_method = pull_recv_data_method_S_0033 then
-          class_buffer_0088_address_b <= binary_expr_00213;
+          class_buffer_0088_address_b <= binary_expr_00225;
         elsif pull_recv_data_method = pull_recv_data_method_S_0040 then
-          class_buffer_0088_address_b <= binary_expr_00219;
-        elsif push_send_data_method = push_send_data_method_S_0020 and push_send_data_method_delay = 0 then
-          class_buffer_0088_address_b <= binary_expr_00239;
-        elsif push_send_data_method = push_send_data_method_S_0027 and push_send_data_method_delay = 0 then
-          class_buffer_0088_address_b <= binary_expr_00245;
+          class_buffer_0088_address_b <= binary_expr_00231;
+        elsif push_send_data_method = push_send_data_method_S_0031 and push_send_data_method_delay = 0 then
+          class_buffer_0088_address_b <= binary_expr_00262;
+        elsif push_send_data_method = push_send_data_method_S_0038 and push_send_data_method_delay = 0 then
+          class_buffer_0088_address_b <= binary_expr_00268;
         end if;
       end if;
     end if;
@@ -3480,9 +3494,9 @@ begin
         class_buffer_0088_din_b <= (others => '0');
       else
         if pull_recv_data_method = pull_recv_data_method_S_0037 then
-          class_buffer_0088_din_b <= method_result_00215;
+          class_buffer_0088_din_b <= method_result_00227;
         elsif pull_recv_data_method = pull_recv_data_method_S_0044 then
-          class_buffer_0088_din_b <= method_result_00221;
+          class_buffer_0088_din_b <= method_result_00233;
         end if;
       end if;
     end if;
@@ -3511,9 +3525,9 @@ begin
       if reset = '1' then
         class_buffer_0088_oe_b <= '0';
       else
-        if push_send_data_method = push_send_data_method_S_0020 and push_send_data_method_delay = 0 then
+        if push_send_data_method = push_send_data_method_S_0031 and push_send_data_method_delay = 0 then
           class_buffer_0088_oe_b <= '1';
-        elsif push_send_data_method = push_send_data_method_S_0027 and push_send_data_method_delay = 0 then
+        elsif push_send_data_method = push_send_data_method_S_0038 and push_send_data_method_delay = 0 then
           class_buffer_0088_oe_b <= '1';
         else
           class_buffer_0088_oe_b <= '0';
@@ -3541,13 +3555,13 @@ begin
       if reset = '1' then
         wait_cycles_n_local <= (others => '0');
       else
-        if write_data_method = write_data_method_write_data_method_S_0010_body and write_data_method_delay = 0 then
+        if write_data_method = write_data_method_S_0010_body and write_data_method_delay = 0 then
           wait_cycles_n_local <= X"00000003";
-        elsif read_data_method = read_data_method_read_data_method_S_0008_body and read_data_method_delay = 0 then
+        elsif read_data_method = read_data_method_S_0008_body and read_data_method_delay = 0 then
           wait_cycles_n_local <= X"00000005";
-        elsif init_method = init_method_init_method_S_0010_body and init_method_delay = 0 then
+        elsif init_method = init_method_S_0010_body and init_method_delay = 0 then
           wait_cycles_n_local <= X"000003e8";
-        elsif init_method = init_method_init_method_S_0013_body and init_method_delay = 0 then
+        elsif init_method = init_method_S_0013_body and init_method_delay = 0 then
           wait_cycles_n_local <= X"000003e8";
         end if;
       end if;
@@ -3562,8 +3576,8 @@ begin
       else
         if wait_cycles_method = wait_cycles_method_S_0002 then
           wait_cycles_i_0090 <= X"00000000";
-        elsif wait_cycles_method = wait_cycles_method_S_0007 then
-          wait_cycles_i_0090 <= unary_expr_00092;
+        elsif wait_cycles_method = wait_cycles_method_S_0006 then
+          wait_cycles_i_0090 <= tmp_0015;
         end if;
       end if;
     end if;
@@ -3614,74 +3628,80 @@ begin
       if reset = '1' then
         write_data_addr_local <= (others => '0');
       else
-        if network_configuration_method = network_configuration_method_network_configuration_method_S_0002_body and network_configuration_method_delay = 0 then
+        if network_configuration_method = network_configuration_method_S_0002_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000008";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0003_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0003_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000009";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0004_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0004_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000000a";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0005_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0005_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000000b";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0006_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0006_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000000c";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0007_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0007_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000000d";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0008_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0008_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000010";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0009_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0009_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000011";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0010_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0010_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000012";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0011_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0011_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000013";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0012_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0012_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000014";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0013_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0013_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000015";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0014_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0014_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000016";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0015_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0015_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000017";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0016_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0016_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000018";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0017_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0017_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"00000019";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0018_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0018_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000001a";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0019_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0019_body and network_configuration_method_delay = 0 then
           write_data_addr_local <= X"0000001b";
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0007_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0007_body and tcp_server_open_method_delay = 0 then
           write_data_addr_local <= binary_expr_00139;
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0010_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0010_body and tcp_server_open_method_delay = 0 then
           write_data_addr_local <= binary_expr_00145;
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0013_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0013_body and tcp_server_open_method_delay = 0 then
           write_data_addr_local <= binary_expr_00148;
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0016_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0016_body and tcp_server_open_method_delay = 0 then
           write_data_addr_local <= binary_expr_00151;
-        elsif tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0004_body and tcp_server_listen_method_delay = 0 then
+        elsif tcp_server_listen_method = tcp_server_listen_method_S_0004_body and tcp_server_listen_method_delay = 0 then
           write_data_addr_local <= binary_expr_00158;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0048_body and pull_recv_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00226;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0024_body and push_send_data_method_delay = 0 then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0045_body and wait_for_recv_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00201;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0048_body and pull_recv_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00238;
+        elsif push_send_data_method = push_send_data_method_S_0007_body and push_send_data_method_delay = 0 then
           write_data_addr_local <= binary_expr_00243;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0031_body and push_send_data_method_delay = 0 then
+        elsif push_send_data_method = push_send_data_method_S_0012_body and push_send_data_method_delay = 0 then
           write_data_addr_local <= binary_expr_00249;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0035_body and push_send_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00252;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0040_body and push_send_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00255;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0045_body and push_send_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00260;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0050_body and push_send_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00265;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0053_body and push_send_data_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00270;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0004_body and tcp_server_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00274;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0012_body and tcp_server_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00280;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0025_body and tcp_server_method_delay = 0 then
-          write_data_addr_local <= binary_expr_00287;
+        elsif push_send_data_method = push_send_data_method_S_0035_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00266;
+        elsif push_send_data_method = push_send_data_method_S_0042_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00272;
+        elsif push_send_data_method = push_send_data_method_S_0046_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00275;
+        elsif push_send_data_method = push_send_data_method_S_0051_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00278;
+        elsif push_send_data_method = push_send_data_method_S_0056_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00283;
+        elsif push_send_data_method = push_send_data_method_S_0061_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00288;
+        elsif push_send_data_method = push_send_data_method_S_0064_body and push_send_data_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00293;
+        elsif tcp_server_method = tcp_server_method_S_0004_body and tcp_server_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00297;
+        elsif tcp_server_method = tcp_server_method_S_0012_body and tcp_server_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00303;
+        elsif tcp_server_method = tcp_server_method_S_0025_body and tcp_server_method_delay = 0 then
+          write_data_addr_local <= binary_expr_00310;
         end if;
       end if;
     end if;
@@ -3706,73 +3726,79 @@ begin
       if reset = '1' then
         write_data_data_local <= (others => '0');
       else
-        if network_configuration_method = network_configuration_method_network_configuration_method_S_0002_body and network_configuration_method_delay = 0 then
+        if network_configuration_method = network_configuration_method_S_0002_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0003_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0003_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"08";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0004_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0004_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"dc";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0005_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0005_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"01";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0006_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0006_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"02";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0007_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0007_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"03";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0008_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0008_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"0a";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0009_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0009_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0010_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0010_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0011_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0011_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"01";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0012_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0012_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"ff";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0013_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0013_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0014_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0014_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0015_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0015_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0016_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0016_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"0a";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0017_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0017_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0018_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0018_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0019_body and network_configuration_method_delay = 0 then
+        elsif network_configuration_method = network_configuration_method_S_0019_body and network_configuration_method_delay = 0 then
           write_data_data_local <= X"02";
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0007_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0007_body and tcp_server_open_method_delay = 0 then
           write_data_data_local <= cast_expr_00142;
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0010_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0010_body and tcp_server_open_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0013_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0013_body and tcp_server_open_method_delay = 0 then
           write_data_data_local <= X"50";
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0016_body and tcp_server_open_method_delay = 0 then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0016_body and tcp_server_open_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_OPEN_0059;
-        elsif tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0004_body and tcp_server_listen_method_delay = 0 then
+        elsif tcp_server_listen_method = tcp_server_listen_method_S_0004_body and tcp_server_listen_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_LISTEN_0060;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0048_body and pull_recv_data_method_delay = 0 then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0045_body and wait_for_recv_method_delay = 0 then
+          write_data_data_local <= class_Sn_CR_DISCON_0062;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0048_body and pull_recv_data_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_RECV_0067;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0024_body and push_send_data_method_delay = 0 then
-          write_data_data_local <= push_send_data_v_0237;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0031_body and push_send_data_method_delay = 0 then
-          write_data_data_local <= push_send_data_v_0237;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0035_body and push_send_data_method_delay = 0 then
+        elsif push_send_data_method = push_send_data_method_S_0007_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= cast_expr_00246;
+        elsif push_send_data_method = push_send_data_method_S_0012_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= cast_expr_00251;
+        elsif push_send_data_method = push_send_data_method_S_0035_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= push_send_data_v_0260;
+        elsif push_send_data_method = push_send_data_method_S_0042_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= push_send_data_v_0260;
+        elsif push_send_data_method = push_send_data_method_S_0046_body and push_send_data_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_RECV_0067;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0040_body and push_send_data_method_delay = 0 then
-          write_data_data_local <= cast_expr_00257;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0045_body and push_send_data_method_delay = 0 then
-          write_data_data_local <= cast_expr_00262;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0050_body and push_send_data_method_delay = 0 then
-          write_data_data_local <= cast_expr_00267;
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0053_body and push_send_data_method_delay = 0 then
+        elsif push_send_data_method = push_send_data_method_S_0051_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= cast_expr_00280;
+        elsif push_send_data_method = push_send_data_method_S_0056_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= cast_expr_00285;
+        elsif push_send_data_method = push_send_data_method_S_0061_body and push_send_data_method_delay = 0 then
+          write_data_data_local <= cast_expr_00290;
+        elsif push_send_data_method = push_send_data_method_S_0064_body and push_send_data_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_SEND_0064;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0004_body and tcp_server_method_delay = 0 then
+        elsif tcp_server_method = tcp_server_method_S_0004_body and tcp_server_method_delay = 0 then
           write_data_data_local <= X"00";
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0012_body and tcp_server_method_delay = 0 then
+        elsif tcp_server_method = tcp_server_method_S_0012_body and tcp_server_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_CLOSE_0063;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0025_body and tcp_server_method_delay = 0 then
+        elsif tcp_server_method = tcp_server_method_S_0025_body and tcp_server_method_delay = 0 then
           write_data_data_local <= class_Sn_CR_CLOSE_0063;
         end if;
       end if;
@@ -3876,28 +3902,30 @@ begin
       if reset = '1' then
         read_data_addr_local <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0019_body and tcp_server_open_method_delay = 0 then
+        if tcp_server_open_method = tcp_server_open_method_S_0019_body and tcp_server_open_method_delay = 0 then
           read_data_addr_local <= binary_expr_00154;
-        elsif tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0007_body and tcp_server_listen_method_delay = 0 then
+        elsif tcp_server_listen_method = tcp_server_listen_method_S_0007_body and tcp_server_listen_method_delay = 0 then
           read_data_addr_local <= binary_expr_00161;
-        elsif wait_for_established_method = wait_for_established_method_wait_for_established_method_S_0007_body and wait_for_established_method_delay = 0 then
+        elsif wait_for_established_method = wait_for_established_method_S_0007_body and wait_for_established_method_delay = 0 then
           read_data_addr_local <= binary_expr_00166;
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0008_body and wait_for_recv_method_delay = 0 then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0008_body and wait_for_recv_method_delay = 0 then
           read_data_addr_local <= binary_expr_00173;
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0013_body and wait_for_recv_method_delay = 0 then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0013_body and wait_for_recv_method_delay = 0 then
           read_data_addr_local <= binary_expr_00178;
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0018_body and wait_for_recv_method_delay = 0 then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0018_body and wait_for_recv_method_delay = 0 then
           read_data_addr_local <= binary_expr_00183;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0004_body and pull_recv_data_method_delay = 0 then
-          read_data_addr_local <= binary_expr_00194;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0009_body and pull_recv_data_method_delay = 0 then
-          read_data_addr_local <= binary_expr_00199;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0036_body and pull_recv_data_method_delay = 0 then
-          read_data_addr_local <= binary_expr_00217;
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0043_body and pull_recv_data_method_delay = 0 then
-          read_data_addr_local <= binary_expr_00223;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0033_body and tcp_server_method_delay = 0 then
-          read_data_addr_local <= binary_expr_00292;
+        elsif wait_for_recv_method = wait_for_recv_method_S_0033_body and wait_for_recv_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00192;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0004_body and pull_recv_data_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00206;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0009_body and pull_recv_data_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00211;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0036_body and pull_recv_data_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00229;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0043_body and pull_recv_data_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00235;
+        elsif tcp_server_method = tcp_server_method_S_0033_body and tcp_server_method_delay = 0 then
+          read_data_addr_local <= binary_expr_00315;
         end if;
       end if;
     end if;
@@ -4078,10 +4106,10 @@ begin
       if reset = '1' then
         tcp_server_open_port_local <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0005_body and tcp_server_method_delay = 0 then
-          tcp_server_open_port_local <= tcp_server_port_0271;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0013_body and tcp_server_method_delay = 0 then
-          tcp_server_open_port_local <= tcp_server_port_0271;
+        if tcp_server_method = tcp_server_method_S_0005_body and tcp_server_method_delay = 0 then
+          tcp_server_open_port_local <= tcp_server_port_0294;
+        elsif tcp_server_method = tcp_server_method_S_0013_body and tcp_server_method_delay = 0 then
+          tcp_server_open_port_local <= tcp_server_port_0294;
         end if;
       end if;
     end if;
@@ -4106,7 +4134,7 @@ begin
       if reset = '1' then
         binary_expr_00139 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0003 then
+        if tcp_server_open_method = tcp_server_open_method_S_0002 then
           binary_expr_00139 <= tmp_0146;
         end if;
       end if;
@@ -4132,7 +4160,7 @@ begin
       if reset = '1' then
         binary_expr_00141 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0003 then
+        if tcp_server_open_method = tcp_server_open_method_S_0002 then
           binary_expr_00141 <= tmp_0147;
         end if;
       end if;
@@ -4145,7 +4173,7 @@ begin
       if reset = '1' then
         cast_expr_00142 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0006 then
+        if tcp_server_open_method = tcp_server_open_method_S_0002 then
           cast_expr_00142 <= tmp_0148;
         end if;
       end if;
@@ -4171,7 +4199,7 @@ begin
       if reset = '1' then
         binary_expr_00145 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0009 then
+        if tcp_server_open_method = tcp_server_open_method_S_0008 then
           binary_expr_00145 <= tmp_0150;
         end if;
       end if;
@@ -4197,7 +4225,7 @@ begin
       if reset = '1' then
         binary_expr_00148 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0012 then
+        if tcp_server_open_method = tcp_server_open_method_S_0011 then
           binary_expr_00148 <= tmp_0152;
         end if;
       end if;
@@ -4223,7 +4251,7 @@ begin
       if reset = '1' then
         binary_expr_00151 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0015 then
+        if tcp_server_open_method = tcp_server_open_method_S_0014 then
           binary_expr_00151 <= tmp_0154;
         end if;
       end if;
@@ -4236,7 +4264,7 @@ begin
       if reset = '1' then
         method_result_00152 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0019_wait then
+        if tcp_server_open_method = tcp_server_open_method_S_0019_wait then
           method_result_00152 <= read_data_return;
         end if;
       end if;
@@ -4262,7 +4290,7 @@ begin
       if reset = '1' then
         binary_expr_00154 <= (others => '0');
       else
-        if tcp_server_open_method = tcp_server_open_method_S_0018 then
+        if tcp_server_open_method = tcp_server_open_method_S_0017 then
           binary_expr_00154 <= tmp_0156;
         end if;
       end if;
@@ -4288,10 +4316,10 @@ begin
       if reset = '1' then
         tcp_server_listen_port_local <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0018_body and tcp_server_method_delay = 0 then
-          tcp_server_listen_port_local <= tcp_server_port_0271;
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0026_body and tcp_server_method_delay = 0 then
-          tcp_server_listen_port_local <= tcp_server_port_0271;
+        if tcp_server_method = tcp_server_method_S_0018_body and tcp_server_method_delay = 0 then
+          tcp_server_listen_port_local <= tcp_server_port_0294;
+        elsif tcp_server_method = tcp_server_method_S_0026_body and tcp_server_method_delay = 0 then
+          tcp_server_listen_port_local <= tcp_server_port_0294;
         end if;
       end if;
     end if;
@@ -4316,7 +4344,7 @@ begin
       if reset = '1' then
         binary_expr_00158 <= (others => '0');
       else
-        if tcp_server_listen_method = tcp_server_listen_method_S_0003 then
+        if tcp_server_listen_method = tcp_server_listen_method_S_0002 then
           binary_expr_00158 <= tmp_0170;
         end if;
       end if;
@@ -4329,7 +4357,7 @@ begin
       if reset = '1' then
         method_result_00159 <= (others => '0');
       else
-        if tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0007_wait then
+        if tcp_server_listen_method = tcp_server_listen_method_S_0007_wait then
           method_result_00159 <= read_data_return;
         end if;
       end if;
@@ -4355,7 +4383,7 @@ begin
       if reset = '1' then
         binary_expr_00161 <= (others => '0');
       else
-        if tcp_server_listen_method = tcp_server_listen_method_S_0006 then
+        if tcp_server_listen_method = tcp_server_listen_method_S_0005 then
           binary_expr_00161 <= tmp_0172;
         end if;
       end if;
@@ -4381,8 +4409,8 @@ begin
       if reset = '1' then
         wait_for_established_port_local <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0029_body and tcp_server_method_delay = 0 then
-          wait_for_established_port_local <= tcp_server_port_0271;
+        if tcp_server_method = tcp_server_method_S_0029_body and tcp_server_method_delay = 0 then
+          wait_for_established_port_local <= tcp_server_port_0294;
         end if;
       end if;
     end if;
@@ -4409,7 +4437,7 @@ begin
       if reset = '1' then
         method_result_00164 <= (others => '0');
       else
-        if wait_for_established_method = wait_for_established_method_wait_for_established_method_S_0007_wait then
+        if wait_for_established_method = wait_for_established_method_S_0007_wait then
           method_result_00164 <= read_data_return;
         end if;
       end if;
@@ -4435,7 +4463,7 @@ begin
       if reset = '1' then
         binary_expr_00166 <= (others => '0');
       else
-        if wait_for_established_method = wait_for_established_method_S_0006 then
+        if wait_for_established_method = wait_for_established_method_S_0005 then
           binary_expr_00166 <= tmp_0186;
         end if;
       end if;
@@ -4448,7 +4476,7 @@ begin
       if reset = '1' then
         binary_expr_00167 <= '0';
       else
-        if wait_for_established_method = wait_for_established_method_S_0009 then
+        if wait_for_established_method = wait_for_established_method_S_0008 then
           binary_expr_00167 <= tmp_0187;
         end if;
       end if;
@@ -4474,8 +4502,8 @@ begin
       if reset = '1' then
         wait_for_recv_port_local <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0038_body and tcp_server_method_delay = 0 then
-          wait_for_recv_port_local <= tcp_server_port_0271;
+        if tcp_server_method = tcp_server_method_S_0038_body and tcp_server_method_delay = 0 then
+          wait_for_recv_port_local <= tcp_server_port_0294;
         end if;
       end if;
     end if;
@@ -4491,8 +4519,10 @@ begin
           wait_for_recv_v_0169 <= X"00000000";
         elsif wait_for_recv_method = wait_for_recv_method_S_0005 then
           wait_for_recv_v_0169 <= X"00000000";
-        elsif wait_for_recv_method = wait_for_recv_method_S_0025 then
-          wait_for_recv_v_0169 <= binary_expr_00188;
+        elsif wait_for_recv_method = wait_for_recv_method_S_0019 then
+          wait_for_recv_v_0169 <= tmp_0234;
+        elsif wait_for_recv_method = wait_for_recv_method_S_0034 then
+          wait_for_recv_v_0169 <= tmp_0238;
         end if;
       end if;
     end if;
@@ -4504,8 +4534,8 @@ begin
       if reset = '1' then
         wait_for_recv_v0_0170 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0010 then
-          wait_for_recv_v0_0170 <= cast_expr_00174;
+        if wait_for_recv_method = wait_for_recv_method_S_0009 then
+          wait_for_recv_v0_0170 <= tmp_0224;
         end if;
       end if;
     end if;
@@ -4517,7 +4547,7 @@ begin
       if reset = '1' then
         method_result_00171 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0008_wait then
+        if wait_for_recv_method = wait_for_recv_method_S_0008_wait then
           method_result_00171 <= read_data_return;
         end if;
       end if;
@@ -4531,7 +4561,7 @@ begin
         binary_expr_00172 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0005 then
-          binary_expr_00172 <= tmp_0212;
+          binary_expr_00172 <= tmp_0222;
         end if;
       end if;
     end if;
@@ -4543,8 +4573,8 @@ begin
       if reset = '1' then
         binary_expr_00173 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0007 then
-          binary_expr_00173 <= tmp_0213;
+        if wait_for_recv_method = wait_for_recv_method_S_0005 then
+          binary_expr_00173 <= tmp_0223;
         end if;
       end if;
     end if;
@@ -4557,7 +4587,7 @@ begin
         cast_expr_00174 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0009 then
-          cast_expr_00174 <= tmp_0214;
+          cast_expr_00174 <= tmp_0224;
         end if;
       end if;
     end if;
@@ -4569,8 +4599,8 @@ begin
       if reset = '1' then
         wait_for_recv_v1_0175 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0015 then
-          wait_for_recv_v1_0175 <= cast_expr_00179;
+        if wait_for_recv_method = wait_for_recv_method_S_0014 then
+          wait_for_recv_v1_0175 <= tmp_0227;
         end if;
       end if;
     end if;
@@ -4582,7 +4612,7 @@ begin
       if reset = '1' then
         method_result_00176 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0013_wait then
+        if wait_for_recv_method = wait_for_recv_method_S_0013_wait then
           method_result_00176 <= read_data_return;
         end if;
       end if;
@@ -4596,7 +4626,7 @@ begin
         binary_expr_00177 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0009 then
-          binary_expr_00177 <= tmp_0215;
+          binary_expr_00177 <= tmp_0225;
         end if;
       end if;
     end if;
@@ -4608,8 +4638,8 @@ begin
       if reset = '1' then
         binary_expr_00178 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0010 then
-          binary_expr_00178 <= tmp_0216;
+        if wait_for_recv_method = wait_for_recv_method_S_0009 then
+          binary_expr_00178 <= tmp_0226;
         end if;
       end if;
     end if;
@@ -4622,7 +4652,7 @@ begin
         cast_expr_00179 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0014 then
-          cast_expr_00179 <= tmp_0217;
+          cast_expr_00179 <= tmp_0227;
         end if;
       end if;
     end if;
@@ -4634,8 +4664,8 @@ begin
       if reset = '1' then
         wait_for_recv_v2_0180 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0020 then
-          wait_for_recv_v2_0180 <= cast_expr_00184;
+        if wait_for_recv_method = wait_for_recv_method_S_0019 then
+          wait_for_recv_v2_0180 <= tmp_0230;
         end if;
       end if;
     end if;
@@ -4647,7 +4677,7 @@ begin
       if reset = '1' then
         method_result_00181 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0018_wait then
+        if wait_for_recv_method = wait_for_recv_method_S_0018_wait then
           method_result_00181 <= read_data_return;
         end if;
       end if;
@@ -4661,7 +4691,7 @@ begin
         binary_expr_00182 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0014 then
-          binary_expr_00182 <= tmp_0218;
+          binary_expr_00182 <= tmp_0228;
         end if;
       end if;
     end if;
@@ -4673,8 +4703,8 @@ begin
       if reset = '1' then
         binary_expr_00183 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0015 then
-          binary_expr_00183 <= tmp_0219;
+        if wait_for_recv_method = wait_for_recv_method_S_0014 then
+          binary_expr_00183 <= tmp_0229;
         end if;
       end if;
     end if;
@@ -4687,7 +4717,7 @@ begin
         cast_expr_00184 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0019 then
-          cast_expr_00184 <= tmp_0220;
+          cast_expr_00184 <= tmp_0230;
         end if;
       end if;
     end if;
@@ -4700,7 +4730,7 @@ begin
         binary_expr_00185 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0019 then
-          binary_expr_00185 <= tmp_0221;
+          binary_expr_00185 <= tmp_0231;
         end if;
       end if;
     end if;
@@ -4713,7 +4743,7 @@ begin
         binary_expr_00186 <= (others => '0');
       else
         if wait_for_recv_method = wait_for_recv_method_S_0019 then
-          binary_expr_00186 <= tmp_0222;
+          binary_expr_00186 <= tmp_0232;
         end if;
       end if;
     end if;
@@ -4725,8 +4755,8 @@ begin
       if reset = '1' then
         binary_expr_00187 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0020 then
-          binary_expr_00187 <= tmp_0223;
+        if wait_for_recv_method = wait_for_recv_method_S_0019 then
+          binary_expr_00187 <= tmp_0233;
         end if;
       end if;
     end if;
@@ -4738,8 +4768,8 @@ begin
       if reset = '1' then
         binary_expr_00188 <= (others => '0');
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0024 then
-          binary_expr_00188 <= tmp_0224;
+        if wait_for_recv_method = wait_for_recv_method_S_0019 then
+          binary_expr_00188 <= tmp_0234;
         end if;
       end if;
     end if;
@@ -4751,8 +4781,8 @@ begin
       if reset = '1' then
         binary_expr_00189 <= '0';
       else
-        if wait_for_recv_method = wait_for_recv_method_S_0026 then
-          binary_expr_00189 <= tmp_0225;
+        if wait_for_recv_method = wait_for_recv_method_S_0019 then
+          binary_expr_00189 <= tmp_0235;
         end if;
       end if;
     end if;
@@ -4762,10 +4792,153 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pull_recv_data_port_0190 <= (others => '0');
+        method_result_00190 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0033_wait then
+          method_result_00190 <= read_data_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00191 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0031 then
+          binary_expr_00191 <= tmp_0236;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00192 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0031 then
+          binary_expr_00192 <= tmp_0237;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00193 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          cast_expr_00193 <= tmp_0238;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00194 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          cast_expr_00194 <= tmp_0239;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00195 <= '0';
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          binary_expr_00195 <= tmp_0241;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00196 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          cast_expr_00196 <= tmp_0240;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00197 <= '0';
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          binary_expr_00197 <= tmp_0242;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00198 <= '0';
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0034 then
+          binary_expr_00198 <= tmp_0243;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00200 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0043 then
+          binary_expr_00200 <= tmp_0244;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00201 <= (others => '0');
+      else
+        if wait_for_recv_method = wait_for_recv_method_S_0043 then
+          binary_expr_00201 <= tmp_0245;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        pull_recv_data_port_0202 <= (others => '0');
       else
         if pull_recv_data_method = pull_recv_data_method_S_0001 then
-          pull_recv_data_port_0190 <= pull_recv_data_port_local;
+          pull_recv_data_port_0202 <= pull_recv_data_port_local;
         end if;
       end if;
     end if;
@@ -4777,8 +4950,8 @@ begin
       if reset = '1' then
         pull_recv_data_port_local <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0041_body and tcp_server_method_delay = 0 then
-          pull_recv_data_port_local <= tcp_server_port_0271;
+        if tcp_server_method = tcp_server_method_S_0046_body and tcp_server_method_delay = 0 then
+          pull_recv_data_port_local <= tcp_server_port_0294;
         end if;
       end if;
     end if;
@@ -4788,62 +4961,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pull_recv_data_v0_0191 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0006 then
-          pull_recv_data_v0_0191 <= cast_expr_00195;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        method_result_00192 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0004_wait then
-          method_result_00192 <= read_data_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00193 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0002 then
-          binary_expr_00193 <= tmp_0258;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00194 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0003 then
-          binary_expr_00194 <= tmp_0259;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00195 <= (others => '0');
+        pull_recv_data_v0_0203 <= (others => '0');
       else
         if pull_recv_data_method = pull_recv_data_method_S_0005 then
-          cast_expr_00195 <= tmp_0260;
+          pull_recv_data_v0_0203 <= tmp_0280;
         end if;
       end if;
     end if;
@@ -4853,116 +4974,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pull_recv_data_v1_0196 <= (others => '0');
+        method_result_00204 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0011 then
-          pull_recv_data_v1_0196 <= cast_expr_00200;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        method_result_00197 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0009_wait then
-          method_result_00197 <= read_data_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00198 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0005 then
-          binary_expr_00198 <= tmp_0261;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00199 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0006 then
-          binary_expr_00199 <= tmp_0262;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00200 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0010 then
-          cast_expr_00200 <= tmp_0263;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        pull_recv_data_actual_len_0201 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0014 then
-          pull_recv_data_actual_len_0201 <= binary_expr_00203;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00202 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0010 then
-          binary_expr_00202 <= tmp_0264;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00203 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0013 then
-          binary_expr_00203 <= tmp_0265;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        pull_recv_data_read_len_0204 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0016 then
-          pull_recv_data_read_len_0204 <= binary_expr_00205;
-        elsif pull_recv_data_method = pull_recv_data_method_S_0022 then
-          pull_recv_data_read_len_0204 <= binary_expr_00208;
+        if pull_recv_data_method = pull_recv_data_method_S_0004_wait then
+          method_result_00204 <= read_data_return;
         end if;
       end if;
     end if;
@@ -4974,8 +4989,8 @@ begin
       if reset = '1' then
         binary_expr_00205 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0015 then
-          binary_expr_00205 <= tmp_0266;
+        if pull_recv_data_method = pull_recv_data_method_S_0002 then
+          binary_expr_00205 <= tmp_0278;
         end if;
       end if;
     end if;
@@ -4987,8 +5002,8 @@ begin
       if reset = '1' then
         binary_expr_00206 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0015 then
-          binary_expr_00206 <= tmp_0267;
+        if pull_recv_data_method = pull_recv_data_method_S_0002 then
+          binary_expr_00206 <= tmp_0279;
         end if;
       end if;
     end if;
@@ -4998,10 +5013,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00207 <= '0';
+        cast_expr_00207 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0016 then
-          binary_expr_00207 <= tmp_0268;
+        if pull_recv_data_method = pull_recv_data_method_S_0005 then
+          cast_expr_00207 <= tmp_0280;
         end if;
       end if;
     end if;
@@ -5011,10 +5026,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00225 <= (others => '0');
+        pull_recv_data_v1_0208 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0046 then
-          binary_expr_00225 <= tmp_0280;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          pull_recv_data_v1_0208 <= tmp_0283;
         end if;
       end if;
     end if;
@@ -5024,10 +5039,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00226 <= (others => '0');
+        method_result_00209 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0047 then
-          binary_expr_00226 <= tmp_0281;
+        if pull_recv_data_method = pull_recv_data_method_S_0009_wait then
+          method_result_00209 <= read_data_return;
         end if;
       end if;
     end if;
@@ -5037,10 +5052,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00208 <= (others => '0');
+        binary_expr_00210 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0021 then
-          binary_expr_00208 <= tmp_0269;
+        if pull_recv_data_method = pull_recv_data_method_S_0005 then
+          binary_expr_00210 <= tmp_0281;
         end if;
       end if;
     end if;
@@ -5050,12 +5065,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        pull_recv_data_i_0209 <= X"00000000";
+        binary_expr_00211 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0024 then
-          pull_recv_data_i_0209 <= X"00000000";
-        elsif pull_recv_data_method = pull_recv_data_method_S_0029 then
-          pull_recv_data_i_0209 <= unary_expr_00211;
+        if pull_recv_data_method = pull_recv_data_method_S_0005 then
+          binary_expr_00211 <= tmp_0282;
         end if;
       end if;
     end if;
@@ -5065,10 +5078,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00210 <= '0';
+        cast_expr_00212 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0025 then
-          binary_expr_00210 <= tmp_0270;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          cast_expr_00212 <= tmp_0283;
         end if;
       end if;
     end if;
@@ -5078,10 +5091,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        unary_expr_00211 <= (others => '0');
+        pull_recv_data_actual_len_0213 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0028 then
-          unary_expr_00211 <= tmp_0271;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          pull_recv_data_actual_len_0213 <= tmp_0285;
         end if;
       end if;
     end if;
@@ -5091,10 +5104,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00212 <= (others => '0');
+        binary_expr_00214 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0031 then
-          binary_expr_00212 <= tmp_0272;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          binary_expr_00214 <= tmp_0284;
         end if;
       end if;
     end if;
@@ -5104,10 +5117,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00213 <= (others => '0');
+        binary_expr_00215 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0032 then
-          binary_expr_00213 <= tmp_0273;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          binary_expr_00215 <= tmp_0285;
         end if;
       end if;
     end if;
@@ -5117,23 +5130,12 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00215 <= (others => '0');
+        pull_recv_data_read_len_0216 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0036_wait then
-          method_result_00215 <= read_data_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00216 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0034 then
-          binary_expr_00216 <= tmp_0274;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          pull_recv_data_read_len_0216 <= tmp_0286;
+        elsif pull_recv_data_method = pull_recv_data_method_S_0021 then
+          pull_recv_data_read_len_0216 <= tmp_0289;
         end if;
       end if;
     end if;
@@ -5145,8 +5147,8 @@ begin
       if reset = '1' then
         binary_expr_00217 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0035 then
-          binary_expr_00217 <= tmp_0275;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          binary_expr_00217 <= tmp_0286;
         end if;
       end if;
     end if;
@@ -5158,8 +5160,8 @@ begin
       if reset = '1' then
         binary_expr_00218 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0037 then
-          binary_expr_00218 <= tmp_0276;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          binary_expr_00218 <= tmp_0287;
         end if;
       end if;
     end if;
@@ -5169,10 +5171,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00219 <= (others => '0');
+        binary_expr_00219 <= '0';
       else
-        if pull_recv_data_method = pull_recv_data_method_S_0039 then
-          binary_expr_00219 <= tmp_0277;
+        if pull_recv_data_method = pull_recv_data_method_S_0010 then
+          binary_expr_00219 <= tmp_0288;
         end if;
       end if;
     end if;
@@ -5182,419 +5184,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00221 <= (others => '0');
+        binary_expr_00237 <= (others => '0');
       else
-        if pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0043_wait then
-          method_result_00221 <= read_data_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00222 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0041 then
-          binary_expr_00222 <= tmp_0278;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00223 <= (others => '0');
-      else
-        if pull_recv_data_method = pull_recv_data_method_S_0042 then
-          binary_expr_00223 <= tmp_0279;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_port_0227 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0001 then
-          push_send_data_port_0227 <= push_send_data_port_local;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_port_local <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0044_body and tcp_server_method_delay = 0 then
-          push_send_data_port_local <= tcp_server_port_0271;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_len_0228 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0001 then
-          push_send_data_len_0228 <= push_send_data_len_local;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_len_local <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0044_body and tcp_server_method_delay = 0 then
-          push_send_data_len_local <= tcp_server_len_0294;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_write_len_0229 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0003 then
-          push_send_data_write_len_0229 <= binary_expr_00230;
-        elsif push_send_data_method = push_send_data_method_S_0009 then
-          push_send_data_write_len_0229 <= binary_expr_00233;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00230 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0002 then
-          binary_expr_00230 <= tmp_0322;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00231 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0002 then
-          binary_expr_00231 <= tmp_0323;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00232 <= '0';
-      else
-        if push_send_data_method = push_send_data_method_S_0003 then
-          binary_expr_00232 <= tmp_0324;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00251 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0033 then
-          binary_expr_00251 <= tmp_0336;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00252 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0034 then
-          binary_expr_00252 <= tmp_0337;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00254 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0036 then
-          binary_expr_00254 <= tmp_0338;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00255 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0037 then
-          binary_expr_00255 <= tmp_0340;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00256 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0036 then
-          binary_expr_00256 <= tmp_0339;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00257 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0037 then
-          cast_expr_00257 <= tmp_0341;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00259 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0041 then
-          binary_expr_00259 <= tmp_0342;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00260 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0042 then
-          binary_expr_00260 <= tmp_0344;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00261 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0041 then
-          binary_expr_00261 <= tmp_0343;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00262 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0042 then
-          cast_expr_00262 <= tmp_0345;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00264 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0046 then
-          binary_expr_00264 <= tmp_0346;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00265 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0047 then
-          binary_expr_00265 <= tmp_0348;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00266 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0046 then
-          binary_expr_00266 <= tmp_0347;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00267 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0047 then
-          cast_expr_00267 <= tmp_0349;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00269 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0051 then
-          binary_expr_00269 <= tmp_0350;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00270 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0052 then
-          binary_expr_00270 <= tmp_0351;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00233 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0008 then
-          binary_expr_00233 <= tmp_0325;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_i_0234 <= X"00000000";
-      else
-        if push_send_data_method = push_send_data_method_S_0011 then
-          push_send_data_i_0234 <= X"00000000";
-        elsif push_send_data_method = push_send_data_method_S_0016 then
-          push_send_data_i_0234 <= unary_expr_00236;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00235 <= '0';
-      else
-        if push_send_data_method = push_send_data_method_S_0012 then
-          binary_expr_00235 <= tmp_0326;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        unary_expr_00236 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0015 then
-          unary_expr_00236 <= tmp_0327;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        push_send_data_v_0237 <= (others => '0');
-      else
-        if push_send_data_method = push_send_data_method_S_0021 then
-          push_send_data_v_0237 <= array_access_00240;
-        elsif push_send_data_method = push_send_data_method_S_0028 then
-          push_send_data_v_0237 <= array_access_00246;
+        if pull_recv_data_method = pull_recv_data_method_S_0046 then
+          binary_expr_00237 <= tmp_0300;
         end if;
       end if;
     end if;
@@ -5606,8 +5199,8 @@ begin
       if reset = '1' then
         binary_expr_00238 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0018 then
-          binary_expr_00238 <= tmp_0328;
+        if pull_recv_data_method = pull_recv_data_method_S_0046 then
+          binary_expr_00238 <= tmp_0301;
         end if;
       end if;
     end if;
@@ -5617,10 +5210,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00239 <= (others => '0');
+        binary_expr_00220 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0019 then
-          binary_expr_00239 <= tmp_0329;
+        if pull_recv_data_method = pull_recv_data_method_S_0021 then
+          binary_expr_00220 <= tmp_0289;
         end if;
       end if;
     end if;
@@ -5630,10 +5223,220 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        array_access_00240 <= (others => '0');
+        pull_recv_data_i_0221 <= X"00000000";
       else
-        if push_send_data_method = push_send_data_method_S_0020 and push_send_data_method_delay = 2 then
-          array_access_00240 <= class_buffer_0088_dout_b;
+        if pull_recv_data_method = pull_recv_data_method_S_0024 then
+          pull_recv_data_i_0221 <= X"00000000";
+        elsif pull_recv_data_method = pull_recv_data_method_S_0028 then
+          pull_recv_data_i_0221 <= tmp_0291;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00222 <= '0';
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0025 then
+          binary_expr_00222 <= tmp_0290;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        unary_expr_00223 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0028 then
+          unary_expr_00223 <= tmp_0291;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00224 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0031 then
+          binary_expr_00224 <= tmp_0292;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00225 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0031 then
+          binary_expr_00225 <= tmp_0293;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00227 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0036_wait then
+          method_result_00227 <= read_data_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00228 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0034 then
+          binary_expr_00228 <= tmp_0294;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00229 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0034 then
+          binary_expr_00229 <= tmp_0295;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00230 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0037 then
+          binary_expr_00230 <= tmp_0296;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00231 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0037 then
+          binary_expr_00231 <= tmp_0297;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00233 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0043_wait then
+          method_result_00233 <= read_data_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00234 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0041 then
+          binary_expr_00234 <= tmp_0298;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00235 <= (others => '0');
+      else
+        if pull_recv_data_method = pull_recv_data_method_S_0041 then
+          binary_expr_00235 <= tmp_0299;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_port_0239 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0001 then
+          push_send_data_port_0239 <= push_send_data_port_local;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_port_local <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0049_body and tcp_server_method_delay = 0 then
+          push_send_data_port_local <= tcp_server_port_0294;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_len_0240 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0001 then
+          push_send_data_len_0240 <= push_send_data_len_local;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_len_local <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0049_body and tcp_server_method_delay = 0 then
+          push_send_data_len_local <= tcp_server_len_0317;
         end if;
       end if;
     end if;
@@ -5645,8 +5448,8 @@ begin
       if reset = '1' then
         binary_expr_00242 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0021 then
-          binary_expr_00242 <= tmp_0330;
+        if push_send_data_method = push_send_data_method_S_0002 then
+          binary_expr_00242 <= tmp_0342;
         end if;
       end if;
     end if;
@@ -5658,8 +5461,8 @@ begin
       if reset = '1' then
         binary_expr_00243 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0023 then
-          binary_expr_00243 <= tmp_0331;
+        if push_send_data_method = push_send_data_method_S_0002 then
+          binary_expr_00243 <= tmp_0344;
         end if;
       end if;
     end if;
@@ -5671,8 +5474,8 @@ begin
       if reset = '1' then
         binary_expr_00244 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0025 then
-          binary_expr_00244 <= tmp_0332;
+        if push_send_data_method = push_send_data_method_S_0002 then
+          binary_expr_00244 <= tmp_0343;
         end if;
       end if;
     end if;
@@ -5684,8 +5487,8 @@ begin
       if reset = '1' then
         binary_expr_00245 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0026 then
-          binary_expr_00245 <= tmp_0333;
+        if push_send_data_method = push_send_data_method_S_0002 then
+          binary_expr_00245 <= tmp_0345;
         end if;
       end if;
     end if;
@@ -5695,10 +5498,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        array_access_00246 <= (others => '0');
+        cast_expr_00246 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0027 and push_send_data_method_delay = 2 then
-          array_access_00246 <= class_buffer_0088_dout_b;
+        if push_send_data_method = push_send_data_method_S_0002 then
+          cast_expr_00246 <= tmp_0346;
         end if;
       end if;
     end if;
@@ -5710,8 +5513,8 @@ begin
       if reset = '1' then
         binary_expr_00248 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0028 then
-          binary_expr_00248 <= tmp_0334;
+        if push_send_data_method = push_send_data_method_S_0008 then
+          binary_expr_00248 <= tmp_0347;
         end if;
       end if;
     end if;
@@ -5723,8 +5526,8 @@ begin
       if reset = '1' then
         binary_expr_00249 <= (others => '0');
       else
-        if push_send_data_method = push_send_data_method_S_0030 then
-          binary_expr_00249 <= tmp_0335;
+        if push_send_data_method = push_send_data_method_S_0008 then
+          binary_expr_00249 <= tmp_0349;
         end if;
       end if;
     end if;
@@ -5734,10 +5537,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        tcp_server_port_0271 <= (others => '0');
+        binary_expr_00250 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0001 then
-          tcp_server_port_0271 <= tcp_server_port_local;
+        if push_send_data_method = push_send_data_method_S_0008 then
+          binary_expr_00250 <= tmp_0348;
         end if;
       end if;
     end if;
@@ -5747,10 +5550,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        tcp_server_port_local <= (others => '0');
+        cast_expr_00251 <= (others => '0');
       else
-        if test_method = test_method_test_method_S_0007_body and test_method_delay = 0 then
-          tcp_server_port_local <= X"00000000";
+        if push_send_data_method = push_send_data_method_S_0008 then
+          cast_expr_00251 <= tmp_0350;
         end if;
       end if;
     end if;
@@ -5760,10 +5563,51 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00273 <= (others => '0');
+        push_send_data_write_len_0252 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0002 then
-          binary_expr_00273 <= tmp_0406;
+        if push_send_data_method = push_send_data_method_S_0013 then
+          push_send_data_write_len_0252 <= tmp_0351;
+        elsif push_send_data_method = push_send_data_method_S_0019 then
+          push_send_data_write_len_0252 <= tmp_0354;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00253 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0013 then
+          binary_expr_00253 <= tmp_0351;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00254 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0013 then
+          binary_expr_00254 <= tmp_0352;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00255 <= '0';
+      else
+        if push_send_data_method = push_send_data_method_S_0013 then
+          binary_expr_00255 <= tmp_0353;
         end if;
       end if;
     end if;
@@ -5775,8 +5619,8 @@ begin
       if reset = '1' then
         binary_expr_00274 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0003 then
-          binary_expr_00274 <= tmp_0407;
+        if push_send_data_method = push_send_data_method_S_0044 then
+          binary_expr_00274 <= tmp_0365;
         end if;
       end if;
     end if;
@@ -5786,16 +5630,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        tcp_server_v_0275 <= (others => '0');
+        binary_expr_00275 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0006 then
-          tcp_server_v_0275 <= method_result_00276;
-        elsif tcp_server_method = tcp_server_method_S_0014 then
-          tcp_server_v_0275 <= method_result_00281;
-        elsif tcp_server_method = tcp_server_method_S_0019 then
-          tcp_server_v_0275 <= method_result_00283;
-        elsif tcp_server_method = tcp_server_method_S_0027 then
-          tcp_server_v_0275 <= method_result_00288;
+        if push_send_data_method = push_send_data_method_S_0044 then
+          binary_expr_00275 <= tmp_0366;
         end if;
       end if;
     end if;
@@ -5805,10 +5643,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00276 <= (others => '0');
+        binary_expr_00277 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0005_wait then
-          method_result_00276 <= tcp_server_open_return;
+        if push_send_data_method = push_send_data_method_S_0047 then
+          binary_expr_00277 <= tmp_0367;
         end if;
       end if;
     end if;
@@ -5818,101 +5656,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00277 <= '0';
+        binary_expr_00278 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0007 then
-          binary_expr_00277 <= tmp_0408;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00282 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_S_0016 then
-          cast_expr_00282 <= tmp_0411;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        method_result_00283 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0018_wait then
-          method_result_00283 <= tcp_server_listen_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00284 <= '0';
-      else
-        if tcp_server_method = tcp_server_method_S_0020 then
-          binary_expr_00284 <= tmp_0412;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        method_result_00290 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0033_wait then
-          method_result_00290 <= read_data_return;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00291 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_S_0030 then
-          binary_expr_00291 <= tmp_0415;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        binary_expr_00292 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_S_0032 then
-          binary_expr_00292 <= tmp_0416;
-        end if;
-      end if;
-    end if;
-  end process;
-
-  process(clk)
-  begin
-    if clk'event and clk = '1' then
-      if reset = '1' then
-        cast_expr_00293 <= (others => '0');
-      else
-        if tcp_server_method = tcp_server_method_S_0034 then
-          cast_expr_00293 <= tmp_0417;
+        if push_send_data_method = push_send_data_method_S_0047 then
+          binary_expr_00278 <= tmp_0369;
         end if;
       end if;
     end if;
@@ -5924,8 +5671,8 @@ begin
       if reset = '1' then
         binary_expr_00279 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0010 then
-          binary_expr_00279 <= tmp_0409;
+        if push_send_data_method = push_send_data_method_S_0047 then
+          binary_expr_00279 <= tmp_0368;
         end if;
       end if;
     end if;
@@ -5935,10 +5682,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00280 <= (others => '0');
+        cast_expr_00280 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0011 then
-          binary_expr_00280 <= tmp_0410;
+        if push_send_data_method = push_send_data_method_S_0047 then
+          cast_expr_00280 <= tmp_0370;
         end if;
       end if;
     end if;
@@ -5948,10 +5695,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00281 <= (others => '0');
+        binary_expr_00282 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0013_wait then
-          method_result_00281 <= tcp_server_open_return;
+        if push_send_data_method = push_send_data_method_S_0052 then
+          binary_expr_00282 <= tmp_0371;
         end if;
       end if;
     end if;
@@ -5961,10 +5708,36 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        binary_expr_00286 <= (others => '0');
+        binary_expr_00283 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0023 then
-          binary_expr_00286 <= tmp_0413;
+        if push_send_data_method = push_send_data_method_S_0052 then
+          binary_expr_00283 <= tmp_0373;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00284 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0052 then
+          binary_expr_00284 <= tmp_0372;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00285 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0052 then
+          cast_expr_00285 <= tmp_0374;
         end if;
       end if;
     end if;
@@ -5976,8 +5749,8 @@ begin
       if reset = '1' then
         binary_expr_00287 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_S_0024 then
-          binary_expr_00287 <= tmp_0414;
+        if push_send_data_method = push_send_data_method_S_0057 then
+          binary_expr_00287 <= tmp_0375;
         end if;
       end if;
     end if;
@@ -5987,10 +5760,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00288 <= (others => '0');
+        binary_expr_00288 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0026_wait then
-          method_result_00288 <= tcp_server_listen_return;
+        if push_send_data_method = push_send_data_method_S_0057 then
+          binary_expr_00288 <= tmp_0377;
         end if;
       end if;
     end if;
@@ -6000,12 +5773,529 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        tcp_server_len_0294 <= (others => '0');
+        binary_expr_00289 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0057 then
+          binary_expr_00289 <= tmp_0376;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00290 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0057 then
+          cast_expr_00290 <= tmp_0378;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00292 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0062 then
+          binary_expr_00292 <= tmp_0379;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00293 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0062 then
+          binary_expr_00293 <= tmp_0380;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00256 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0019 then
+          binary_expr_00256 <= tmp_0354;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_i_0257 <= X"00000000";
+      else
+        if push_send_data_method = push_send_data_method_S_0022 then
+          push_send_data_i_0257 <= X"00000000";
+        elsif push_send_data_method = push_send_data_method_S_0026 then
+          push_send_data_i_0257 <= tmp_0356;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00258 <= '0';
+      else
+        if push_send_data_method = push_send_data_method_S_0023 then
+          binary_expr_00258 <= tmp_0355;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        unary_expr_00259 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0026 then
+          unary_expr_00259 <= tmp_0356;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        push_send_data_v_0260 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0032 then
+          push_send_data_v_0260 <= array_access_00263;
+        elsif push_send_data_method = push_send_data_method_S_0039 then
+          push_send_data_v_0260 <= array_access_00269;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00261 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0029 then
+          binary_expr_00261 <= tmp_0357;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00262 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0029 then
+          binary_expr_00262 <= tmp_0358;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        array_access_00263 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0031 and push_send_data_method_delay = 2 then
+          array_access_00263 <= class_buffer_0088_dout_b;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00265 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0032 then
+          binary_expr_00265 <= tmp_0359;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00266 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0032 then
+          binary_expr_00266 <= tmp_0360;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00267 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0036 then
+          binary_expr_00267 <= tmp_0361;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00268 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0036 then
+          binary_expr_00268 <= tmp_0362;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        array_access_00269 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0038 and push_send_data_method_delay = 2 then
+          array_access_00269 <= class_buffer_0088_dout_b;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00271 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0039 then
+          binary_expr_00271 <= tmp_0363;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00272 <= (others => '0');
+      else
+        if push_send_data_method = push_send_data_method_S_0039 then
+          binary_expr_00272 <= tmp_0364;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        tcp_server_port_0294 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0001 then
+          tcp_server_port_0294 <= tcp_server_port_local;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        tcp_server_port_local <= (others => '0');
+      else
+        if test_method = test_method_S_0010_body and test_method_delay = 0 then
+          tcp_server_port_local <= X"00000000";
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00296 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0002 then
+          binary_expr_00296 <= tmp_0433;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00297 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0002 then
+          binary_expr_00297 <= tmp_0434;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        tcp_server_v_0298 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0006 then
+          tcp_server_v_0298 <= method_result_00299;
+        elsif tcp_server_method = tcp_server_method_S_0014 then
+          tcp_server_v_0298 <= method_result_00304;
+        elsif tcp_server_method = tcp_server_method_S_0019 then
+          tcp_server_v_0298 <= method_result_00306;
+        elsif tcp_server_method = tcp_server_method_S_0027 then
+          tcp_server_v_0298 <= method_result_00311;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00299 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0005_wait then
+          method_result_00299 <= tcp_server_open_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00300 <= '0';
+      else
+        if tcp_server_method = tcp_server_method_S_0007 then
+          binary_expr_00300 <= tmp_0435;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00305 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0016 then
+          cast_expr_00305 <= tmp_0438;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00306 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0018_wait then
+          method_result_00306 <= tcp_server_listen_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00307 <= '0';
+      else
+        if tcp_server_method = tcp_server_method_S_0020 then
+          binary_expr_00307 <= tmp_0439;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00313 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0033_wait then
+          method_result_00313 <= read_data_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00314 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0030 then
+          binary_expr_00314 <= tmp_0442;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00315 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0032 then
+          binary_expr_00315 <= tmp_0443;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        cast_expr_00316 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0034 then
+          cast_expr_00316 <= tmp_0444;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00302 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0010 then
+          binary_expr_00302 <= tmp_0436;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00303 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0010 then
+          binary_expr_00303 <= tmp_0437;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00304 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0013_wait then
+          method_result_00304 <= tcp_server_open_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00309 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0023 then
+          binary_expr_00309 <= tmp_0440;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        binary_expr_00310 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0023 then
+          binary_expr_00310 <= tmp_0441;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00311 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0026_wait then
+          method_result_00311 <= tcp_server_listen_return;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        tcp_server_len_0317 <= (others => '0');
       else
         if tcp_server_method = tcp_server_method_S_0039 then
-          tcp_server_len_0294 <= method_result_00295;
-        elsif tcp_server_method = tcp_server_method_S_0042 then
-          tcp_server_len_0294 <= method_result_00296;
+          tcp_server_len_0317 <= method_result_00318;
+        elsif tcp_server_method = tcp_server_method_S_0047 then
+          tcp_server_len_0317 <= method_result_00320;
         end if;
       end if;
     end if;
@@ -6015,10 +6305,10 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00295 <= (others => '0');
+        method_result_00318 <= (others => '0');
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0038_wait then
-          method_result_00295 <= wait_for_recv_return;
+        if tcp_server_method = tcp_server_method_S_0038_wait then
+          method_result_00318 <= wait_for_recv_return;
         end if;
       end if;
     end if;
@@ -6028,10 +6318,23 @@ begin
   begin
     if clk'event and clk = '1' then
       if reset = '1' then
-        method_result_00296 <= (others => '0');
+        binary_expr_00319 <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0041_wait then
-          method_result_00296 <= pull_recv_data_return;
+        if tcp_server_method = tcp_server_method_S_0039 then
+          binary_expr_00319 <= tmp_0445;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  process(clk)
+  begin
+    if clk'event and clk = '1' then
+      if reset = '1' then
+        method_result_00320 <= (others => '0');
+      else
+        if tcp_server_method = tcp_server_method_S_0046_wait then
+          method_result_00320 <= pull_recv_data_return;
         end if;
       end if;
     end if;
@@ -6060,13 +6363,13 @@ begin
       if reset = '1' then
         wait_cycles_req_local <= '0';
       else
-        if write_data_method = write_data_method_write_data_method_S_0010_body then
+        if write_data_method = write_data_method_S_0010_body then
           wait_cycles_req_local <= '1';
-        elsif read_data_method = read_data_method_read_data_method_S_0008_body then
+        elsif read_data_method = read_data_method_S_0008_body then
           wait_cycles_req_local <= '1';
-        elsif init_method = init_method_init_method_S_0010_body then
+        elsif init_method = init_method_S_0010_body then
           wait_cycles_req_local <= '1';
-        elsif init_method = init_method_init_method_S_0013_body then
+        elsif init_method = init_method_S_0013_body then
           wait_cycles_req_local <= '1';
         else
           wait_cycles_req_local <= '0';
@@ -6098,73 +6401,79 @@ begin
       if reset = '1' then
         write_data_req_local <= '0';
       else
-        if network_configuration_method = network_configuration_method_network_configuration_method_S_0002_body then
+        if network_configuration_method = network_configuration_method_S_0002_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0003_body then
+        elsif network_configuration_method = network_configuration_method_S_0003_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0004_body then
+        elsif network_configuration_method = network_configuration_method_S_0004_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0005_body then
+        elsif network_configuration_method = network_configuration_method_S_0005_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0006_body then
+        elsif network_configuration_method = network_configuration_method_S_0006_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0007_body then
+        elsif network_configuration_method = network_configuration_method_S_0007_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0008_body then
+        elsif network_configuration_method = network_configuration_method_S_0008_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0009_body then
+        elsif network_configuration_method = network_configuration_method_S_0009_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0010_body then
+        elsif network_configuration_method = network_configuration_method_S_0010_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0011_body then
+        elsif network_configuration_method = network_configuration_method_S_0011_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0012_body then
+        elsif network_configuration_method = network_configuration_method_S_0012_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0013_body then
+        elsif network_configuration_method = network_configuration_method_S_0013_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0014_body then
+        elsif network_configuration_method = network_configuration_method_S_0014_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0015_body then
+        elsif network_configuration_method = network_configuration_method_S_0015_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0016_body then
+        elsif network_configuration_method = network_configuration_method_S_0016_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0017_body then
+        elsif network_configuration_method = network_configuration_method_S_0017_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0018_body then
+        elsif network_configuration_method = network_configuration_method_S_0018_body then
           write_data_req_local <= '1';
-        elsif network_configuration_method = network_configuration_method_network_configuration_method_S_0019_body then
+        elsif network_configuration_method = network_configuration_method_S_0019_body then
           write_data_req_local <= '1';
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0007_body then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0007_body then
           write_data_req_local <= '1';
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0010_body then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0010_body then
           write_data_req_local <= '1';
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0013_body then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0013_body then
           write_data_req_local <= '1';
-        elsif tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0016_body then
+        elsif tcp_server_open_method = tcp_server_open_method_S_0016_body then
           write_data_req_local <= '1';
-        elsif tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0004_body then
+        elsif tcp_server_listen_method = tcp_server_listen_method_S_0004_body then
           write_data_req_local <= '1';
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0048_body then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0045_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0024_body then
+        elsif pull_recv_data_method = pull_recv_data_method_S_0048_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0031_body then
+        elsif push_send_data_method = push_send_data_method_S_0007_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0035_body then
+        elsif push_send_data_method = push_send_data_method_S_0012_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0040_body then
+        elsif push_send_data_method = push_send_data_method_S_0035_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0045_body then
+        elsif push_send_data_method = push_send_data_method_S_0042_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0050_body then
+        elsif push_send_data_method = push_send_data_method_S_0046_body then
           write_data_req_local <= '1';
-        elsif push_send_data_method = push_send_data_method_push_send_data_method_S_0053_body then
+        elsif push_send_data_method = push_send_data_method_S_0051_body then
           write_data_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0004_body then
+        elsif push_send_data_method = push_send_data_method_S_0056_body then
           write_data_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0012_body then
+        elsif push_send_data_method = push_send_data_method_S_0061_body then
           write_data_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0025_body then
+        elsif push_send_data_method = push_send_data_method_S_0064_body then
+          write_data_req_local <= '1';
+        elsif tcp_server_method = tcp_server_method_S_0004_body then
+          write_data_req_local <= '1';
+        elsif tcp_server_method = tcp_server_method_S_0012_body then
+          write_data_req_local <= '1';
+        elsif tcp_server_method = tcp_server_method_S_0025_body then
           write_data_req_local <= '1';
         else
           write_data_req_local <= '0';
@@ -6209,27 +6518,29 @@ begin
       if reset = '1' then
         read_data_req_local <= '0';
       else
-        if tcp_server_open_method = tcp_server_open_method_tcp_server_open_method_S_0019_body then
+        if tcp_server_open_method = tcp_server_open_method_S_0019_body then
           read_data_req_local <= '1';
-        elsif tcp_server_listen_method = tcp_server_listen_method_tcp_server_listen_method_S_0007_body then
+        elsif tcp_server_listen_method = tcp_server_listen_method_S_0007_body then
           read_data_req_local <= '1';
-        elsif wait_for_established_method = wait_for_established_method_wait_for_established_method_S_0007_body then
+        elsif wait_for_established_method = wait_for_established_method_S_0007_body then
           read_data_req_local <= '1';
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0008_body then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0008_body then
           read_data_req_local <= '1';
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0013_body then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0013_body then
           read_data_req_local <= '1';
-        elsif wait_for_recv_method = wait_for_recv_method_wait_for_recv_method_S_0018_body then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0018_body then
           read_data_req_local <= '1';
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0004_body then
+        elsif wait_for_recv_method = wait_for_recv_method_S_0033_body then
           read_data_req_local <= '1';
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0009_body then
+        elsif pull_recv_data_method = pull_recv_data_method_S_0004_body then
           read_data_req_local <= '1';
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0036_body then
+        elsif pull_recv_data_method = pull_recv_data_method_S_0009_body then
           read_data_req_local <= '1';
-        elsif pull_recv_data_method = pull_recv_data_method_pull_recv_data_method_S_0043_body then
+        elsif pull_recv_data_method = pull_recv_data_method_S_0036_body then
           read_data_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0033_body then
+        elsif pull_recv_data_method = pull_recv_data_method_S_0043_body then
+          read_data_req_local <= '1';
+        elsif tcp_server_method = tcp_server_method_S_0033_body then
           read_data_req_local <= '1';
         else
           read_data_req_local <= '0';
@@ -6261,7 +6572,7 @@ begin
       if reset = '1' then
         init_req_local <= '0';
       else
-        if test_method = test_method_test_method_S_0003_body then
+        if test_method = test_method_S_0003_body then
           init_req_local <= '1';
         else
           init_req_local <= '0';
@@ -6293,7 +6604,7 @@ begin
       if reset = '1' then
         network_configuration_req_local <= '0';
       else
-        if test_method = test_method_test_method_S_0005_body then
+        if test_method = test_method_S_0005_body then
           network_configuration_req_local <= '1';
         else
           network_configuration_req_local <= '0';
@@ -6338,9 +6649,9 @@ begin
       if reset = '1' then
         tcp_server_open_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0005_body then
+        if tcp_server_method = tcp_server_method_S_0005_body then
           tcp_server_open_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0013_body then
+        elsif tcp_server_method = tcp_server_method_S_0013_body then
           tcp_server_open_req_local <= '1';
         else
           tcp_server_open_req_local <= '0';
@@ -6385,9 +6696,9 @@ begin
       if reset = '1' then
         tcp_server_listen_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0018_body then
+        if tcp_server_method = tcp_server_method_S_0018_body then
           tcp_server_listen_req_local <= '1';
-        elsif tcp_server_method = tcp_server_method_tcp_server_method_S_0026_body then
+        elsif tcp_server_method = tcp_server_method_S_0026_body then
           tcp_server_listen_req_local <= '1';
         else
           tcp_server_listen_req_local <= '0';
@@ -6419,7 +6730,7 @@ begin
       if reset = '1' then
         wait_for_established_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0029_body then
+        if tcp_server_method = tcp_server_method_S_0029_body then
           wait_for_established_req_local <= '1';
         else
           wait_for_established_req_local <= '0';
@@ -6436,6 +6747,8 @@ begin
       else
         if wait_for_recv_method = wait_for_recv_method_S_0029 then
           wait_for_recv_return <= wait_for_recv_v_0169;
+        elsif wait_for_recv_method = wait_for_recv_method_S_0046 then
+          wait_for_recv_return <= X"00000000";
         end if;
       end if;
     end if;
@@ -6464,7 +6777,7 @@ begin
       if reset = '1' then
         wait_for_recv_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0038_body then
+        if tcp_server_method = tcp_server_method_S_0038_body then
           wait_for_recv_req_local <= '1';
         else
           wait_for_recv_req_local <= '0';
@@ -6480,7 +6793,7 @@ begin
         pull_recv_data_return <= (others => '0');
       else
         if pull_recv_data_method = pull_recv_data_method_S_0049 then
-          pull_recv_data_return <= pull_recv_data_actual_len_0201;
+          pull_recv_data_return <= pull_recv_data_actual_len_0213;
         end if;
       end if;
     end if;
@@ -6495,7 +6808,7 @@ begin
         if pull_recv_data_method = pull_recv_data_method_S_0000 then
           pull_recv_data_busy <= '0';
         elsif pull_recv_data_method = pull_recv_data_method_S_0001 then
-          pull_recv_data_busy <= tmp_0229;
+          pull_recv_data_busy <= tmp_0249;
         end if;
       end if;
     end if;
@@ -6509,7 +6822,7 @@ begin
       if reset = '1' then
         pull_recv_data_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0041_body then
+        if tcp_server_method = tcp_server_method_S_0046_body then
           pull_recv_data_req_local <= '1';
         else
           pull_recv_data_req_local <= '0';
@@ -6527,7 +6840,7 @@ begin
         if push_send_data_method = push_send_data_method_S_0000 then
           push_send_data_busy <= '0';
         elsif push_send_data_method = push_send_data_method_S_0001 then
-          push_send_data_busy <= tmp_0285;
+          push_send_data_busy <= tmp_0305;
         end if;
       end if;
     end if;
@@ -6541,7 +6854,7 @@ begin
       if reset = '1' then
         push_send_data_req_local <= '0';
       else
-        if tcp_server_method = tcp_server_method_tcp_server_method_S_0044_body then
+        if tcp_server_method = tcp_server_method_S_0049_body then
           push_send_data_req_local <= '1';
         else
           push_send_data_req_local <= '0';
@@ -6559,7 +6872,7 @@ begin
         if tcp_server_method = tcp_server_method_S_0000 then
           tcp_server_busy <= '0';
         elsif tcp_server_method = tcp_server_method_S_0001 then
-          tcp_server_busy <= tmp_0355;
+          tcp_server_busy <= tmp_0384;
         end if;
       end if;
     end if;
@@ -6573,7 +6886,7 @@ begin
       if reset = '1' then
         tcp_server_req_local <= '0';
       else
-        if test_method = test_method_test_method_S_0007_body then
+        if test_method = test_method_S_0010_body then
           tcp_server_req_local <= '1';
         else
           tcp_server_req_local <= '0';
@@ -6656,65 +6969,67 @@ begin
 
   read_data_call_flag_0018 <= tmp_0205;
 
-  pull_recv_data_req_flag_edge <= tmp_0227;
+  read_data_call_flag_0033 <= tmp_0211;
 
-  read_data_call_flag_0004 <= tmp_0233;
+  write_data_call_flag_0045 <= tmp_0217;
 
-  read_data_call_flag_0009 <= tmp_0237;
+  pull_recv_data_req_flag_edge <= tmp_0247;
 
-  read_data_call_flag_0036 <= tmp_0245;
+  read_data_call_flag_0004 <= tmp_0253;
 
-  read_data_call_flag_0043 <= tmp_0249;
+  read_data_call_flag_0009 <= tmp_0257;
 
-  write_data_call_flag_0048 <= tmp_0253;
+  read_data_call_flag_0036 <= tmp_0265;
 
-  push_send_data_req_flag_edge <= tmp_0283;
+  read_data_call_flag_0043 <= tmp_0269;
 
-  write_data_call_flag_0024 <= tmp_0293;
+  write_data_call_flag_0048 <= tmp_0273;
 
-  write_data_call_flag_0031 <= tmp_0297;
+  push_send_data_req_flag_edge <= tmp_0303;
 
-  write_data_call_flag_0035 <= tmp_0301;
+  write_data_call_flag_0035 <= tmp_0313;
 
-  write_data_call_flag_0040 <= tmp_0305;
+  write_data_call_flag_0042 <= tmp_0317;
 
-  write_data_call_flag_0045 <= tmp_0309;
+  write_data_call_flag_0046 <= tmp_0321;
 
-  write_data_call_flag_0050 <= tmp_0313;
+  write_data_call_flag_0051 <= tmp_0325;
 
-  write_data_call_flag_0053 <= tmp_0317;
+  write_data_call_flag_0056 <= tmp_0329;
 
-  tcp_server_req_flag_edge <= tmp_0353;
+  write_data_call_flag_0061 <= tmp_0333;
 
-  tcp_server_open_call_flag_0005 <= tmp_0359;
+  write_data_call_flag_0064 <= tmp_0337;
 
-  tcp_server_open_call_flag_0013 <= tmp_0365;
+  tcp_server_req_flag_edge <= tmp_0382;
 
-  tcp_server_listen_call_flag_0018 <= tmp_0369;
+  tcp_server_open_call_flag_0005 <= tmp_0388;
 
-  write_data_call_flag_0025 <= tmp_0375;
+  tcp_server_open_call_flag_0013 <= tmp_0394;
 
-  tcp_server_listen_call_flag_0026 <= tmp_0379;
+  tcp_server_listen_call_flag_0018 <= tmp_0398;
 
-  wait_for_established_call_flag_0029 <= tmp_0383;
+  write_data_call_flag_0025 <= tmp_0404;
 
-  read_data_call_flag_0033 <= tmp_0387;
+  tcp_server_listen_call_flag_0026 <= tmp_0408;
 
-  wait_for_recv_call_flag_0038 <= tmp_0393;
+  wait_for_established_call_flag_0029 <= tmp_0412;
 
-  pull_recv_data_call_flag_0041 <= tmp_0397;
+  wait_for_recv_call_flag_0038 <= tmp_0418;
 
-  push_send_data_call_flag_0044 <= tmp_0401;
+  pull_recv_data_call_flag_0046 <= tmp_0424;
 
-  test_req_flag_edge <= tmp_0419;
+  push_send_data_call_flag_0049 <= tmp_0428;
 
-  init_call_flag_0003 <= tmp_0425;
+  test_req_flag_edge <= tmp_0447;
 
-  network_configuration_call_flag_0005 <= tmp_0429;
+  init_call_flag_0003 <= tmp_0453;
 
-  tcp_server_call_flag_0007 <= tmp_0433;
+  network_configuration_call_flag_0005 <= tmp_0457;
 
-  blink_led_req_flag_edge <= tmp_0441;
+  tcp_server_call_flag_0010 <= tmp_0463;
+
+  blink_led_req_flag_edge <= tmp_0469;
 
 
   inst_class_wiz830mj_0000 : wiz830mj_iface
