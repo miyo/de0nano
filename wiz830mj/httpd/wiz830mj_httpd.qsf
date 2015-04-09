@@ -406,6 +406,12 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to *
 
 
 
+
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Httpd
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Httpd
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Httpd
+set_global_assignment -name VHDL_FILE ../dualportram.vhd
+set_global_assignment -name VHDL_FILE ../HttpServer.vhd
 set_global_assignment -name VHDL_FILE ../Misc.vhd
 set_global_assignment -name VHDL_FILE ../synthesijer_mul32.vhd
 set_global_assignment -name VHDL_FILE ../http_response_header.vhd
@@ -414,8 +420,4 @@ set_global_assignment -name SDC_FILE wiz830mj_httpd.sdc
 set_global_assignment -name VHDL_FILE ../WIZ830MJ_Httpd.vhd
 set_global_assignment -name VHDL_FILE ../wiz830mj_iface.vhd
 set_global_assignment -name VHDL_FILE ../httpd.vhd
-
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Httpd
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Httpd
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Httpd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Httpd
